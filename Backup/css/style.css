@@ -1,0 +1,651 @@
+/* Global Reset */
+html {
+}
+body {
+	font-family: Arial;
+	font-size: 12px;
+	line-height:16px;
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+	background:url(../images/bg_page.gif) #231f20;
+}
+html, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, img {
+	margin:0;
+	padding:0;
+	border:0;
+	text-decoration: none;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+li {
+	list-style:none;
+	float:left;
+}
+a img {
+	border:none;
+}
+a {
+	cursor:pointer;
+	outline:none;
+}
+/* Page Holder */
+
+.container {
+	padding: 0;
+	margin: 0 auto;
+	width: 960px;
+	overflow:hidden;
+}
+/* General Styles */
+.clear {
+	clear:both;
+	overflow:hidden;
+	width:100%;
+}
+.fltlft {
+	float:left;
+}
+.fltrt {
+	float:right;
+}
+/* H1 to H6 type Styles */
+h1, h2, h3, h4, h5, h6 {
+	font-weight:normal;
+}
+#wrapper, #banner, #footer {
+	width: 100%;
+	text-align:left;
+	clear:both;
+	overflow:hidden;
+}
+
+/*font*/
+@font-face {
+ font-family: 'UniSansBoldRegular';
+ src: url('../fonts/uni_sans_bold-webfont.eot');
+ src: url('../fonts/uni_sans_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_bold-webfont.woff') format('woff'), url('../fonts/uni_sans_bold-webfont.ttf') format('truetype'), url('../fonts/uni_sans_bold-webfont.svg#UniSansBoldRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansBoldItalic';
+ src: url('../fonts/uni_sans_bolditalic-webfont.eot');
+ src: url('../fonts/uni_sans_bolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_bolditalic-webfont.woff') format('woff'), url('../fonts/uni_sans_bolditalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_bolditalic-webfont.svg#UniSansBoldItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansBookRegular';
+ src: url('../fonts/uni_sans_book-webfont.eot');
+ src: url('../fonts/uni_sans_book-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_book-webfont.woff') format('woff'), url('../fonts/uni_sans_book-webfont.ttf') format('truetype'), url('../fonts/uni_sans_book-webfont.svg#UniSansBookRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansBookItalic';
+ src: url('../fonts/uni_sans_bookitalic-webfont.eot');
+ src: url('uni_sans_bookitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_bookitalic-webfont.woff') format('woff'), url('../fonts/uni_sans_bookitalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_bookitalic-webfont.svg#UniSansBookItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansHeavyRegular';
+ src: url('../fonts/uni_sans_heavy-webfont.eot');
+ src: url('../fonts/uni_sans_heavy-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_heavy-webfont.woff') format('woff'), url('../fonts/uni_sans_heavy-webfont.ttf') format('truetype'), url('../fonts/uni_sans_heavy-webfont.svg#UniSansHeavyRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansHeavyItalic';
+ src: url('../fonts/uni_sans_heavyitalic-webfont.eot');
+ src: url('../fonts/uni_sans_heavyitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_heavyitalic-webfont.woff') format('woff'), url('../fonts/uni_sans_heavyitalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_heavyitalic-webfont.svg#UniSansHeavyItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansLightRegular';
+ src: url('../fonts/uni_sans_light-webfont.eot');
+ src: url('../fonts/uni_sans_light-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_light-webfont.woff') format('woff'), url('../fonts/uni_sans_light-webfont.ttf') format('truetype'), url('../fonts/uni_sans_light-webfont.svg#UniSansLightRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansLightItalic';
+ src: url('../fonts/uni_sans_lightitalic-webfont.eot');
+ src: url('uni_sans_lightitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_lightitalic-webfont.woff') format('woff'), url('../fonts/uni_sans_lightitalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_lightitalic-webfont.svg#UniSansLightItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansRegular';
+ src: url('../fonts/uni_sans_regular-webfont.eot');
+ src: url('../fonts/uni_sans_regular-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_regular-webfont.woff') format('woff'), url('../fonts/uni_sans_regular-webfont.ttf') format('truetype'), url('../fonts/uni_sans_regular-webfont.svg#UniSansRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansRegularItalic';
+ src: url('../fonts/uni_sans_regularitalic-webfont.eot');
+ src: url('../fonts/uni_sans_regularitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_regularitalic-webfont.woff') format('woff'), url('../fonts/uni_sans_regularitalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_regularitalic-webfont.svg#UniSansRegularItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansSemiBoldRegular';
+ src: url('../fonts/uni_sans_semi_bold-webfont.eot');
+ src: url('../fonts/uni_sans_semi_bold-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_semi_bold-webfont.woff') format('woff'), url('../fonts/uni_sans_semi_bold-webfont.ttf') format('truetype'), url('../fonts/uni_sans_semi_bold-webfont.svg#UniSansSemiBoldRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansSemiBoldItalic';
+ src: url('../fonts/uni_sans_semibolditalic-webfont.eot');
+ src: url('../fonts/uni_sans_semibolditalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_semibolditalic-webfont.woff') format('woff'), url('../fonts/uni_sans_semibolditalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_semibolditalic-webfont.svg#UniSansSemiBoldItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansThinRegular';
+ src: url('../fonts/uni_sans_thin-webfont.eot');
+ src: url('../fonts/uni_sans_thin-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_thin-webfont.woff') format('woff'), url('../fonts/uni_sans_thin-webfont.ttf') format('truetype'), url('../fonts/uni_sans_thin-webfont.svg#UniSansThinRegular') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+ @font-face {
+ font-family: 'UniSansThinItalic';
+ src: url('../fonts/uni_sans_thinitalic-webfont.eot');
+ src: url('../fonts/uni_sans_thinitalic-webfont.eot?#iefix') format('embedded-opentype'), url('../fonts/uni_sans_thinitalic-webfont.woff') format('woff'), url('../fonts/uni_sans_thinitalic-webfont.ttf') format('truetype'), url('../fonts/uni_sans_thinitalic-webfont.svg#UniSansThinItalic') format('svg');
+ font-weight: normal;
+ font-style: normal;
+}
+/* Header */
+#header {
+	background-color:#fff;
+	height:143px;
+	width: 100%;
+	text-align:left;
+}
+#header #logo {
+	float:left;
+	width:194px;
+	height:78px;
+	padding:16px 0 0 21px;
+}
+#navigation {
+	width: 100%;
+	background-color:#e7e7e8;
+	height:38px;
+	float:left;
+	position:relative;
+	z-index:99999;
+	margin:11px 0 0 0;
+    padding-left:65px;
+}
+#header #login-blog {
+	width:415px;
+	padding:0 0 0 2px;
+	background:url(../images/loginformbg.jpg) no-repeat left top;
+	float:right;
+	visibility:visible;
+}
+#login-blog1a {
+	width:360px;
+	height:29px;
+	float:left;
+	padding:0 0 0 19px;
+	border-bottom:1px solid #e2e3e4;
+}
+#loginname {
+	color:#a3190a;
+	height:29px;
+	line-height:29px;
+	float:left;
+	font-family:'UniSansRegular';
+	padding:0 23px 0 0;
+	font-size:13px;
+	display:block;
+	width:128px;
+	text-align:center;
+}
+.username-pass {
+	height:29px;
+	float:left;
+	width:102px;
+	border-left:1px solid #e2e3e4;
+	display:block;
+}
+.tab1 {
+	float:left;
+	width:98px;
+	padding:0 2px;
+	height:18px;
+	margin:7px 0 0 0;
+	text-align:center;
+	color:#ababac;
+	background:none;
+	outline:none;
+	font-size:13px;
+	border:none;
+	line-height:15px;
+}
+#button1 {
+	width:35px;
+	height:30px;
+	background:url(../images/gobg.jpg) no-repeat left top;
+	border:none;
+	float:left;
+	color:#fff;
+	cursor:pointer;
+}
+#navigation #menu {
+	margin:0 auto;
+	width:1115px;
+}
+#navigation #menu li {
+	font-family: 'UniSansRegular';
+	font-size:18px;
+	height:38px;
+	position:relative;
+}
+#navigation #menu li a {
+	padding:0 11px;
+	color:#58585a;
+	line-height:38px;
+	display:block;
+}
+#navigation #menu li.active a, #navigation #menu li.active a:hover {
+	background-color:#cbccce;
+	display:block;
+}
+#navigation #menu li a:hover {
+	background:#fff;
+}
+#navigation #menu li ul {
+	width:200px;
+	position:absolute;
+	left:0px;
+	top:38px;
+	padding:15px 0 7px 17px;
+	display:none;
+	background-color:#fff;
+	z-index:99999;
+}
+#navigation #menu li ul li {
+	width:100%;
+	line-height:25px;
+}
+#navigation #menu li ul li a {
+	color:#58585a;
+	padding:0;
+}
+#navigation #menu li ul li a:hover {
+	color:#999999;
+}
+#navigation #menu li:hover ul {
+	display:block;
+}
+#navigation #menu li:hover a {
+	background-color:#fff;
+}
+/*banner*/
+#slider {
+	margin:0 auto;
+	width:960px;
+	padding:0;
+	clear:both;
+	position:relative;
+	z-index:0;
+	height:317px;
+}
+#slider-txt {
+	font-family: 'UniSansSemiBoldRegular';
+	width:585px;
+	position:absolute;
+	left:35px;
+	top:210px;
+	color:#fff;
+	font-size:50px;
+	line-height:50px;
+}
+
+#tab-links {
+	position:relative; width:961px; overflow:hidden; z-index:1000
+}
+
+#tabmenu {
+	width:960px;
+	height:31px;
+	top:-33px;
+	clear:both;
+	overflow:hidden;
+}
+
+div#slideshow {
+	width: 960px; height: 317px;
+	overflow: scroll; /* Allows the slides to be viewed using scrollbar if Javascript isn't available */
+	position: relative; z-index: 5;
+}
+
+/* Content */
+#wrapper {
+	background:url(../images/wrapbg.jpg) repeat-y center top;
+	z-index:1;
+}
+#wrapper .content {
+	width:920px;
+	min-height:560px;
+	clear:both;
+	overflow:hidden;
+	padding:21px 19px 0 22px;
+	background-color:#e7e7e8;
+}
+
+#wrapper .home-content {
+	width:920px;
+	min-height:560px;
+	clear:both;
+	overflow:hidden;
+	padding:21px 19px 0 22px;
+	background-color:#e7e7e8;
+	margin-top:-33px;
+}
+
+#content-blogs {
+	width:920px;
+	clear:both;
+	overflow:hidden;
+	margin:0 0 85px 0;
+	border-bottom:1px solid #a6a6a8;
+}
+#wrapper .home-content #content-blogs .blogs {
+	position:relative;
+	font-family: 'UniSansRegular';
+	width:292px;
+	float:left;
+}
+#wrapper .home-content #content-blogs a {
+	font-weight:bold;
+	color:#a3190a;
+}
+
+#wrapper .home-content #content-blogs a:hover {
+	font-weight:bold;
+	color:#A5A5A7;
+}
+
+#wrapper .home-content #content-blogs .blogcenter {
+	font-family: 'UniSansRegular';
+	width:292px;
+	padding:0 10px 15px 10px;
+	position:relative;
+	float:left;
+	margin:0 10px;
+	border-left:1px solid #a6a6a8;
+	border-right:1px solid #a6a6a8;
+}
+#wrapper .home-content h2 {
+	font-size:24px;
+	display:block;
+	padding:0 0 10px 0;
+	font-family: 'UniSansRegular', arial, halvetica, sans-serif;
+}
+
+#wrapper .home-content #content-blogs .blogstxt {
+	font-size:12px;
+	color:#636466;
+	line-height:20px;
+	padding:0 0 0 12px;
+	font-family: arial, halvetica, sans-serif;
+	text-align:justify;
+}
+
+#wrapper .home-content #content-blogs .blogstxt .main {
+	height:80px;
+}
+
+.privacy-header {
+	margin-top:20px;
+}
+
+.terms-sub-header {
+	margin-top:20px;
+	font-size: 12px;
+}
+
+.privacy-list {
+	margin-top:15px;
+}
+
+.privacy-list li {
+	list-style: circle;
+	display:block; 
+	width:100%;
+}
+
+.action-button {
+	text-align:right;
+}
+
+.imgblog {
+	width:277px;
+	float:left;
+	height:145px;
+	display:block;
+	margin:0 0 14px 0;
+	border-right:1px solid #ededee;
+	padding:7px;
+	background-color:#f3f3f4;
+}
+#copyrights {
+	font-family: arial, halvetica, sans-serif;
+	font-size:10px;
+	width:961px;
+	margin:0 auto;
+	text-align:center;
+	color:#a5a5a7;
+	padding:0 0 27px 0;
+	clear:both;
+	overflow:hidden;
+}
+
+#copyrights a {
+	color: #A5a5a7;
+	text-decoration:none;
+}
+
+#copyrights a:hover {
+	color:#a3190a;
+	text-decoration:none;
+}
+
+/*inner1*/
+#innerslider {
+	margin:0 auto;
+	width:961px;
+	padding:0;
+	clear:both;
+	overflow:hidden;
+	position:relative;
+	z-index:0;
+	height:348px;
+}
+#wrapper .content #aboutusnav {
+	width:212px;
+	padding:14px 86px 0 13px;
+	float:left;
+	color:#636466;
+}
+
+#wrapper .content #aboutusnav p {
+	color:#636466;
+}
+
+#wrapper .content #aboutusnav li {
+	float:none;
+	height:43px;
+	margin:0 0 -1px 0;
+	overflow:hidden;
+	font-family: 'UniSansRegular';
+	font-size:15px;
+	line-height:43px;
+	width:212px;
+	border-bottom:1px solid #a6a6a8;
+	
+}
+
+
+#wrapper .content #aboutusnav li a {
+	color:#848587;
+	height:43px;
+	display:block;
+	padding:0 0 0 10px;
+	width:202px;
+}
+#wrapper .content #aboutusnav li a:hover, #wrapper .content #aboutusnav li a.selected {
+	background:url(../images/aboutnav.gif) no-repeat left top;
+	margin-top:1px;
+}
+#wrapper .content #rightcontent {
+	float:left;
+	width:583px;
+	padding:27px 0 63px 0;
+	height:420px;
+	font-size:12px;
+	color:#636466;
+	font-family: arial, halvetica, sans-serif;
+	line-height:20px;
+}
+
+.scroll-pane {
+	width:583px;
+	text-align:justify;
+}
+
+.scroll-pane p {
+	margin-top:10px;
+}
+
+.scroll-pane a {
+	color:#a3190a;
+	text-decoration:none;
+}
+
+
+
+.theme-default .nivoSlider {
+	position:relative;
+	background:#fff url(img/loading.gif) no-repeat 50% 50%;
+}
+.theme-default .nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+	display:none;
+}
+.theme-default .nivoSlider a {
+	border:0;
+	display:block;
+}
+
+.nivoSlider {
+	position:relative;
+	background-image: url('images/sliderimg_01.jpg');
+}
+.nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:6;
+	display:none;
+}
+/* The slices and boxes in the Slider */
+.nivo-slice {
+	display:block;
+	position:absolute;
+	z-index:5;
+	height:100%;
+}
+.nivo-box {
+	display:block;
+	position:absolute;
+	z-index:5;
+}
+/* Caption styles */
+.nivo-caption {
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	background:#000;
+	color:#fff;
+	opacity:0.8; /* Overridden by captionOpacity setting */
+	width:100%;
+	z-index:8;
+}
+.nivo-caption p {
+	padding:5px;
+	margin:0;
+}
+.nivo-caption a {
+	display:inline !important;
+}
+.nivo-html-caption {
+    display:none;
+}
+
+.spacer {
+	width:100%;
+	height:50px;
+}
+
+.testimonial-name {
+	font-style:normal;
+}
+
+.testimonial {
+	font-style:italic;
+}
+
+.testimonial-image-left {
+	padding-right:20px;
+}
+
+.testimonial-image-right {
+	padding-left:20px;
+}
+
+.table-title {
+	font-weight:bold;
+	background-color:#a3190a;
+	color:#FFFFFF;
+}
+
+.table-header {
+	font-weight:bold;
+}
+
+ul.disc li{
+float:none;
+list-style:disc;
+}

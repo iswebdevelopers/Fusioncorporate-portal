@@ -1,0 +1,98 @@
+title = "Contact-us"
+url = "/contact-us"
+layout = "default"
+description = "Contact Us - Fusion Retail Brands Pty Ltd"
+is_hidden = 0
+==
+<?php
+function onSend()
+{
+    // Collect input
+$name = post('first_name').' '.post('last_name');
+$email = post('email_address');
+$msg = post('message');
+
+
+ // Form Validation
+    $validator = Validator::make(
+        [
+            'name' => $name,
+            'email' => $email,
+            'msg' => $msg,
+        ],
+        [
+            'name' => 'required',
+            'email' => 'required|email',
+            'msg' => 'required',
+        ]
+    );
+    
+     if ($validator->fails())
+    {
+        $messages = $validator->messages();
+        throw new ApplicationException($messages->first());
+    }
+    
+    // Submit form
+    $to = System\Models\MailSetting::get('sender_email');
+    $params = compact('name','msg','email');
+    $sendmail = Mail::sendTo($to, 'Fusion.contact.email', $params);
+    $sendmail = Mail::sendTo($email, 'Fusion.contact.message.email', $params);
+    if ($sendmail){
+	    $this['level'] = 'success';
+	    $this['msg'] = 'Your enquiry has been submitted';
+    } else {
+    	$this['level'] = 'danger';
+	    $this['msg'] = 'Your enquiry has not been submitted, please try again. Thanks';
+    }
+}
+?>
+==
+<div class="row">
+    <div class="about-us">
+    	<img class="img-responsive img_align_middle" src="{{ ('assets/images/contact-us.png')|theme }}"/>
+	    <div class="col-md-6 col-md-offset-3">
+	    	<h3>CONTACT US</h3>
+	    	<p> For any questions, feedback or comments relating to Fusion Retail Brands, please contact us via our details below.</p>
+	    	<p>Fusion Retail Brands Pty Ltd</p>
+			<p>Level 1, 850 Lorimer St, Port Melbourne VIC 3207</p>
+			<!--p>PO Box 690, Richmond VIC 3121</p-->
+			<p>P: 03 9420 8444</p>
+			<p>F: 03 9420 8400</p>
+			<p>ACN 151 836 083</p>
+			<p>Alternatively, please complete the form below and we will respond to your message as soon as possible.</p>
+			<div id="result"></div>
+			<form class="form-horizontal top5" data-request="onSend" data-request-update="calcresult: '#result'">
+              <div class="form-group">
+                <label for="inputfirstname" class="col-sm-3 control-label">First Name</label>
+                <div class="col-sm-9">
+                  <input type="text" name="first_name" class="form-control" id="inputfirstname" placeholder="John">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputlastname" class="col-sm-3 control-label">Last Name</label>
+                <div class="col-sm-9">
+                  <input type="text" name="last_name" class="form-control" id="inputlastname" placeholder="Doe">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputemail" class="col-sm-3 control-label">Email Address</label>
+                <div class="col-sm-9">
+                  <input type="email" name ="email_address" class="form-control" id="inputemail" placeholder="John.Doe@mail.com">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputmessage" class="col-sm-3 control-label">Message</label>
+                <div class="col-sm-9">
+                  <textarea name ="message" class="form-control" id="inputmessage" rows="5"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-4">
+                  <button type="submit" class="btn btn-primary">Send</button>
+                </div>
+              </div>
+            </form>
+	    </div>
+    </div>
+</div>

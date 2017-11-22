@@ -1,0 +1,16 @@
+.vertical-align {
+              display: flex;
+              align-items: center;
+              flex-direction: row;
+            }
+
+/* fusion button */
+.btn-primary{
+    border-radius : 0px;  
+    padding: 3px 12px;
+}
+
+.brand-box{
+    border-top: 2px solid #222;
+    border-bottom: 2px solid #222;
+}

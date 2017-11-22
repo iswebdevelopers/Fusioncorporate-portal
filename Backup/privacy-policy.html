@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Fusion Retail Brands" />
+<meta name="Keywords" content="Fusion Retail Brands, Privacy Policy" />
+<meta name="Description" content="Fusion Retail Brands Privacy Policy" />
+<meta name="language" content="English" />
+<title>Fusion Retail Brands - Privacy Policy</title>
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+<link href="css/style.css" rel="stylesheet" type="text/css" />
+<link type="text/css" href="css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<!--[if IE 6]>
+	<style type="text/css">
+		img, div, p, span, { behavior: url(iepngfix.htc) }
+        body{
+         behavior: url(csshover3.htc)
+        }
+	</style>
+<![endif]-->
+<script src="scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="scripts/jquery.faded.js" type="text/javascript"></script>
+<script type="text/javascript" src="scripts/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="scripts/jquery.jscrollpane.min.js"></script>
+<script language="javascript" type="text/javascript" src="scripts/jquery.nivo.slider.pack.js"></script>
+<script type="text/javascript">
+	
+	$(window).load(function() {
+		$('#slider').nivoSlider({effect: 'fade', pauseTime: 5000, controlNav: false, directionNav: false, pauseOnHover: false});
+	});
+	
+	$(function() {
+		$('.scroll-pane').jScrollPane();
+	});
+</script>
+<!-- Script to handle logon to fusion rewards -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#button1").click(function () {
+                $.post("fusionservice/FusionService.aspx", { TxtCardNumber: $("#ctl00_txtCardNumber").val(),
+                    TxtPassword: $("#ctl00_txtPassword").val()
+                },
+                                        function (response) { $("#DivResult").html(response).show(); });
+                return false;
+            })
+        });
+    </script>
+
+</head>
+<body>
+<!--Header Starts Here-->
+<div id="header">
+   <!--Container for all login related areas -->
+        <div class="container">
+            <h1 id="logo">
+                <a href="index.html">
+                    <img src="images/logo.jpg" alt="Fusion Retail Brands Logo" /></a></h1>
+            <!-- Begin Login Div -->
+            <div id="login-blog">
+                <!-- Begin Form -->
+                <form name="FusionService" action="#">
+                <!--Begin Form Div -->
+                <div id="login-blog1a">
+                    <p id="loginname">
+                        Fusion Rewards Login</p>
+                    <p class="username-pass">
+                        <input name="ctl00$txtCardNumber" id="ctl00_txtCardNumber" type="text" class="tab1"
+                            onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Username':this.value;"
+                            value="card / e-mail" /></p>
+                    <p class="username-pass">
+                        <input name="ctl00$txtCardNumber" id="ctl00_txtPassword" type="password" class="tab1"
+                            onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'password':this.value;"
+                            value="password" /></p>
+                </div>
+                <!-- End Form Div -->
+                <!-- Include Submit Button -->
+                <p>
+                    <input name="Submit" type="submit" id="button1" value="GO" />
+                </p>
+                <!-- Login Result -->
+                <div id="DivResult" style="display: none;">
+                    no text</div>
+                </form>
+                <!-- End Form -->
+            </div>
+        </div>
+        <!-- End Container -->
+  <div id="navigation">
+    <ul id="menu">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="./about-us/about-us.html">About us</a>
+      	<ul>
+      		<li><a href="./about-us/about-us.html">Our Company</a></li>
+      		<li><a href="./about-us/about-us.html#history">History</a></li>
+      		<li><a href="./about-us/about-us.html#stores">Stores</a></li>
+      		<li><a href="./about-us/about-us.html#suppliers">Suppliers</a></li>
+      	</ul>
+      </li>
+      <li><a href="#">Brands</a>
+        <ul>
+          <li><a href="./brands/diana-ferrari.html">diana ferrari</a></li>
+          <li><a href="./brands/williams.html">Williams</a></li>
+          <li><a href="./brands/mathers.html">Mathers</a></li>
+          <li><a href="./brands/colorado.html">Colorado</a></li>
+        </ul>
+      </li>
+      <li><a href="./group-functions/group-functions.html">Group Functions</a>
+        <ul>
+          <li><a href="./group-functions/group-functions.html#retail-operations">Retail Operations</a></li>
+          <li><a href="./group-functions/group-functions.html#finance">Finance</a></li>
+          <li><a href="./group-functions/group-functions.html#supply-chain">Suppy Chain &amp; Sourcing</a></li>
+          <li><a href="./group-functions/group-functions.html#human-resources">Human Resources</a></li>
+          <li><a href="./group-functions/group-functions.html#information-services">Information Services</a></li>
+          <li><a href="./group-functions/group-functions.html#legal">Legal</a></li>
+          <li><a href="./group-functions/group-functions.html#property">Property</a></li>
+          <li><a href="./group-functions/group-functions.html#wholesale">Wholesale</a></li>
+          <li><a href="./group-functions/group-functions.html#customer-service">Customer Service</a></li>
+        </ul>
+      </li>
+      <li><a href="#">People &amp; Careers</a>
+        <ul>
+          <!-- <li><a href="../careers/testimonials.html">Testimonials</a></li> -->
+          <li><a href="./careers/benefits.html#why-work-for-us">Why Work for Us?</a></li>
+          <li><a href="./careers/benefits.html#benefits">Benefits</a></li>
+          <li><a href="https://fusionretailbrands.springboard.com.au/jobtools/JnCustomLogin.Login?in_organid=18015">Job Search</a></li>
+        </ul>
+      </li>
+      <li><a href="./values/values.html">Values</a></li>
+       <!-- <li><a href="#">Community</a>
+      	<ul>
+      		<li><a href="./community/community.html#social-responsibility">Social Responsibility</a></li>
+      	</ul>
+      </li> -->
+      <li><a href="#">Media</a>
+      	<ul>
+      		<li><a href="./media/press-releases.html">Press Releases</a></li>
+      		<li><a href="./media/key-contacts.html">Key Contacts</a></li>
+      	</ul>
+      </li>
+      <li><a href="http://www.fusioncard.com.au" target="_blank">Rewards</a></li>
+      <li><a href="./contact/contact-us.html">Contact us</a></li>
+    </ul>
+  </div>
+</div>
+<!--Header Ends Here-->
+<!--Content Starts Here-->
+<div id="wrapper">
+  <div class="container">
+    <div class="slider-wrapper">
+		<div id="slider" class="nivoSlider">
+			<img src="images/sliders/contact_01.jpg" alt="Fusion Retail Brands" />
+			<img src="images/sliders/contact_02.jpg" alt="Fusion Retail Brands" />
+		</div>
+	</div>
+    <div class="content">
+      <ul id="aboutusnav">
+      	<li><h2>Quick Links</h2></li>
+        <li><a href="privacy-policy.html" class="selected">Privacy Policy</a></li>
+        <li><a href="terms-conditions.html">Terms and Conditions</a></li>
+      </ul>
+      <div id="rightcontent">
+	      <div class="scroll-pane" style="height:465px; padding-right:10px; overflow:hidden;">
+    	    <h2>Privacy Policy</h2>
+        	<p>Fusion Retail Brands Pty Ltd and each of its related entities (<b>Fusion Retail Brands, we or us</b>) is committed to
+ensuring that any personal information and credit related personal information (<b>credit information</b>) collected
+during the course of our operations is treated with respect managed responsibly at all times.</p>
+<p>We may update this policy from time to time, so please make sure you check the most recent Privacy Policy online at <a href="privacy-policy.html">www.fusionretailbrands.com.au/privacy-policy.html</a>.</p>
+<h3 class="privacy-header">Purpose</h3>
+<p>The purpose of Fusion Retail Brands' Privacy Policy is to outline what personal information and credit
+information we collect during the course of running our business, what we do with the information received
+and what measures we take to keep this information secure.</p>
+<h3 class="privacy-header">About Us</h3>
+<p>Fusion Retail Brands is a retailer and wholesaler of footwear, clothing and accessories. We are bound by the
+provisions of the Privacy Act. For more information on our business, please visit our corporate website: <a href="http://www.fusionretailbrands.com.au/">www.fusionretailbrands.com.au</a> or contact our head office on 03 9420 8444 for further information.</p>
+<h3 class="privacy-header">Personal Information We Collect</h3>
+<p>Personal information which we may collect and hold include your:</p>
+<ul class="privacy-list">
+<li>Name</li>
+<li>Address</li>
+<li>Credit card details</li>
+<li>Phone number</li>
+<li>E-mail address</li>
+<li>Transaction details about purchases you make</li>
+</ul>
+<p>&nbsp;</p>
+<p>Credit information which we may collect, hold and disclose include:</p>
+<ul class="privacy-list">
+<li>Identification information – name, date of birth, current or previous address, driver’s licence details</li>
+<li>Type and amount of credit sought</li>
+<li>Default information</li>
+<li>Repayment history information</li>
+<li>New arrangement information</li>
+</ul>
+<p>&nbsp;</p>
+<p>If you do not provide certain personal information to us, this may affect our ability to provide our goods or
+services to you or your ability to receive special offers if you are a member of the Fusion Rewards program.</p>
+<h3 class="privacy-header">How We Collect Personal Information</h3>
+<p>We may collect your personal and credit information in various ways, including:</p>
+<ul class="privacy-list">
+<li>directly from you via our stores or when you register to become a member of our website or Fusion
+Card program;</li>
+<li>from third parties, including those described in the "Disclosure of Information Collected" section
+below;</li>
+<li>from our own records regarding your previous purchases or other records held at our head office,
+including various departments such as Human Resources, Finance, Marketing and Information
+Services;</li>
+<li>when you visit our website (for more information on what information is collected, see "Cookies" and
+"Information Security" below); and</li>
+<li>from information in the public domain.</li>
+</ul>
+ 
+<p>Any personal or credit information provided to Fusion Retail Brands will be treated in accordance with the
+requirements of the Privacy Act. For more information regarding the Privacy Act, please refer to the Office of
+the Australian Information Commissioner's website: <a href="http://www.oaic.gov.au">www.oaic.gov.au</a>.</p>
+<h3 class="privacy-header">Use of Information Collected</h3>
+<p>Any personal or credit information Fusion Retail Brands collects through the course of normal business
+dealings will be used primarily for the purposes for which it was collected. Fusion Retail Brands does not sell,
+trade or share personal information to third parties. We may use your personal information:</p>
+ 
+<ul class="privacy-list">
+<li>to verify your identity;</li>
+<li>to provide you with our goods or services;</li>
+<li>to charge or bill your for those goods or services (including debt collection); </li>
+<li>to report any default by you under payment terms with us; </li>
+<li>to perform statistical analysis of customer shopping habits or other similar activities (for internal marketing purposes only); </li>
+<li>to send you information about our promotions and products;</li>
+<li>to obtain feedback on how to improve our products or customer service; and</li>
+<li>for any purpose related to the above.</li>
+</ul>
+ 
+<p>Fusion Retail Brands does not send unsolicited e-mails. </p>
+ 
+<h3 class="privacy-header">Disclosure of Information Collected</h3>
+<p>In some instances, it is necessary to disclose some of your personal information to third parties or contractors,
+such as providers of:</p>
+ 
+<ul class="privacy-list">
+<li>delivery services;</li>
+<li>information technology services;</li>
+<li>data storage or processing services; </li>
+<li>billing and debt-recovery services;</li>
+<li>customer enquiries services;</li>
+<li>mailing service services; and</li>
+<li>market research or website usage analysis services.</li>
+</ul>
+ 
+ 
+<p>However, Fusion Retail Brands will take reasonable steps to ensure our suppliers and contractors only use the
+information provided to them for relevant purposes, for example by requiring them to sign contracts containing
+appropriate privacy or confidentiality obligations.</p>
+ 
+<p>In limited circumstances, Fusion Retail Brands may also disclose your personal information to:</p>
+ 
+<ul class="privacy-list">
+<li>our related companies;</li>
+<li>our professional advisors, such as our lawyers, accountants, and auditors;</li>
+<li>to government agencies or bodies, if we are required or authorised to do so by law; and</li>
+<li>organisations who manage the transfer or sale of our assets or business.</li>
+</ul>
+<p>&nbsp;</p>
+
+<h3 class="privacy-header">Disclosure of information to Credit Reporting Bodies</h3> 
+<p>In order to assess and maintain an application made by you to use any service we offer, including our Take Home
+Lay Buy Services <b>(“Services”)</b>, Fusion Retail Brands may obtain consumer credit reporting information about
+you from a credit reporting body (such as VEDA). In addition, Fusion Retail Brands may also disclose to a credit
+reporting body information about any default by you under our terms and conditions.</p>
+
+<p>In this situation, Fusion Retail Brands may derive the following types of personal information from information
+about you contained in the credit check:</p>
+
+<ul class="privacy-list">
+<li>your eligibility to be provided with credit;</li>
+</ul>
+<p>&nbsp;</p>
+
+<p>Any consumer credit reporting information collected by Fusion Retail Brands may be disclosed to any of the
+entities set out above for the purposes of processing an application for our Services, processing payments and
+any other related purpose.</p>
+
+<p>For the purposes of providing consumer credit, Fusion Retail Brands may disclose your personal and credit
+information to the following credit reporting bodies for the purposes of undertaking a credit check in relation to
+an application made by you:</p>
+
+<h3 class="privacy-header">VEDA www.veda.com.au</h3>
+<p>Secure Sentinel - Email: customerservice@securesentinel.com.au, Phone: 1800 022 043</p>
+<p>Verify – Postal address: Verify Holdings Australia Ltd Locked Bag 965, NORTH SYDNEY
+NSW 2059, Email: <a href="mailto:info@verifycv.com.au">info@verifycv.com.au</a></p>
+<p>You may access a copy of VEDA’s policy about its management of credit information on its
+website at <a href="www.veda.com.au">www.veda.com.au</a>.</p>
+
+<h3 class="privacy-header">DUN & BRADSTREET www.dnb.com.au</h3>
+<p>Email<a href="mailto:pac.austral@dnb.com.au">pac.austral@dnb.com.au</a></p>
+<p>Phone: 1300 734 806</p>
+<p>You may access a copy of Dun & Bradstreet’s policy about its management of credit
+information on its website at <a href="www.dnb.com.au">www.dnb.com.au</a>.</p>
+
+<p>These credit reporting bodies may include any of your personal or credit information, disclosed to it by Fusion
+Retail Brands, in reports provided to other credit providers to assist other credit providers to assess your credit
+worthiness. You may access a copy of the credit reporting body’s policy about its management of credit
+information on its website. You have the right to make a request to the credit reporting body not to use or disclose
+your credit reporting information:</p>
+
+<ul class="privacy-list">
+<li>for the purposes of pre-screening of direct marketing by a credit provider; or</li>
+<li>if you believe on reasonable grounds that you have been, or are likely to be, a victim of fraud.</li>
+</ul>
+<p>&nbsp;</p>
+<h3 class="privacy-header">Overseas Disclosures</h3>
+<p>We may disclose personal information to overseas recipients, including for example, related bodies corporate
+or our third-party service providers which are located overseas.</p>
+ 
+<h3 class="privacy-header">Anonymity</h3>
+<p>Where lawful and practicable, you have the option of remaining anonymous (or using a pseudonym) in your
+dealings with Fusion Retail Brands.</p>
+<p>For example, we understand that when customers visit our website they may not wish to become a member.
+We respect that and have provided visitors with the option to not sign up as a member and to drop out at any
+time if they no longer wish to be a member of the site.</p>
+
+<h3 class="privacy-header">Direct marketing</h3>
+<p>Customers who do not wish to have their personal information used for marketing by Fusion Retail Brands
+should request not to receive direct marketing communications at the time of purchase, in correspondence, at
+interview or any other point of contact with a representative of our company. Customers may also contact us at
+any time to ask us not to use their personal information for marketing purposes, using our contact details at the
+end of this Privacy Policy.</p>
+
+<h3 class="privacy-header">Access to personal information and keeping up-to-date</h3>
+<p>Fusion Retail Brands takes reasonable steps to keep your personal and credit information accurate, complete
+and up-to-date. However, our ability to do this depends to a large extent on you informing us of any changes or
+updates to your details.</p>
+<p>You may request access to or correction of your personal or credit information held by Fusion Retail Brands at
+any time by contacting us at our contact details at the end of this Privacy Policy.</p>
+<p>Fusion Retail Brands will provide you with access to your personal or credit information and/or allow you to
+correct that information so that it is accurate, complete or up to date, except in limited circumstances specified
+under the Privacy Act. If we deny you access or refuse to correct your personal information, we will inform
+you of the reasons why.</p>
+<p>We may charge you a fee for providing access to your personal information, which reflects the cost incurred by
+us to provide you with access to this information.</p>
+ 
+<h3 class="privacy-header">Cookies</h3>
+<p>Both the Fusion Retail Brands group corporate web site and the company's online stores use "system cookies".
+A "system cookie" is a small amount of information stored on the user's computer by our web site server.</p>
+<p>The "system cookie" identifies the user's browser. It does not identify the user personally and no personal
+information is stored within Fusion Retail Brands "system cookies". "System cookies" can be disabled by the
+user going to the preferences or options menus in their browser.</p>
+ 
+<h3 class="privacy-header">Information Security</h3>
+<p>Fusion Retail Brands takes reasonable security measures to minimize the risk of misuse, interference and loss,
+and unauthorised third party access, modification or disclosure of personal and credit information.</p>
+<p>The company’s trading web sites (<a href="http://www.dianaferrari.com.au">www.dianaferrari.com.au</a>; <a href="http://www.mathers.com.au">www.mathers.com.au</a>; <a href="http://www.williamsshoes.com.au">www.williamsshoes.com.au</a>; <a href="http://www.colorado.com.au">www.colorado.com.au</a>; <a href="https://www.bigbrandsshoeclearance.com.au">www.bigbrandsshoeclearance.com.au</a>; <a href="https://www.abeofootwear.com.au">www.abeofootwear.com.au</a>; <a href="http://www.dfwholesale.com.au">www.dfwholesale.com.au</a>) conform to the standard of SSL (Secure Sockets Layer) technology, with credit card details and other information scrambled (encrypted) to minimise possible misuse by third parties.</p>
+<p>A padlock/key is displayed on the lower right hand corner that indicates we have a secure site.  Double click the padlock to see our certificate of authenticity.</p>
+<p>Our website contains links to other sites, however no personal information is exchanged.  These links are for information purposes only.</p>
+<p>Fusion Retail Brands does not store or keep complete credit card numbers from on-line transactions.  The first and last three numbers of your credit card number are kept for order verification purposes only.</p>
+<p>While every endeavour is made to ensure every shopping experience with us is a good one, in the event a credit card is used without the holder's authorisation, the card holder must notify their credit card provider in accordance with their reporting rules and procedures. </p>
+<p>The internal network also has levels of security to ensure information of a sensitive nature is only accessible by authorised staff members. </p>
+<p>All hard copies of information of a sensitive nature are stored securely and are not accessible by unauthorised persons. </p>
+<p>Fusion Retail Brands will take reasonable steps to destroy or permanently de-identify personal information if it is no longer needed for any purpose for which the information may be used or disclosed.</p>
+ 
+<h3 class="privacy-header">Children and Young People</h3>
+<p>The Fusion Retail Brands’ websites are accessible to people of all ages.  However, we are mindful that some customers who register as members may be under the age of 18.  In the interests of their personal safety, we urge children to check with their parents before entering personal information on any website and ask parents to discuss these issues with their children.  </p>
+<p>Fusion Retail Brands will also ensure that appropriate disclosures are made at the time of collection of other information from minors, and will only collect this information as is reasonably necessary in the circumstances.  Information collected will only be used for the purposes of which it was collected.</p>
+ 
+<h3 class="privacy-header">Complaints </h3>
+<p>If you are not satisfied with the way we have handled your personal information we encourage you to contact our Privacy Officer with details of your complaint by using our contact details below.</p>
+<p>You are also entitled to lodge a complaint with the Federal Office of the Australian Information Commissioner.  More information can be obtained from the Commissioner's website at <a href="http://www.oaic.gov.au">www.oaic.gov.au</a>.  </p>
+ 
+<h3 class="privacy-header">Contact Us</h3>
+<p>If you have any comments, suggestions or questions in relation to privacy, please contact us:</p>
+<ul class="privacy-list">
+<li>by post at: 254 - 260 Burwood Road, Hawthorn VIC Australia 3122
+<li>by telephone on 1800 101 285 or 
+<li>by email to <a href="mailto:privacy@fusionretailbrands.com.au">privacy@fusionretailbrands.com.au</a>.</li>
+</ul>
+
+
+</ul>
+			</div>
+      	  </div>
+      </div>
+      <p id="copyrights">Fusion Retail Brands Pty Ltd &copy; 2013 | <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms-conditions.html">Terms and Conditions</a></p>
+    </div>
+  </div>
+<!--Content Ends Here-->
+<!--Footer Starts Here-->
+<!--Footer Ends Here-->
+</body>
+</html>

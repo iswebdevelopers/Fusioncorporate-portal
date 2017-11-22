@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="Fusion Retail Brands" />
+<meta name="Keywords" content="Mathers, Fusion Retail Brands" />
+<meta name="Description" content="Mathers - Fusion Retail Brands />
+<meta name="language" content="English" />
+<title>Fusion Retail Brands - Brands - Mathers</title>
+<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+<link href="../css/style.css" rel="stylesheet" type="text/css" />
+<link type="text/css" href="../css/jquery.jscrollpane.css" rel="stylesheet" media="all" />
+<!--[if IE 6]>
+	<style type="text/css">
+		img, div, p, span, { behavior: url(iepngfix.htc) }
+        body{
+         behavior: url(csshover3.htc)
+        }
+	</style>
+<![endif]-->
+
+<script src="../scripts/jquery-1.4.2.min.js" type="text/javascript"></script>
+<script src="../scripts/jquery.faded.js" type="text/javascript"></script>
+<script type="text/javascript" src="../scripts/jquery.mousewheel.js"></script>
+<script type="text/javascript" src="../scripts/jquery.jscrollpane.min.js"></script>
+
+<script type="text/javascript" id="sourcecode">
+	$(function() {
+		$('.scroll-pane').jScrollPane();
+	});
+</script>
+
+<!-- Script to handle logon to fusion rewards -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#button1").click(function () {
+                $.post("fusionservice/FusionService.aspx", { TxtCardNumber: $("#ctl00_txtCardNumber").val(),
+                    TxtPassword: $("#ctl00_txtPassword").val()
+                },
+                                        function (response) { $("#DivResult").html(response).show(); });
+                return false;
+            })
+        });
+    </script>
+
+</head>
+<body>
+<!--Header Starts Here-->
+<div id="header">
+     <!--Container for all login related areas -->
+        <div class="container">
+            <h1 id="logo">
+                <a href="../index.html">
+                    <img src="../images/logo.jpg" alt="Fusion Retail Brands Logo" /></a></h1>
+            <!-- Begin Login Div -->
+            <div id="login-blog">
+                <!-- Begin Form -->
+                <form name="FusionService" action="#">
+                <!--Begin Form Div -->
+                <div id="login-blog1a">
+                    <p id="loginname">
+                        Fusion Rewards Login</p>
+                    <p class="username-pass">
+                        <input name="ctl00$txtCardNumber" id="ctl00_txtCardNumber" type="text" class="tab1"
+                            onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'Username':this.value;"
+                            value="card / e-mail" /></p>
+                    <p class="username-pass">
+                        <input name="ctl00$txtCardNumber" id="ctl00_txtPassword" type="password" class="tab1"
+                            onclick="this.value='';" onfocus="this.select()" onblur="this.value=!this.value?'password':this.value;"
+                            value="password" /></p>
+                </div>
+                <!-- End Form Div -->
+                <!-- Include Submit Button -->
+                <p>
+                    <input name="Submit" type="submit" id="button1" value="GO" />
+                </p>
+                <!-- Login Result -->
+                <div id="DivResult" style="display: none;">
+                    no text</div>
+                </form>
+                <!-- End Form -->
+            </div>
+        </div>
+        <!-- End Container -->
+  <div id="navigation">
+    <ul id="menu">
+      <li><a href="../index.html" class="active">Home</a></li>
+      <li><a href="../about-us/about-us.html">About us</a>
+      	<ul>
+      		<li><a href="../about-us/about-us.html">Our Company</a></li>
+      		<li><a href="../about-us/about-us.html#history">History</a></li>
+      		<li><a href="../about-us/about-us.html#stores">Stores</a></li>
+      		<li><a href="../about-us/about-us.html#suppliers">Suppliers</a></li>
+      	</ul>
+      </li>
+      <li><a href="#">Brands</a>
+        <ul>
+          <li><a href="diana-ferrari.html">diana ferrari</a></li>
+           <li><a href="colorado.html">Colorado</a></li>
+          <li><a href="williams.html">Williams</a></li>
+          <li><a href="mathers.html">Mathers</a></li>
+        </ul>
+      </li>
+      <li><a href="../group-functions/group-functions.html">Group Functions</a>
+        <ul>
+          <li><a href="../group-functions/group-functions.html#retail-operations">Retail Operations</a></li>
+          <li><a href="../group-functions/group-functions.html#finance">Finance</a></li>
+          <li><a href="../group-functions/group-functions.html#supply-chain">Suppy Chain &amp; Sourcing</a></li>
+          <li><a href="../group-functions/group-functions.html#human-resources">Human Resources</a></li>
+          <li><a href="../group-functions/group-functions.html#information-services">Information Services</a></li>
+          <li><a href="../group-functions/group-functions.html#legal">Legal</a></li>
+          <li><a href="../group-functions/group-functions.html#property">Property</a></li>
+          <li><a href="../group-functions/group-functions.html#wholesale">Wholesale</a></li>
+          <li><a href="../group-functions/group-functions.html#customer-service">Customer Service</a></li>
+        </ul>
+      </li>
+      <li><a href="#">People &amp; Careers</a>
+        <ul>
+         <!-- <li><a href="../careers/testimonials.html">Testimonials</a></li> -->
+          <li><a href="../careers/benefits.html#why-work-for-us">Why Work for Us?</a></li>
+          <li><a href="../careers/benefits.html#benefits">Benefits</a></li>
+          <li><a href="https://fusionretailbrands.springboard.com.au/jobtools/JnCustomLogin.Login?in_organid=18015">Job Search</a></li>
+        </ul>
+      </li>
+      <li><a href="../values/values.html">Values</a></li>
+       <!-- <li><a href="#">Community</a>
+      	<ul>
+      		<li><a href="../community/community.html#social-responsibility">Social Responsibility</a></li>
+      	</ul>
+      </li> -->
+      <li><a href="#">Media</a>
+      	<ul>
+      		<li><a href="../media/press-releases.html">Press Releases</a></li>
+      		<li><a href="../media/key-contacts.html">Key Contacts</a></li>
+      	</ul>
+      </li>
+      <li><a href="http://www.fusioncard.com.au" target="_blank">Rewards</a></li>
+      <li><a href="../contact/contact-us.html">Contact</a></li>
+	  <li><a href="../stores/locations.html">Store Locations</a></li>
+    </ul>
+  </div>
+</div>
+<!--Header Ends Here-->
+<!--Content Starts Here-->
+<div id="wrapper">
+  <div class="container">
+    <div class="slider-wrapper">
+		<div id="slider" class="nivoSlider">
+			<img src="../images/sliders/mathers_01.jpg" alt="Mathers" />
+		</div>
+	</div>
+    <div class="content">
+      <ul id="aboutusnav">
+      	<li><h2>Quick Links</h2></li>
+        <li><a href="diana-ferrari.html">diana ferrari</a></li>
+         <li><a href="colorado.html">Colorado</a></li>
+        <li><a href="williams.html">Williams</a></li>
+        <li><a href="mathers.html" class="selected">Mathers</a></li>
+       
+      </ul>
+      <div id="rightcontent">
+	      <div class="scroll-pane" style="height:465px; padding-right:10px; overflow:hidden;">
+    	    <h2>Mathers</h2>
+        	<p>Mathers is the first choice retail destination for stylish and comfortable shoes from brands you trust with the service you deserve. 
+        	We stock brands exclusive to Mathers such as Giovanna and Castello and in addition to this your favourite brands such as diana ferrari, Hush Puppies and Colorado.</p>
+        	<p><a href="http://www.mathers.com.au" target="_blank">Visit mathers.com.au&nbsp;>></a></p>
+			<br /><br />        	
+      	  </div>
+      </div></div>
+      <p id="copyrights">Fusion Retail Brands Pty Ltd &copy; 2013 | <a href="../privacy-policy.html">Privacy Policy</a> | <a href="../terms-conditions.html">Terms and Conditions</a></p>
+    </div>
+  </div>
+<!--Content Ends Here-->
+<!--Footer Starts Here-->
+<!--Footer Ends Here-->
+</body>
+</html>

@@ -1,0 +1,645 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+FRB
+</name>
+</assembly>
+<members>
+<member name="F:FRB.FusionService.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="P:FRB.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:FRB.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:FRB.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="F:FRB.FRBMain.head">
+	<summary>
+head control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.FRBMain.form1">
+	<summary>
+form1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.FRBMain.HeaderContentPlaceHolder">
+	<summary>
+HeaderContentPlaceHolder control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.FRBMain.TextContentPlaceHolder">
+	<summary>
+TextContentPlaceHolder control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.pnlRequired">
+	<summary>
+pnlRequired control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.lblRequired">
+	<summary>
+lblRequired control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.pnlForm">
+	<summary>
+pnlForm control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.txtFirstname">
+	<summary>
+txtFirstname control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.RequiredFieldValidator1">
+	<summary>
+RequiredFieldValidator1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.txtLastname">
+	<summary>
+txtLastname control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.RequiredFieldValidator2">
+	<summary>
+RequiredFieldValidator2 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.txtEmailAddress">
+	<summary>
+txtEmailAddress control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.RequiredFieldValidator3">
+	<summary>
+RequiredFieldValidator3 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.RegularExpressionValidator1">
+	<summary>
+RegularExpressionValidator1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.txtMessage">
+	<summary>
+txtMessage control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.RequiredFieldValidator4">
+	<summary>
+RequiredFieldValidator4 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.btnSend">
+	<summary>
+btnSend control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.ValidationSummary1">
+	<summary>
+ValidationSummary1 control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.pnlThankYou">
+	<summary>
+pnlThankYou control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.pnlError">
+	<summary>
+pnlError control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="F:FRB.sendcomment.lblErrorMessage">
+	<summary>
+lblErrorMessage control.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="P:FRB.My.MyWebExtension.Application">
+	<summary>
+ Returns information about the current application.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.Computer">
+	<summary>
+ Returns information about the host computer.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.User">
+	<summary>
+ Returns information for the current Web user.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.Request">
+	<summary>
+ Returns Request object.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.Response">
+	<summary>
+ Returns Response object.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.Log">
+	<summary>
+ Returns the Asp log object.
+ </summary>
+</member><member name="P:FRB.My.MyWebExtension.WebServices">
+	<summary>
+ Provides access to WebServices added to this project.
+ </summary>
+</member><member name="T:FRB.My.MyWebExtension">
+	<summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:FRB.FusionCard.Default.#ctor">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.CardConvertDisplayToNumberCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.CardConvertListDisplayToNumberCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.CardConvertNumberToDisplayCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.CardConvertNumberToBarcodeCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.CardIsValidCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.GetPromotionsCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberGetNewCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberAddCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberUpdateCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberResetPasswordCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberReferralCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberPointsLoadCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberPointsWithSSOLoadCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberLoadFromDetailCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberSetPasswordCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberGetCurrentCardCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberCheckExistsCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.MemberConfirmUnsubscribeCompleted">
+	<remarks/>
+</member><member name="E:FRB.FusionCard.Default.ReferralGetAllCompleted">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertDisplayToNumber(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertDisplayToNumberAsync(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertDisplayToNumberAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertListDisplayToNumber(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertListDisplayToNumberAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertListDisplayToNumberAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToDisplay(System.Int32)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToDisplayAsync(System.Int32)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToDisplayAsync(System.Int32,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToBarcode(System.Int32)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToBarcodeAsync(System.Int32)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardConvertNumberToBarcodeAsync(System.Int32,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardIsValid(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardIsValidAsync(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CardIsValidAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.GetPromotions(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.GetPromotionsAsync(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.GetPromotionsAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetNew">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetNewAsync">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetNewAsync(System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberAdd(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberAddAsync(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberAddAsync(FRB.FusionCard.Member,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberUpdate(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberUpdateAsync(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberUpdateAsync(FRB.FusionCard.Member,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberResetPassword(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberResetPasswordAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberResetPasswordAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberReferral(FRB.FusionCard.Member,System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberReferralAsync(FRB.FusionCard.Member,System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberReferralAsync(FRB.FusionCard.Member,System.String,System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsLoad(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsLoadAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsLoadAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsWithSSOLoad(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsWithSSOLoadAsync(System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberPointsWithSSOLoadAsync(System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberLoadFromDetail(System.String,System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberLoadFromDetailAsync(System.String,System.String,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberLoadFromDetailAsync(System.String,System.String,System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberSetPassword(FRB.FusionCard.Member,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberSetPasswordAsync(FRB.FusionCard.Member,System.String,System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberSetPasswordAsync(FRB.FusionCard.Member,System.String,System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetCurrentCard(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetCurrentCardAsync(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberGetCurrentCardAsync(FRB.FusionCard.Member,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberCheckExists(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberCheckExistsAsync(FRB.FusionCard.Member)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberCheckExistsAsync(FRB.FusionCard.Member,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberConfirmUnsubscribe(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberConfirmUnsubscribeAsync(System.String)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.MemberConfirmUnsubscribeAsync(System.String,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.ReferralGetAll(FRB.FusionCard.CountryType)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.ReferralGetAllAsync(FRB.FusionCard.CountryType)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.ReferralGetAllAsync(FRB.FusionCard.CountryType,System.Object)">
+	<remarks/>
+</member><member name="M:FRB.FusionCard.Default.CancelAsync(System.Object)">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Default">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Promotion.Name">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Promotion.Description">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Promotion.FinishDate">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Promotion.Brand">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Promotion.Style">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Promotion">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Referral.ID">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Referral.StartDate">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Referral.FinishDate">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Referral.Description">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Referral.Terms">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Referral">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.FirstName">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.LastName">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.RewardPointsBalance">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.BarcodeNumber">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.PreferredBrand">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.Tier">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithSSO.SsoUrl">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberWithSSO">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.FirstName">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.LastName">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.RewardPointsBalance">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.BarcodeNumber">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.PreferredBrand">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberWithPoints.Tier">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberWithPoints">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.Address1">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.Address2">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.State">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.City">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.Country">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Address.Postcode">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Address">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Card.Number">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Card.Active">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Card.Current">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Card.Display">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Card.Barcode">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Card">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.ID">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.CurrentCard">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Cards">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Mobile">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Active">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.OfferViaEmail">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.OfferViaSMS">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Address">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.BirthDay">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.BirthMonth">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.BirthYear">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.DateChanged">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.DateCreated">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Firstname">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Title">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.EmailAddress">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Gender">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Lastname">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Password">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.Postcode">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.ReferenceTypeID">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.ReferenceNumber">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.SignUpLocation">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.SignUpEmployee">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.PasswordChangeRequired">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.EmailHasBounced">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.Member.ReferralID">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.Member">
+	<remarks/>
+</member><member name="F:FRB.FusionCard.CountryType.Nothing">
+	<remarks/>
+</member><member name="F:FRB.FusionCard.CountryType.Australia">
+	<remarks/>
+</member><member name="F:FRB.FusionCard.CountryType.NewZealand">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CountryType">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertDisplayToNumberCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.CardConvertDisplayToNumberCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertDisplayToNumberCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertListDisplayToNumberCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.CardConvertListDisplayToNumberCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertListDisplayToNumberCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertNumberToDisplayCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.CardConvertNumberToDisplayCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertNumberToDisplayCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertNumberToBarcodeCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.CardConvertNumberToBarcodeCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardConvertNumberToBarcodeCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardIsValidCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.CardIsValidCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.CardIsValidCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.GetPromotionsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.GetPromotionsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.GetPromotionsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberGetNewCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberGetNewCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberGetNewCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberAddCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberAddCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberAddCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberUpdateCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberUpdateCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberUpdateCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberResetPasswordCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberResetPasswordCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberResetPasswordCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberReferralCompletedEventHandler">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberPointsLoadCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberPointsLoadCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberPointsLoadCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberPointsWithSSOLoadCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberPointsWithSSOLoadCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberPointsWithSSOLoadCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberLoadFromDetailCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberLoadFromDetailCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberLoadFromDetailCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberSetPasswordCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberSetPasswordCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberSetPasswordCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberGetCurrentCardCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberGetCurrentCardCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberGetCurrentCardCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberCheckExistsCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberCheckExistsCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberCheckExistsCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberConfirmUnsubscribeCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.MemberConfirmUnsubscribeCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.MemberConfirmUnsubscribeCompletedEventArgs">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.ReferralGetAllCompletedEventHandler">
+	<remarks/>
+</member><member name="P:FRB.FusionCard.ReferralGetAllCompletedEventArgs.Result">
+	<remarks/>
+</member><member name="T:FRB.FusionCard.ReferralGetAllCompletedEventArgs">
+	<remarks/>
+</member>
+</members>
+</doc>

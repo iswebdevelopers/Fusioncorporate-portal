@@ -1,0 +1,62 @@
+title = "Store Locator"
+url = "/store-locator"
+layout = "default"
+description = "Store locator page with form to find different stores"
+is_hidden = 0
+
+[locationList]
+==
+<div class="row">
+ 	<div class="locator">
+    	<img class="img-responsive img_align_middle" src="{{ ('assets/images/store-locator.png')|theme }}"/>
+	</div>
+	<div class="text-center">
+   	<h3 class="text-center">STORE LOCATIONS</h3>
+</div>
+<div class="col-md-12">
+	<p class="alert alert-danger no-store-result">No Stores found for your search.</p>
+	<form class="clearfix" id="map-form">
+		<div class="form-group brand-box clearfix">
+			<label class="col-xs-12 col-sm-4 col-md-3 col-md-offset-2 store_brands_labels_sm">
+				<input type="radio" class="checkradios" name="division" value="41"/>DIANA FERRARI
+			</label>
+			<label class="col-xs-12 col-sm-4 col-md-2 store_brands_labels_sm">
+				<input type="radio" class="checkradios" name="division" value="01"/>MATHERS
+			</label>
+			<label class="col-xs-12 col-sm-4 col-md-2 store_brands_labels_sm">
+				<input type="radio" class="checkradios" name="division" value="20"/>WILLIAMS
+			</label>	
+		</div>	
+		<div class="form-group col-md-12">
+			<div class="col-md-6">
+					POSTCODE&nbsp;&nbsp;<input type="number" name="postcode" maxlength="4" >&nbsp;&nbsp;WITHIN&nbsp;&nbsp; 
+					<label>
+						<select class="form-control" name="distance">
+						  <option>10</option>
+						  <option>20</option>
+						  <option>30</option>
+						  <option>40</option>
+						  <option>50</option>
+						</select>
+					</label>
+					&nbsp;&nbsp;KM&nbsp;&nbsp;
+					<button type="submit" class="btn btn-primary">GO</button>	
+			</div>	
+			<div class="col-md-6 state-box">
+				<p>
+				<label class="control control--checkbox state-control"><a href="#" data-state="VIC" boxclick(this,'VIC')>VIC</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="NSW">NSW</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="ACT">ACT</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="NT">NT</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="WA">WA</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="QLD">QLD</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="SA">SA</a></label>
+				<label class="control control--checkbox  state-control"><a href="#" data-state="TAS">TAS</a></label></p>
+			</div>	
+		</div>	
+	</form>	
+</div>
+<div class="col-xs-12" >
+	<div id="map"></div>
+</div>
+</div>

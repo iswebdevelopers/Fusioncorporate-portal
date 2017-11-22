@@ -1,0 +1,9 @@
+name: Fusion
+description: 'This theme is customised from valilla theme - october cms'
+author: RGopinath
+homepage: 'http://fusionretailbrands.com'
+code: Fusion
+require:
+    - RainLab.User
+    - RainLab.Blog
+    - RainLab.Forum

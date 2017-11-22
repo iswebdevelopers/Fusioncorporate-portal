@@ -1,0 +1,14 @@
+/*
+ * Application
+ */
+$(document).tooltip({
+    selector: "[data-toggle=tooltip]"
+})
+
+/**	fancy checkbox **/
+
+$(document).ready(function(){
+  $('input').iCheck({
+    
+  });
+});

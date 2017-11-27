@@ -3,7 +3,7 @@
     "description": "Fusion retail brands pvt ltd corporate website",
     "type": "Website",
     "require": {
-        "php": "7.1.1",
+        "php": ">=7.1.0",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "october/rain": "~1.0",

@@ -18,7 +18,7 @@ return [
         'access_other_posts' => 'Más felhasználók bejegyzéseinek kezelése',
         'access_import_export' => 'Bejegyzések importálása és exportálása',
         'access_publish' => 'Blog bejegyzések közzététele',
-        'delete_confirm' => 'Valóban törölni akarja a kijelölt bejegyzéseket?',
+        'delete_confirm' => 'Törölni akarja a kijelölt bejegyzéseket?',
         'chart_published' => 'Közzétéve',
         'chart_drafts' => 'Piszkozatok',
         'chart_total' => 'Összesen'
@@ -69,6 +69,7 @@ return [
     'category' => [
         'name' => 'Név',
         'name_placeholder' => 'Új kategória neve',
+        'description' => 'Leírás',
         'slug' => 'Keresőbarát cím',
         'slug_placeholder' => 'uj-kategoria-keresobarat-neve',
         'posts' => 'Bejegyzések',
@@ -78,7 +79,9 @@ return [
     ],
     'menuitem' => [
         'blog_category' => 'Blog kategória',
-        'all_blog_categories' => 'Összes blog kategória'
+        'all_blog_categories' => 'Összes blog kategória',
+        'blog_post' => 'Blog bejegyzés',
+        'all_blog_posts' => 'Összes blog bejegyzés'
     ],
     'settings' => [
         'category_title' => 'Blog kategória lista',
@@ -89,7 +92,7 @@ return [
         'category_display_empty_description' => 'Azon kategóriák megjelenítése, melyekben nincs egy bejegyzés sem.',
         'category_page' => 'Kategórialap',
         'category_page_description' => 'A kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
-        'post_title' => 'Blogbejegyzés',
+        'post_title' => 'Blog bejegyzés',
         'post_description' => 'Egy blog bejegyzést jelez ki a lapon.',
         'post_slug' => 'Keresőbarát cím paraméter neve',
         'post_slug_description' => 'A webcím útvonal paramétere a bejegyzés keresőbarát címe alapján való kereséséhez.',
@@ -106,11 +109,13 @@ return [
         'posts_no_posts' => 'Nincsenek bejegyzések üzenet ',
         'posts_no_posts_description' => 'A blog bejegyzés listában kijelezendő üzenet abban az esetben, ha nincsenek bejegyzések. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_order' => 'Bejegyzések sorrendje',
-        'posts_order_description' => 'Attribútum, mely alapján rendezni kell a bejegyzéseket',
+        'posts_order_description' => 'Jellemző, ami alapján rendezni kell a bejegyzéseket',
         'posts_category' => 'Kategórialap',
         'posts_category_description' => 'A "Kategória" kategória hivatkozások kategórialap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
         'posts_post' => 'Bejegyzéslap',
         'posts_post_description' => 'A "Tovább olvasom" hivatkozások blog bejegyzéslap fájljának neve. Az alapértelmezett komponensrész használja ezt a tulajdonságot.',
+        'posts_except_post' => 'Bejegyzés kizárása',
+        'posts_except_post_description' => 'Adja meg annak a bejegyzésnek az azonosítóját vagy webcímét, amit nem akar megjeleníteni a listázáskor.',
         'rssfeed_blog' => 'Blog oldal',
         'rssfeed_blog_description' => 'Annak a lapnak a neve, ahol listázódnak a blog bejegyzések. Ezt a beállítást használja alapértelmezetten a blog komponens is.',
         'rssfeed_title' => 'RSS hírfolyam',

@@ -3,6 +3,7 @@
 use Auth;
 use Lang;
 use Flash;
+use Response;
 use BackendMenu;
 use BackendAuth;
 use Backend\Classes\Controller;
@@ -14,19 +15,42 @@ use RainLab\User\Models\Settings as UserSettings;
 
 class Users extends Controller
 {
+    /**
+     * @var array Extensions implemented by this controller.
+     */
     public $implement = [
-        'Backend.Behaviors.FormController',
-        'Backend.Behaviors.ListController'
+        \Backend\Behaviors\FormController::class,
+        \Backend\Behaviors\ListController::class
     ];
 
+    /**
+     * @var array `FormController` configuration.
+     */
     public $formConfig = 'config_form.yaml';
+
+    /**
+     * @var array `ListController` configuration.
+     */
     public $listConfig = 'config_list.yaml';
+
+    /**
+     * @var array `RelationController` configuration, by extension.
+     */
     public $relationConfig;
 
+    /**
+     * @var array Permissions required to view this page.
+     */
     public $requiredPermissions = ['rainlab.users.access_users'];
 
+    /**
+     * @var string HTML body tag class
+     */
     public $bodyClass = 'compact-container';
 
+    /**
+     * Constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -132,6 +156,62 @@ class Users extends Controller
     }
 
     /**
+     * Display the convert to registered user popup
+     */
+    public function preview_onLoadConvertGuestForm($recordId)
+    {
+        $this->vars['groups'] = UserGroup::where('code', '!=', UserGroup::GROUP_GUEST)->get();
+
+        return $this->makePartial('convert_guest_form');
+    }
+
+    /**
+     * Manually convert a guest user to a registered one
+     */
+    public function preview_onConvertGuest($recordId)
+    {
+        $model = $this->formFindModelObject($recordId);
+
+        // Convert user and send notification
+        $model->convertToRegistered(post('send_registration_notification', false));
+
+        // Remove user from guest group
+        if ($group = UserGroup::getGuestGroup()) {
+            $model->groups()->remove($group);
+        }
+
+        // Add user to new group
+        if (
+            ($groupId = post('new_group')) &&
+            ($group = UserGroup::find($groupId))
+        ) {
+            $model->groups()->add($group);
+        }
+
+        Flash::success(Lang::get('rainlab.user::lang.users.convert_guest_success'));
+
+        if ($redirect = $this->makeRedirect('update-close', $model)) {
+            return $redirect;
+        }
+    }
+
+    /**
+     * Impersonate this user
+     */
+    public function preview_onImpersonateUser($recordId)
+    {
+        if (!$this->user->hasAccess('rainlab.users.impersonate_user')) {
+            return Response::make(Lang::get('backend::lang.page.access_denied.label'), 403);
+        }
+
+        $model = $this->formFindModelObject($recordId);
+
+        Auth::impersonate($model);
+
+        Flash::success(Lang::get('rainlab.user::lang.users.impersonate_success'));
+    }
+
+    /**
      * Force delete a user.
      */
     public function update_onDelete($recordId = null)
@@ -167,6 +247,10 @@ class Users extends Controller
                 switch ($bulkAction) {
                     case 'delete':
                         $user->forceDelete();
+                        break;
+
+                    case 'activate':
+                        $user->attemptActivation($user->activation_code);
                         break;
 
                     case 'deactivate':

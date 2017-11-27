@@ -33,7 +33,6 @@ return [
         'fullscreen' => 'Full screen',
         'preview' => 'Preview',
     ],
-
     'mediamanager' => [
         'insert_link' => 'Insert Media Link',
         'insert_image' => 'Insert Media Image',
@@ -45,13 +44,11 @@ return [
         'invalid_video_empty_insert' => 'Please select a video file to insert.',
         'invalid_audio_empty_insert' => 'Please select an audio file to insert.',
     ],
-
     'alert' => [
         'confirm_button_text' => 'OK',
         'cancel_button_text' => 'Cancel',
         'widget_remove_confirm' => 'Remove this widget?'
     ],
-
     'datepicker' => [
         'previousMonth' => 'Previous Month',
         'nextMonth' => 'Next Month',
@@ -59,7 +56,9 @@ return [
         'weekdays' => ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         'weekdaysShort' => ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
     ],
-
+    'colorpicker' => [
+        'choose' => 'Ok',
+    ],
     'filter' => [
         'group' => [
             'all' => 'all'
@@ -71,9 +70,16 @@ return [
             'date_placeholder' => 'Date',
             'after_placeholder' => 'After',
             'before_placeholder' => 'Before'
+        ],
+        'numbers' => [
+            'all' => 'all',
+            'filter_button_text' => 'Filter',
+            'reset_button_text'  => 'Reset',
+            'min_placeholder' => 'Min',
+            'max_placeholder' => 'Max'
         ]
-    ],
 
+    ],
     'eventlog' => [
         'show_stacktrace' => 'Show the stacktrace',
         'hide_stacktrace' => 'Hide the stacktrace',

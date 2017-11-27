@@ -16,8 +16,19 @@ use SplTempFileObject;
 use Exception;
 
 /**
- * Import/Export Controller Behavior
  * Adds features for importing and exporting data.
+ *
+ * This behavior is implemented in the controller like so:
+ *
+ *     public $implement = [
+ *         'Backend.Behaviors.ImportExportController',
+ *     ];
+ *
+ *     public $importExportConfig = 'config_import_export.yaml';
+ *
+ * The `$importExportConfig` property makes reference to the configuration
+ * values as either a YAML file, located in the controller view directory,
+ * or directly as a PHP array.
  *
  * @package october\backend
  * @author Alexey Bobkov, Samuel Georges
@@ -26,7 +37,7 @@ class ImportExportController extends ControllerBehavior
 {
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected $requiredProperties = ['importExportConfig'];
 
@@ -199,6 +210,8 @@ class ImportExportController extends ControllerBehavior
         catch (Exception $ex) {
             $this->controller->handleError($ex);
         }
+        
+        $this->vars['sourceIndexOffset'] = $this->getImportSourceIndexOffset($importOptions['firstRowTitles']);
 
         return $this->importExportMakePartial('import_result_form');
     }
@@ -273,7 +286,7 @@ class ImportExportController extends ControllerBehavior
 
     public function importRender()
     {
-        return $this->importExportMakePartial('import');
+        return $this->importExportMakePartial('container_import');
     }
 
     public function importGetModel()
@@ -307,7 +320,7 @@ class ImportExportController extends ControllerBehavior
         $firstRow = $reader->fetchOne(0);
 
         if (!post('first_row_titles')) {
-            array_walk($firstRow, function(&$value, $key) {
+            array_walk($firstRow, function (&$value, $key) {
                 $value = 'Column #'.($key + 1);
             });
         }
@@ -320,6 +333,17 @@ class ImportExportController extends ControllerBehavior
         }
 
         return $firstRow;
+    }
+    
+    /**
+     * Get the index offset to add to the reported row number in status messages
+     *
+     * @param bool $firstRowTitles Whether or not the first row contains column titles
+     * @return int $offset
+     */
+    protected function getImportSourceIndexOffset($firstRowTitles)
+    {
+        return $firstRowTitles ? 2 : 1;
     }
 
     protected function makeImportUploadFormWidget()
@@ -334,7 +358,7 @@ class ImportExportController extends ControllerBehavior
 
         $widget = $this->makeWidget('Backend\Widgets\Form', $widgetConfig);
 
-        $widget->bindEvent('form.beforeRefresh', function($holder) {
+        $widget->bindEvent('form.beforeRefresh', function ($holder) {
             $holder->data = [];
         });
 
@@ -456,7 +480,7 @@ class ImportExportController extends ControllerBehavior
 
     public function exportRender()
     {
-        return $this->importExportMakePartial('export');
+        return $this->importExportMakePartial('container_export');
     }
 
     public function exportGetModel()
@@ -492,7 +516,7 @@ class ImportExportController extends ControllerBehavior
 
         $widget = $this->makeWidget('Backend\Widgets\Form', $widgetConfig);
 
-        $widget->bindEvent('form.beforeRefresh', function($holder) {
+        $widget->bindEvent('form.beforeRefresh', function ($holder) {
             $holder->data = [];
         });
 
@@ -538,12 +562,19 @@ class ImportExportController extends ControllerBehavior
 
     protected function checkUseListExportMode()
     {
-        if (!$listDefinition = $this->getConfig('export[useList]')) {
+        if (!$useList = $this->getConfig('export[useList]')) {
             return false;
         }
 
         if (!$this->controller->isClassExtendedWith('Backend.Behaviors.ListController')) {
             throw new ApplicationException(Lang::get('backend::lang.import_export.behavior_missing_uselist_error'));
+        }
+
+        if (is_array($useList)) {
+            $listDefinition = array_get($useList, 'definition');
+        }
+        else {
+            $listDefinition = $useList;
         }
 
         $this->exportFromList($listDefinition);
@@ -594,12 +625,20 @@ class ImportExportController extends ControllerBehavior
         /*
          * Add records
          */
+        $getter = $this->getConfig('export[useList][raw]', false)
+            ? 'getColumnValueRaw'
+            : 'getColumnValue';
+
         $model = $widget->prepareModel();
         $results = $model->get();
         foreach ($results as $result) {
             $record = [];
             foreach ($columns as $column) {
-                $record[] = $widget->getColumnValue($result, $column);
+                $value = $widget->$getter($result, $column);
+                if (is_array($value)) {
+                    $value = implode('|', $value);
+                }
+                $record[] = $value;
             }
             $csv->insertOne($record);
         }
@@ -706,8 +745,10 @@ class ImportExportController extends ControllerBehavior
 
     protected function getRedirectUrlForType($type)
     {
-        if ($redirect = $this->getConfig($type.'[redirect]')) {
-            return Backend::url($redirect);
+        $redirect = $this->getConfig($type.'[redirect]');
+
+        if ($redirect !== null) {
+            return $redirect ? Backend::url($redirect) : 'javascript:;';
         }
 
         return $this->controller->actionUrl($type);

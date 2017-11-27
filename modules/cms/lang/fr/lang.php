@@ -45,6 +45,8 @@ return [
         'homepage_placeholder' => 'Adresse URL du site Web',
         'code_label' => 'Code',
         'code_placeholder' => 'Un nom de code unique pour la distribution de ce thème',
+        'preview_image_label' => 'Aperçu',
+        'preview_image_placeholder' => 'Chemin de l’aperçu.',
         'dir_name_label' => 'Nom du répertoire',
         'dir_name_create_label' => 'Le répertoire de destination du thème',
         'theme_label' => 'Thème',
@@ -94,7 +96,8 @@ return [
         'settings_menu' => 'Maintenance',
         'settings_menu_description' => 'Configurer la page de maintenance et ajuster ses options.',
         'is_enabled' => 'Activer la maintenance',
-        'is_enabled_comment' => 'Si activé, la page choisie ci-dessous sera affichée pour les visiteurs du site Web.'
+        'is_enabled_comment' => 'Si activé, la page choisie ci-dessous sera affichée pour les visiteurs du site Web.',
+        'hint' => 'Le mode maintenance affichera la page de maintenance pour les visiteurs qui ne sont pas authentifiés dans l’interface d’administration.'
     ],
     'page' => [
         'not_found_name' => 'La page ":name" est introuvable',
@@ -113,7 +116,11 @@ return [
         'invalid_url' => 'Format d’adresse URL invalide. L’adresse URL doit commencer par un / et peut contenir des chiffres, des lettres et les symboles suivants : ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'Confirmer la suppression des pages sélectionnées ?',
         'delete_confirm_single' => 'Confirmer la suppression de cette page ?',
-        'no_layout' => '-- aucune  maquette --'
+        'no_layout' => '-- aucune  maquette --',
+        'cms_page' => 'Page CMS',
+        'title' => 'Titre de la page',
+        'url' => 'URL de la page',
+        'file_name' => 'Nom du fichier de la page'
     ],
     'layout' => [
         'not_found_name' => 'La maquette ":name" est introuvable',
@@ -218,6 +225,8 @@ return [
         'error_moving_file' => 'Erreur lors du déplacement du fichier :file',
         'error_moving_directory' => 'Erreur lors du déplacement du répertoire :dir',
         'error_deleting_directory' => 'Erreur lors de la suppression du répertoire d’origine :dir',
+        'no_list_records' => 'Aucun fichier trouvé',
+        'delete_confirm' => 'Supprimer les fichiers ou répertoires sélectionnés ?',
         'path' => 'Chemin'
     ],
     'component' => [
@@ -235,7 +244,10 @@ return [
     'template' => [
         'invalid_type' => 'Type de modèle inconnu.',
         'not_found' => 'Le modèle est introuvable.',
-        'saved'=> 'Le modèle a été sauvegardé avec succès.'
+        'saved'=> 'Le modèle a été sauvegardé avec succès.',
+        'no_list_records' => 'Aucun enregistrement trouvé',
+        'delete_confirm' => 'Supprimer les modèles sélectionnés ?',
+        'order_by' =>'Trier par'
     ],
     'permissions' => [
         'name' => 'CMS',
@@ -245,71 +257,5 @@ return [
         'manage_layouts' => 'Créer, modifier et supprimer des maquettes du CMS',
         'manage_partials' => 'Créer, modifier et supprimer des modèles partiels du CMS',
         'manage_themes' => 'Activer, désactiver et configurer les thèmes',
-        'manage_media' => 'Déposer et gérer les contenus media - images, vidéos, sons, documents'
     ],
-    'mediafinder' => [
-        'default_prompt' => 'Cliquez sur le bouton %s pour trouver un élément média'
-    ],
-    'media' => [
-        'invalid_path' => "Le chemin du fichier indiqué est invalide : ':path'.",
-        'menu_label' => 'Média',
-        'upload' => 'Déposer un fichier',
-        'move' => 'Déplacer',
-        'delete' => 'Supprimer',
-        'add_folder' => 'Ajouter un répertoire',
-        'search' => 'Rechercher',
-        'display' => 'Affichage',
-        'filter_everything' => 'Tout',
-        'filter_images' => 'Images',
-        'filter_video' => 'Vidéo',
-        'filter_audio' => 'Audio',
-        'filter_documents' => 'Documents',
-        'library' => 'Librairie',
-        'folder_size_items' => 'Articles(s)',
-        'size' => 'Taille',
-        'title' => 'Titre',
-        'last_modified' => 'Dernière modification',
-        'public_url' => 'Adresse URL publique',
-        'click_here' => 'Cliquer ici',
-        'thumbnail_error' => 'Erreur lors de la création de la miniature.',
-        'return_to_parent' => 'Retourner au répertoire parent',
-        'return_to_parent_label' => 'Monter…',
-        'nothing_selected' => 'Aucune sélection.',
-        'multiple_selected' => 'Plusieurs éléments sélectionnés.',
-        'uploading_file_num' => 'Dépôt de :number fichier(s)…',
-        'uploading_complete' => 'Dépôt des fichiers terminé',
-        'uploading_error' => 'Le dépôt des fichiers a échoué',
-        'type_blocked' => 'Le type de fichier utilisé est bloqué pour des raisons de sécurité.',
-        'order_by' => 'Trier par',
-        'folder' => 'Répertoire',
-        'no_files_found' => 'Aucun fichier trouvé.',
-        'delete_empty' => 'Veuillez sélectionner les éléments à supprimer.',
-        'delete_confirm' => 'Confirmer la suppression de ces éléments ?',
-        'error_renaming_file' => 'Erreur lors du renommage de l’élément.',
-        'new_folder_title' => 'Nouveau répertoire',
-        'folder_name' => 'Nom du répertoire',
-        'error_creating_folder' => 'Erreur lors de la création du répertoire',
-        'folder_or_file_exist' => 'Un répertoire ou un fichier portant ce nom existe déjà.',
-        'move_empty' => 'Veuillez sélectionner les éléments à déplacer.',
-        'move_popup_title' => 'Déplacer des fichiers ou répertoires',
-        'move_destination' => 'Répertoire de destination',
-        'please_select_move_dest' => 'Veuillez sélectionner un répertoire de destination.',
-        'move_dest_src_match' => 'Veuillez sélectionner un autre répertoire de destination.',
-        'empty_library' => 'La librairie multimédia est vide. Pour commencer, télécharger des fichiers ou répertoires.',
-        'insert' => 'Insérer',
-        'crop_and_insert' => 'Rogner et insérer',
-        'select_single_image' => 'Veuillez sélectionner une seule image.',
-        'selection_not_image' => 'L’élément sélectionné n’est pas une image.',
-        'restore' => 'Annuler tous les changements',
-        'resize' => 'Redimensionner…',
-        'selection_mode_normal' => 'Normal',
-        'selection_mode_fixed_ratio' => 'Rapport fixe',
-        'selection_mode_fixed_size' => 'Taille fixe',
-        'height' => 'Hauteur',
-        'width' => 'Largeur',
-        'selection_mode' => 'Mode de sélection',
-        'resize_image' => 'Redimensionner l’image',
-        'image_size' => 'Taille de l’image :',
-        'selected_size' => 'Sélectionnée :'
-    ]
 ];

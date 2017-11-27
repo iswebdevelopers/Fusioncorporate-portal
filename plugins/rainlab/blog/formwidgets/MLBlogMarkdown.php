@@ -59,6 +59,7 @@ class MLBlogMarkdown extends BlogMarkdown
 
     /**
      * Returns an array of translated values for this field
+     * @param $value
      * @return array
      */
     public function getSaveValue($value)
@@ -68,11 +69,11 @@ class MLBlogMarkdown extends BlogMarkdown
         /*
          * Set the translated values to the model
          */
-        if ($this->model->methodExists('setTranslateAttribute')) {
+        if ($this->model->methodExists('setAttributeTranslated')) {
             foreach ($localeData as $locale => $value) {
-                $this->model->setTranslateAttribute('content', $value, $locale);
+                $this->model->setAttributeTranslated('content', $value, $locale);
 
-                $this->model->setTranslateAttribute(
+                $this->model->setAttributeTranslated(
                     'content_html',
                     Post::formatHtml($value),
                     $locale

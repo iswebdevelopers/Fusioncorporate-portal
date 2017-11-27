@@ -38,7 +38,7 @@ class File extends Model
     /**
      * @var array Known image extensions.
      */
-    public static $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    public static $imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 
     /**
      * @var array Hidden fields from array/json access
@@ -66,6 +66,7 @@ class File extends Model
         'png'  => 'image/png',
         'jpg'  => 'image/jpeg',
         'jpeg' => 'image/jpeg',
+        'webp' => 'image/webp',
         'pdf'  => 'application/pdf'
     ];
 
@@ -79,15 +80,23 @@ class File extends Model
      */
     public function fromPost($uploadedFile)
     {
-        if ($uploadedFile === null)
+        if ($uploadedFile === null) {
             return;
+        }
 
         $this->file_name = $uploadedFile->getClientOriginalName();
         $this->file_size = $uploadedFile->getClientSize();
         $this->content_type = $uploadedFile->getMimeType();
         $this->disk_name = $this->getDiskName();
 
-        $this->putFile($uploadedFile->getRealPath(), $this->disk_name);
+        /*
+         * getRealPath() can be empty for some environments (IIS)
+         */
+        $realPath = empty(trim($uploadedFile->getRealPath()))
+            ? $uploadedFile->getPath() . DIRECTORY_SEPARATOR . $uploadedFile->getFileName()
+            : $uploadedFile->getRealPath();
+
+        $this->putFile($realPath, $this->disk_name);
 
         return $this;
     }
@@ -97,8 +106,9 @@ class File extends Model
      */
     public function fromFile($filePath)
     {
-        if ($filePath === null)
+        if ($filePath === null) {
             return;
+        }
 
         $file = new FileObj($filePath);
         $this->file_name = $file->getFilename();
@@ -109,6 +119,29 @@ class File extends Model
         $this->putFile($file->getRealPath(), $this->disk_name);
 
         return $this;
+    }
+    
+    /**
+     * Creates a file object from raw data.
+     *
+     * @param $data string Raw data
+     * @param $filename string Filename
+     *
+     * @return $this
+     */
+    public function fromData($data, $filename)
+    {
+        if ($data === null) {
+            return;
+        }
+
+        $tempPath = temp_path($filename);
+        FileHelper::put($tempPath, $data);
+
+        $file = $this->fromFile($tempPath);
+        FileHelper::delete($tempPath);
+
+        return $file;
     }
 
     //
@@ -205,6 +238,19 @@ class File extends Model
     }
 
     /**
+     * Returns the last modification date as a UNIX timestamp.
+     * @return int
+     */
+    public function getLastModified($fileName = null)
+    {
+        if (!$fileName) {
+            $fileName = $this->disk_name;
+        }
+
+        return $this->storageCmd('lastModified', $this->getStorageDirectory() . $this->getPartitionDirectory() . $fileName);
+    }
+
+    /**
      * Returns the file content type.
      */
     public function getContentType()
@@ -251,14 +297,15 @@ class File extends Model
             return $this->getLocalRootPath() . '/' . $this->getDiskPath();
         }
         else {
-            //
-            // @todo The CDN portion of this method is not complete.
-            // Things to consider:
-            // - Generating the temp [cache] file only once
-            // - Cleaning up the temporary file somehow
-            // - See media manager process as a reference
-            //
-            return -1;
+            $itemSignature = md5($this->getPath()) . $this->getLastModified();
+
+            $cachePath = $this->getLocalTempPath($itemSignature . '.' . $this->getExtension());
+
+            if (!FileHelper::exists($cachePath)) {
+                $this->copyStorageToLocal($this->getDiskPath(), $cachePath);
+            }
+
+            return $cachePath;
         }
     }
 
@@ -276,11 +323,13 @@ class File extends Model
      */
     public function isPublic()
     {
-        if (array_key_exists('is_public', $this->attributes))
+        if (array_key_exists('is_public', $this->attributes)) {
             return $this->attributes['is_public'];
+        }
 
-        if (isset($this->is_public))
+        if (isset($this->is_public)) {
             return $this->is_public;
+        }
 
         return true;
     }
@@ -382,7 +431,7 @@ class File extends Model
      */
     protected function getThumbFilename($width, $height, $options)
     {
-        return 'thumb_' . $this->id . '_' . $width . 'x' . $height . '_' . $options['offset'][0] . '_' . $options['offset'][1] . '_' . $options['mode'] . '.' . $options['extension'];
+        return 'thumb_' . $this->id . '_' . $width . '_' . $height . '_' . $options['offset'][0] . '_' . $options['offset'][1] . '_' . $options['mode'] . '.' . $options['extension'];
     }
 
     /**
@@ -394,8 +443,9 @@ class File extends Model
         $defaultOptions = [
             'mode'      => 'auto',
             'offset'    => [0, 0],
-            'quality'   => 95,
+            'quality'   => 90,
             'sharpen'   => 0,
+            'interlace' => false,
             'extension' => 'auto',
         ];
 
@@ -492,7 +542,7 @@ class File extends Model
     /*
      * Delete all thumbnails for this file.
      */
-    protected function deleteThumbs()
+    public function deleteThumbs()
     {
         $pattern = 'thumb_'.$this->id.'_';
 
@@ -593,8 +643,9 @@ class File extends Model
      */
     protected function deleteFile($fileName = null)
     {
-        if (!$fileName)
+        if (!$fileName) {
             $fileName = $this->disk_name;
+        }
 
         $directory = $this->getStorageDirectory() . $this->getPartitionDirectory();
         $filePath = $directory . $fileName;

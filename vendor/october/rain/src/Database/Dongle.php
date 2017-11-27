@@ -34,15 +34,6 @@ class Dongle
     }
 
     /**
-     * @deprecated use App::hasDatabase()
-     * Remove this method if year >= 2017
-     */
-    public function hasDatabase()
-    {
-        return \App::hasDatabase();
-    }
-
-    /**
      * Transforms and executes a raw SQL statement
      * @param  string $sql
      * @return mixed
@@ -73,9 +64,10 @@ class Dongle
      */
     public function parseGroupConcat($sql)
     {
-        $result = preg_replace_callback('/group_concat\(([^)]+)\)/i', function($matches){
-            if (!isset($matches[1]))
+        $result = preg_replace_callback('/group_concat\((.+)\)/i', function($matches){
+            if (!isset($matches[1])) {
                 return $matches[0];
+            }
 
             switch ($this->driver) {
                 default:
@@ -91,7 +83,7 @@ class Dongle
         }, $sql);
 
         if ($this->driver == 'pgsql' || $this->driver == 'postgis') {
-            $result = preg_replace("/\\(([]a-zA-Z\\-\\_]+)\\,/i", "($1::VARCHAR,", $result);
+            $result = preg_replace("/\\(([]a-zA-Z\\-\\_\\.]+)\\,/i", "($1::VARCHAR,", $result);
             $result = str_ireplace('group_concat(', 'string_agg(', $result);
         }
 
@@ -112,7 +104,7 @@ class Dongle
      */
     public function parseConcat($sql)
     {
-        return preg_replace_callback('/(?:group_)?concat\(([^)]+)\)(?R)?/i', function($matches){
+        return preg_replace_callback('/(?:group_)?concat\((.+)\)(?R)?/i', function($matches){
             if (!isset($matches[1])) {
                 return $matches[0];
             }

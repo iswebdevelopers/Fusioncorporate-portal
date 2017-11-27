@@ -11,4 +11,6 @@
   'RainLab\\User\\Facades\\Auth' => 'plugins\\rainlab\\user\\facades\\Auth.php',
   'RainLab\\User\\Classes\\AuthManager' => 'plugins\\rainlab\\user\\classes\\AuthManager.php',
   'RainLab\\User\\Models\\Settings' => 'plugins\\rainlab\\user\\models\\Settings.php',
+  'backend\\Controllers\\index' => 'modules\\backend\\controllers\\index.php',
+  'backend\\Controllers\\auth' => 'modules\\backend\\controllers\\auth.php',
 );

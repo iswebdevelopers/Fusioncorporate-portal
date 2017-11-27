@@ -2,5 +2,12 @@
 /config
 *.log
 .env
-.config
+web.config
 /vendor/
+/cache/
+/sessions/
+storage/framework/cache
+storage/framework/views
+storage/framework/sessions
+storage/cms/combiner
+storage/cms/cache

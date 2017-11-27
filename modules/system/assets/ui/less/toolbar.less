@@ -60,6 +60,10 @@
             }
         }
 
+        .dropdown > .btn {
+            margin-right: 0;
+        }
+
         .btn-group {
             > .btn, > .dropdown {
                 margin-right: 0;
@@ -94,6 +98,13 @@
     white-space: nowrap;
     width: 100%;
     overflow: hidden;
+}
+
+html.mobile {
+    [data-control=toolbar].is-native-drag {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 //

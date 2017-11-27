@@ -1,14 +1,11 @@
 <?php namespace Backend\Widgets;
 
-use Backend;
-use Backend\Classes\FormField;
-use Backend\FormWidgets\DatePicker;
-use Carbon\Carbon;
 use Db;
 use Str;
 use Lang;
-use Event;
+use Backend;
 use DbDongle;
+use Carbon\Carbon;
 use Backend\Classes\WidgetBase;
 use Backend\Classes\FilterScope;
 use ApplicationException;
@@ -42,7 +39,7 @@ class Filter extends WidgetBase
     //
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected $defaultAlias = 'filter';
 
@@ -139,6 +136,35 @@ class Filter extends WidgetBase
                 }
 
                 break;
+            case 'number':
+                if (is_numeric($scope->value)) {
+                    $params['number'] = $scope->value;
+                }
+
+                break;
+
+            case 'numberrange':
+                if ($scope->value && is_array($scope->value) && count($scope->value) === 2 &&
+                    $scope->value[0] &&
+                    $scope->value[1]
+                ) {
+                    $min = $scope->value[0];
+                    $max = $scope->value[1];
+
+                    $params['minStr'] = $min ? $min : '';
+                    $params['min'] = $min ? $min : null;
+
+                    $params['maxStr'] = $max ? $max : '∞';
+                    $params['max'] = $max ? $max : null;
+                }
+
+                break;
+
+            case 'text':
+                $params['value'] = $scope->value;
+                $params['size'] = array_get($scope->config, 'size', 10);
+
+                break;
         }
 
         return $this->makePartial('scope_'.$scope->type, $params);
@@ -205,13 +231,56 @@ class Filter extends WidgetBase
 
                 $this->setScopeValue($scope, $dates);
                 break;
+
+            case 'number':
+                $numbers = $this->numbersFromAjax(post('options.numbers'));
+
+                if (!empty($numbers)) {
+                    list($number) = $numbers;
+                }
+                else {
+                    $number = null;
+                }
+
+                $this->setScopeValue($scope, $number);
+                break;
+
+            case 'numberrange':
+                $numbers = $this->numbersFromAjax(post('options.numbers'));
+
+                if (!empty($numbers)) {
+                    list($min, $max) = $numbers;
+
+                    $numbers = [$min, $max];
+                }
+                else {
+                    $numbers = null;
+                }
+
+                $this->setScopeValue($scope, $numbers);
+                break;
+
+            case 'text':
+                $values = post('options.value');
+
+                if (!is_null($values) && $values !== '') {
+                    list($value) = $values;
+                }
+                else {
+                    $value = null;
+                }
+
+                $this->setScopeValue($scope, $value);
+                break;
         }
 
         /*
          * Trigger class event, merge results as viewable array
          */
         $params = func_get_args();
+
         $result = $this->fireEvent('filter.update', [$params]);
+
         if ($result && is_array($result)) {
             return call_user_func_array('array_merge', $result);
         }
@@ -306,8 +375,7 @@ class Filter extends WidgetBase
         /*
          * Extensibility
          */
-        Event::fire('backend.filter.extendQuery', [$this, $query, $scope]);
-        $this->fireEvent('filter.extendQuery', [$query, $scope]);
+        $this->fireSystemEvent('backend.filter.extendQuery', [$query, $scope]);
 
         if (!$searchQuery) {
             return $query->get();
@@ -333,10 +401,11 @@ class Filter extends WidgetBase
             $methodName = $options;
 
             if (!$model->methodExists($methodName)) {
-                throw new ApplicationException(Lang::get(
-                    'backend::lang.filter.options_method_not_exists',
-                    ['model'=>get_class($model), 'method'=>$methodName, 'filter'=>$scope->scopeName]
-                ));
+                throw new ApplicationException(Lang::get('backend::lang.filter.options_method_not_exists', [
+                    'model'  => get_class($model),
+                    'method' => $methodName,
+                    'filter' => $scope->scopeName
+                ]));
             }
 
             $options = $model->$methodName();
@@ -366,7 +435,7 @@ class Filter extends WidgetBase
     {
         $filteredOptions = [];
 
-        $optionMatchesSearch = function($words, $option) {
+        $optionMatchesSearch = function ($words, $option) {
             foreach ($words as $word) {
                 $word = trim($word);
                 if (!strlen($word)) {
@@ -416,8 +485,7 @@ class Filter extends WidgetBase
         /*
          * Extensibility
          */
-        Event::fire('backend.filter.extendScopesBefore', [$this]);
-        $this->fireEvent('filter.extendScopesBefore');
+        $this->fireSystemEvent('backend.filter.extendScopesBefore');
 
         /*
          * All scopes
@@ -431,8 +499,7 @@ class Filter extends WidgetBase
         /*
          * Extensibility
          */
-        Event::fire('backend.filter.extendScopes', [$this]);
-        $this->fireEvent('filter.extendScopes');
+        $this->fireSystemEvent('backend.filter.extendScopes');
 
         $this->scopesDefined = true;
     }
@@ -466,14 +533,42 @@ class Filter extends WidgetBase
             }
 
             /*
-             * Ensure dates options are set
+             * Ensure scope type options are set
              */
-            if (!isset($config['minDate'])) {
-                $scopeObj->minDate = '2000-01-01';
-                $scopeObj->maxDate = '2099-12-31';
+            $scopeProperties = [];
+            switch ($scopeObj->type) {
+                case 'date':
+                case 'daterange':
+                    $scopeProperties = [
+                        'minDate'   => '2000-01-01',
+                        'maxDate'   => '2099-12-31',
+                        'firstDay'  => 0,
+                        'yearRange' => 10,
+                    ];
+
+                    break;
+            }
+
+            foreach ($scopeProperties as $property => $value) {
+                if (isset($config[$property])) {
+                    $value = $config[$property];
+                }
+
+                $scopeObj->{$property} = $value;
             }
 
             $this->allScopes[$name] = $scopeObj;
+        }
+    }
+
+    /**
+     * Programatically remove a scope, used for extensibility.
+     * @param string $scopeName Scope name
+     */
+    public function removeScope($scopeName)
+    {
+        if (isset($this->allScopes[$scopeName])) {
+            unset($this->allScopes[$scopeName]);
         }
     }
 
@@ -491,8 +586,8 @@ class Filter extends WidgetBase
         /*
          * Set scope value
          */
-        $scope->value = $this->getScopeValue($scope);
-
+        $scope->value = $this->getScopeValue($scope, @$config['default']);
+        
         return $scope;
     }
 
@@ -581,6 +676,70 @@ class Filter extends WidgetBase
                             $query->$scopeMethod($after, $before);
                         }
                     }
+                }
+
+                break;
+
+            case 'number':
+                if (is_numeric($scope->value)) {
+                    /*
+                     * Condition
+                     */
+                    if ($scopeConditions = $scope->conditions) {
+                        $query->whereRaw(DbDongle::parse(strtr($scopeConditions, [
+                            ':filtered' => $scope->value,
+                        ])));
+                    }
+                    /*
+                     * Scope
+                     */
+                    elseif ($scopeMethod = $scope->scope) {
+                        $query->$scopeMethod($scope->value);
+                    }
+                }
+
+            case 'numberrange':
+                if (is_array($scope->value) && count($scope->value) > 1) {
+                    list($min, $max) = array_values($scope->value);
+
+                    if ($min && $max) {
+
+                        /*
+                         * Condition
+                         *
+                         */
+                        if ($scopeConditions = $scope->conditions) {
+                            $query->whereRaw(DbDongle::parse(strtr($scopeConditions, [
+                                ':min'  => $min,
+                                ':max'  => $max
+                            ])));
+                        }
+                        /*
+                         * Scope
+                         */
+                        elseif ($scopeMethod = $scope->scope) {
+                            $query->$scopeMethod($min, $max);
+                        }
+                    }
+                }
+
+                break;
+
+            case 'text':
+                /*
+                 * Condition
+                 */
+                if ($scopeConditions = $scope->conditions) {
+                    $query->whereRaw(DbDongle::parse(strtr($scopeConditions, [
+                        ':value' => Db::getPdo()->quote($scope->value),
+                    ])));
+                }
+
+                /*
+                 * Scope
+                 */
+                elseif ($scopeMethod = $scope->scope) {
+                    $query->$scopeMethod($scope->value);
                 }
 
                 break;
@@ -734,7 +893,8 @@ class Filter extends WidgetBase
         }
 
         foreach ($options as $option) {
-            if (!$id = array_get($option, 'id')) {
+            $id = array_get($option, 'id');
+            if ($id === null) {
                 continue;
             }
             $processed[$id] = array_get($option, 'name');
@@ -742,11 +902,9 @@ class Filter extends WidgetBase
         return $processed;
     }
 
-
     /**
      * Convert an array from the posted dates
      *
-     * @param  mixed $scope
      * @param  array $dates
      *
      * @return array
@@ -781,6 +939,35 @@ class Filter extends WidgetBase
         return $dates;
     }
 
+    /**
+     * Convert an array from the posted numbers
+     *
+     * @param  array $dates
+     *
+     * @return array
+     */
+    protected function numbersFromAjax($ajaxNumbers)
+    {
+        $numbers = [];
+        $numberRegex = '/\d/';
+
+        if (!empty($ajaxNumbers)) {
+            if (!is_array($ajaxNumbers) && preg_match($numberRegex, $ajaxNumbers)) {
+                $numbers = [$ajaxNumbers];
+            } else {
+                foreach ($ajaxNumbers as $i => $number) {
+                    if (preg_match($numberRegex, $number)) {
+                        $numbers[] = $number;
+                    } else {
+                        $numbers = [];
+                        break;
+                    }
+                }
+            }
+        }
+
+        return $numbers;
+    }
 
     /**
      * @param mixed $scope

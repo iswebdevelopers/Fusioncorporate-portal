@@ -1,22 +1,20 @@
 <?php namespace Backend\Classes;
 
 use App;
-use Str;
 use Lang;
 use View;
 use Flash;
-use Event;
 use Config;
 use Request;
 use Backend;
 use Session;
+use Redirect;
 use Response;
 use Exception;
 use BackendAuth;
 use Backend\Models\UserPreference;
 use Backend\Models\Preference as BackendPreference;
-use Cms\Widgets\MediaManager;
-use System\Classes\ErrorHandler;
+use Backend\Widgets\MediaManager;
 use October\Rain\Exception\AjaxException;
 use October\Rain\Exception\SystemException;
 use October\Rain\Exception\ValidationException;
@@ -37,13 +35,9 @@ class Controller extends Extendable
     use \System\Traits\ViewMaker;
     use \System\Traits\AssetMaker;
     use \System\Traits\ConfigMaker;
+    use \System\Traits\EventEmitter;
+    use \Backend\Traits\ErrorMaker;
     use \Backend\Traits\WidgetMaker;
-    use \October\Rain\Support\Traits\Emitter;
-
-    /**
-     * @var string Object used for storing a fatal error.
-     */
-    protected $fatalError;
 
     /**
      * @var object Reference the logged in admin user.
@@ -148,13 +142,20 @@ class Controller extends Extendable
         $this->layoutPath[] = '~/modules/' . $relativePath . '/layouts';
         $this->layoutPath[] = '~/plugins/' . $relativePath . '/layouts';
 
+        /*
+         * Create a new instance of the admin user
+         */
+        $this->user = BackendAuth::getUser();
+
         parent::__construct();
 
         /*
          * Media Manager widget is available on all back-end pages
          */
-        $manager = new MediaManager($this, 'ocmediamanager');
-        $manager->bindToController();
+        if ($this->user && $this->user->hasAccess('media.*')) {
+            $manager = new MediaManager($this, 'ocmediamanager');
+            $manager->bindToController();
+        }
     }
 
     /**
@@ -176,22 +177,16 @@ class Controller extends Extendable
         }
 
         /*
-         * Extensibility
+         * Check forced HTTPS protocol.
          */
-        if (
-            ($event = $this->fireEvent('page.beforeDisplay', [$action, $params], true)) ||
-            ($event = Event::fire('backend.page.beforeDisplay', [$this, $action, $params], true))
-        ) {
-            return $event;
+        if (!$this->verifyForceSecure()) {
+            return Redirect::secure(Request::path());
         }
 
         /*
          * Determine if this request is a public action.
          */
         $isPublicAction = in_array($action, $this->publicActions);
-
-        // Create a new instance of the admin user
-        $this->user = BackendAuth::getUser();
 
         /*
          * Check that user is logged in and has permission to view this page
@@ -213,6 +208,13 @@ class Controller extends Extendable
             if ($this->requiredPermissions && !$this->user->hasAnyAccess($this->requiredPermissions)) {
                 return Response::make(View::make('backend::access_denied'), 403);
             }
+        }
+        
+        /*
+         * Extensibility
+         */
+        if ($event = $this->fireSystemEvent('backend.page.beforeDisplay', [$action, $params])) {
+            return $event;
         }
 
         /*
@@ -512,7 +514,7 @@ class Controller extends Extendable
             }
 
             if (($widget = $this->widget->{$widgetName}) && $widget->methodExists($handlerName)) {
-                $result = call_user_func_array([$widget, $handlerName], $this->params);
+                $result = $this->runAjaxHandlerForWidget($widget, $handlerName);
                 return ($result) ?: true;
             }
         }
@@ -543,13 +545,36 @@ class Controller extends Extendable
 
             foreach ((array) $this->widget as $widget) {
                 if ($widget->methodExists($handler)) {
-                    $result = call_user_func_array([$widget, $handler], $this->params);
+                    $result = $this->runAjaxHandlerForWidget($widget, $handler);
                     return ($result) ?: true;
                 }
             }
         }
 
+        /*
+         * Generic handler that does nothing
+         */
+        if ($handler == 'onAjax') {
+            return true;
+        }
+
         return false;
+    }
+
+    /**
+     * Specific code for executing an AJAX handler for a widget.
+     * This will append the widget view paths to the controller and merge the vars.
+     * @return mixed
+     */
+    protected function runAjaxHandlerForWidget($widget, $handler)
+    {
+        $this->addViewPath($widget->getViewPaths());
+
+        $result = call_user_func_array([$widget, $handler], $this->params);
+
+        $this->vars = $widget->vars + $this->vars;
+
+        return $result;
     }
 
     /**
@@ -581,16 +606,6 @@ class Controller extends Extendable
     {
         $this->statusCode = (int) $code;
         return $this;
-    }
-
-    /**
-     * Sets standard page variables in the case of a controller error.
-     */
-    public function handleError($exception)
-    {
-        $errorMessage = ErrorHandler::getDetailedMessage($exception);
-        $this->fatalError = $errorMessage;
-        $this->vars['fatalError'] = $errorMessage;
     }
 
     //
@@ -655,7 +670,7 @@ class Controller extends Extendable
     }
 
     //
-    // CSRF Protection
+    // Security
     //
 
     /**
@@ -676,9 +691,32 @@ class Controller extends Extendable
 
         $token = Request::input('_token') ?: Request::header('X-CSRF-TOKEN');
 
-        return Str::equals(
-            Session::getToken(),
+        if (!strlen($token)) {
+            return false;
+        }
+
+        return hash_equals(
+            Session::token(),
             $token
         );
+    }
+
+    /**
+     * Checks if the back-end should force a secure protocol (HTTPS) enabled by config.
+     * @return bool
+     */
+    protected function verifyForceSecure()
+    {
+        if (Request::secure() || Request::ajax()) {
+            return true;
+        }
+
+        // @todo if year >= 2018 change default from false to null
+        $forceSecure = Config::get('cms.backendForceSecure', false);
+        if ($forceSecure === null) {
+            $forceSecure = !Config::get('app.debug', false);
+        }
+
+        return !$forceSecure;
     }
 }

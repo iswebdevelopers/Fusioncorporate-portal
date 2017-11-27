@@ -13,10 +13,9 @@ use Symfony\Component\Debug\Exception\FatalThrowableError;
  * View Maker Trait
  * Adds view based methods to a class
  *
- * @package october\backend
+ * @package october\system
  * @author Alexey Bobkov, Samuel Georges
  */
-
 trait ViewMaker
 {
     /**
@@ -25,7 +24,7 @@ trait ViewMaker
     public $vars = [];
 
     /**
-     * @var string Specifies a path to the views directory.
+     * @var string|array Specifies a path to the views directory.
      */
     protected $viewPath;
 
@@ -45,6 +44,32 @@ trait ViewMaker
     public $suppressLayout = false;
 
     /**
+     * Prepends a path on the available view path locations.
+     * @param string|array $path
+     * @return void
+     */
+    public function addViewPath($path)
+    {
+        $this->viewPath = (array) $this->viewPath;
+
+        if (is_array($path)) {
+            $this->viewPath = array_merge($path, $this->viewPath);
+        }
+        else {
+            array_unshift($this->viewPath, $path);
+        }
+    }
+
+    /**
+     * Returns the active view path locations.
+     * @return array
+     */
+    public function getViewPaths()
+    {
+        return (array) $this->viewPath;
+    }
+
+    /**
      * Render a partial file contents located in the views folder.
      * @param string $partial The view to load.
      * @param array $params Parameter variables to pass to the view.
@@ -53,7 +78,8 @@ trait ViewMaker
      */
     public function makePartial($partial, $params = [], $throwException = true)
     {
-        if (!File::isPathSymbol($partial) && realpath($partial) === false) {
+        $notRealPath = realpath($partial) === false || is_dir($partial) === true;
+        if (!File::isPathSymbol($partial) && $notRealPath) {
             $folder = strpos($partial, '/') !== false ? dirname($partial) . '/' : '';
             $partial = $folder . '_' . strtolower(basename($partial)).'.htm';
         }
@@ -149,9 +175,9 @@ trait ViewMaker
     }
 
     /**
-     * Locates a file based on it's definition. If the file starts with
-     * an "at symbol", it will be returned in context of the application base path,
-     * otherwise it will be returned in context of the view path.
+     * Locates a file based on its definition. The file name can be prefixed with a
+     * symbol (~|$) to return in context of the application or plugin base path,
+     * otherwise it will be returned in context of this object view path.
      * @param string $fileName File to load.
      * @param mixed $viewPath Explicitly define a view path.
      * @return string Full path to the view file.
@@ -269,23 +295,5 @@ trait ViewMaker
         $classFile = realpath(dirname(File::fromClass($class)));
         $guessedPath = $classFile ? $classFile . '/' . $classFolder . $suffix : null;
         return ($isPublic) ? File::localToPublic($guessedPath) : $guessedPath;
-    }
-
-    /**
-     * Special event function used for extending within view files
-     * @param string $event Event name
-     * @param array $params Event parameters
-     * @return string
-     */
-    public function fireViewEvent($event, $params = [])
-    {
-        // Add the local object to the first parameter always
-        array_unshift($params, $this);
-
-        if ($result = Event::fire($event, $params)) {
-            return implode(PHP_EOL.PHP_EOL, (array) $result);
-        }
-
-        return '';
     }
 }

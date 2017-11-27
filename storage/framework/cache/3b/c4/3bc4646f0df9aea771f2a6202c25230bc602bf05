@@ -1,0 +1,78 @@
+1511755004a:1:{s:14:"our-brands.htm";a:10:{s:8:"fileName";s:14:"our-brands.htm";s:7:"content";s:3579:"title = "Our Brands"
+url = "/our-brands"
+layout = "default"
+description = "Brands and their description - Fusion Retail Brands Pty Ltd"
+is_hidden = 0
+==
+
+<div class="row">
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/diana-ferrari.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>DIANA FERRARI</h3>
+	    	<p> Diana Ferrari is an iconic footwear, clothing and accessories label for the Australian woman, with a focus on fashionable and feminine style. The brand launched from humble beginnings as a small leather shoemaking factory in 1979, and has since evolved to become a landmark label in women’s fashion. Today we are proud to have over 30 dedicated retail outlets located around Australia, as well as over 300 independent stockists around Australia and New Zealand.</p>
+			<p> Wherever you find yourself shopping Diana Ferrari, you can be assured of incredible quality, comfort, and timeless, confidence-boosting style. Diana Ferrari fits the life you love!</p>
+			<p><a href="https://www.dianaferrari.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div>
+	<br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/mathers.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>MATHERS</h3>
+	    	<p> Mathers understands that both style and comfort begin with your shoes. Founded in 1923, we stock a wide range of leading Australian and international brands in more than 40 stores nationally, and pride ourselves on providing products of premium quality and unsurpassed comfort. With notable names such as Diana Ferrari, Colorado, ABEO, Portland and more, you’ll find there’s something for every foot at Mathers.</p>
+			<p><a href="https://www.mathers.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div><br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/williams.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>WILLIAMS</h3>
+	    	<p> Founded in 1864, Williams is trusted by generations of Australian families as the destination for shoes to suit every occasion. Today there are more than 100 Williams stores across Australia stocking favourite names such as Colorado, Diana Ferrari, Corelli, Clarks, and many more. Our continued success stems from a commitment to understanding the footwear needs of everyday Australians and a unique approach that is spirited, fun and unpretentious. </p>
+			<p><a href="https://www.williamsshoes.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div><br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/colorado.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>COLORADO</h3>
+	    	<p> Since 1988, the Colorado name has been synonymous with durable, high quality and longwearing shoes that are perfect for life's everyday adventures. Colorado utilises the latest technology to deliver truly innovative footwear that goes the distance while keeping you comfortable and supported, with a stylish range that caters to men, women and kids. Whether you're hiking hidden trails or hitting the high street, you can put your confidence in Colorado.</p>
+			<p><a href="https://www.colorado.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div>
+</div>";s:5:"mtime";i:1481083190;s:6:"markup";s:3418:"<div class="row">
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/diana-ferrari.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>DIANA FERRARI</h3>
+	    	<p> Diana Ferrari is an iconic footwear, clothing and accessories label for the Australian woman, with a focus on fashionable and feminine style. The brand launched from humble beginnings as a small leather shoemaking factory in 1979, and has since evolved to become a landmark label in women’s fashion. Today we are proud to have over 30 dedicated retail outlets located around Australia, as well as over 300 independent stockists around Australia and New Zealand.</p>
+			<p> Wherever you find yourself shopping Diana Ferrari, you can be assured of incredible quality, comfort, and timeless, confidence-boosting style. Diana Ferrari fits the life you love!</p>
+			<p><a href="https://www.dianaferrari.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div>
+	<br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/mathers.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>MATHERS</h3>
+	    	<p> Mathers understands that both style and comfort begin with your shoes. Founded in 1923, we stock a wide range of leading Australian and international brands in more than 40 stores nationally, and pride ourselves on providing products of premium quality and unsurpassed comfort. With notable names such as Diana Ferrari, Colorado, ABEO, Portland and more, you’ll find there’s something for every foot at Mathers.</p>
+			<p><a href="https://www.mathers.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div><br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/williams.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>WILLIAMS</h3>
+	    	<p> Founded in 1864, Williams is trusted by generations of Australian families as the destination for shoes to suit every occasion. Today there are more than 100 Williams stores across Australia stocking favourite names such as Colorado, Diana Ferrari, Corelli, Clarks, and many more. Our continued success stems from a commitment to understanding the footwear needs of everyday Australians and a unique approach that is spirited, fun and unpretentious. </p>
+			<p><a href="https://www.williamsshoes.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div><br/>
+    <div class="our-brands col-md-12">
+    	<img class="img-responsive" src="{{ ('assets/images/brands/colorado.png')|theme }}"/>
+	    <div class="brands">
+	    	<h3>COLORADO</h3>
+	    	<p> Since 1988, the Colorado name has been synonymous with durable, high quality and longwearing shoes that are perfect for life's everyday adventures. Colorado utilises the latest technology to deliver truly innovative footwear that goes the distance while keeping you comfortable and supported, with a stylish range that caters to men, women and kids. Whether you're hiking hidden trails or hitting the high street, you can put your confidence in Colorado.</p>
+			<p><a href="https://www.colorado.com.au" target="_blank" class="btn btn-primary" role="button">Visit Website</a></p>
+	    </div>
+    </div>
+</div>";s:4:"code";N;s:5:"title";s:10:"Our Brands";s:3:"url";s:11:"/our-brands";s:6:"layout";s:7:"default";s:11:"description";s:59:"Brands and their description - Fusion Retail Brands Pty Ltd";s:9:"is_hidden";s:1:"0";}}

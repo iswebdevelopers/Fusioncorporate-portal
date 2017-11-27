@@ -4,6 +4,29 @@
 
 tabs:
     fields:
+        # Throttle Sign In
+        use_throttle:
+            span: left
+            label: rainlab.user::lang.settings.use_throttle
+            comment: rainlab.user::lang.settings.use_throttle_comment
+            type: switch
+            tab: rainlab.user::lang.settings.signin_tab
+
+        # Prevent concurrent sessions
+        block_persistence:
+            span: right
+            label: rainlab.user::lang.settings.block_persistence
+            comment: rainlab.user::lang.settings.block_persistence_comment
+            type: switch
+            tab: rainlab.user::lang.settings.signin_tab
+
+        # Login Attribute
+        login_attribute:
+            span: left
+            label: rainlab.user::lang.settings.login_attribute
+            commentAbove: rainlab.user::lang.settings.login_attribute_comment
+            type: radio
+            tab: rainlab.user::lang.settings.signin_tab
 
         # Require Activation
         allow_registration:
@@ -28,34 +51,3 @@ tabs:
             label: rainlab.user::lang.settings.activate_mode
             type: radio
             tab: rainlab.user::lang.settings.activation_tab
-
-        # Throttle Sign In
-        use_throttle:
-            span: left
-            label: rainlab.user::lang.settings.use_throttle
-            comment: rainlab.user::lang.settings.use_throttle_comment
-            type: switch
-            tab: rainlab.user::lang.settings.signin_tab
-
-        # Login Attribute
-        login_attribute:
-            span: left
-            label: rainlab.user::lang.settings.login_attribute
-            commentAbove: rainlab.user::lang.settings.login_attribute_comment
-            type: radio
-            tab: rainlab.user::lang.settings.signin_tab
-
-        # Hint
-        template_hint:
-            type: hint
-            path: $/rainlab/user/models/settings/_template_hint.htm
-            tab: rainlab.user::lang.settings.notifications_tab
-
-        # Welcome Template
-        welcome_template:
-            span: left
-            label: rainlab.user::lang.settings.welcome_template
-            comment: rainlab.user::lang.settings.welcome_template_comment
-            type: dropdown
-            default: rainlab.user::mail.activate
-            tab: rainlab.user::lang.settings.notifications_tab

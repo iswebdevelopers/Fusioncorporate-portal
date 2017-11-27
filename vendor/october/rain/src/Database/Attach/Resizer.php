@@ -57,6 +57,11 @@ class Resizer
     protected $height;
 
     /**
+     * @var int|null Exif orientation of image
+     */
+    protected $orientation;
+
+    /**
      * @var array Array of options used for resizing.
      */
     protected $options = [];
@@ -83,8 +88,11 @@ class Resizer
         $this->image = $this->originalImage = $this->openImage($file);
 
         // Get width and height of our image
-        $this->width  = imagesx($this->image);
-        $this->height = imagesy($this->image);
+        $this->orientation  = $this->getOrientation($file);
+
+        // Get width and height of our image
+        $this->width  = $this->getWidth();
+        $this->height = $this->getHeight();
 
         // Set default options
         $this->setOptions([]);
@@ -117,16 +125,18 @@ class Resizer
      *  - mode: Either exact, portrait, landscape, auto or crop.
      *  - offset: The offset of the crop = [ left, top ]
      *  - sharpen: Sharpen image, from 0 - 100 (default: 0)
+     *  - interlace: Interlace image,  Boolean: false (disabled: default), true (enabled)
      *  - quality: Image quality, from 0 - 100 (default: 95)
      * @return self
      */
     public function setOptions($options)
     {
         $this->options = array_merge([
-            'mode'    => 'auto',
-            'offset'  => [0, 0],
-            'sharpen' => 0,
-            'quality' => 95
+            'mode'      => 'auto',
+            'offset'    => [0, 0],
+            'sharpen'   => 0,
+            'interlace' => false,
+            'quality'   => 90
         ], $options);
 
         return $this;
@@ -150,6 +160,105 @@ class Resizer
     protected function getOption($option)
     {
         return array_get($this->options, $option);
+    }
+
+    /**
+     * Receives the image's exif orientation
+     * @return int|null
+     */
+    protected function getOrientation($file)
+    {
+        $mime = $file->getMimeType();
+        $filePath = $file->getPathname();
+
+        if ($mime != 'image/jpeg' || !function_exists('exif_read_data')) {
+            return null;
+        }
+
+        /*
+         * Reading the exif data is prone to fail due to bad data
+         */
+        $exif = @exif_read_data($filePath);
+
+        if (!isset($exif['Orientation'])) {
+            return null;
+        }
+
+        // Only take care of spin orientations, no mirrored
+        if (!in_array($exif['Orientation'], [1, 3, 6, 8], true)) {
+            return null;
+        }
+
+        return $exif['Orientation'];
+    }
+
+    /**
+     * Receives the image's width while respecting
+     * the exif orientation
+     * @return int
+     */
+    protected function getWidth()
+    {
+        switch ($this->orientation) {
+            case 6:
+            case 8:
+                return imagesy($this->image);
+
+            case 1:
+            case 3:
+            default:
+                return imagesx($this->image);
+        }
+    }
+
+    /**
+     * Receives the image's height while respecting
+     * the exif orientation
+     * @return int
+     */
+    protected function getHeight()
+    {
+        switch ($this->orientation) {
+            case 6:
+            case 8:
+                return imagesx($this->image);
+
+            case 1:
+            case 3:
+            default:
+                return imagesy($this->image);
+        }
+    }
+
+    /**
+     * Receives the original but rotated image
+     * according to exif orientation
+     * @return resource (gd)
+     */
+    protected function getRotatedOriginal()
+    {
+        switch ($this->orientation) {
+            case 6:
+                $angle = 270.0;
+                break;
+
+            case 8:
+                $angle = 90.0;
+                break;
+
+            case 3:
+                $angle = 180.0;
+                break;
+
+            case 1:
+            default:
+                return $this->image;
+        }
+
+        $bgcolor = imagecolorallocate($this->image, 0, 0, 0);
+        $rotatedOriginal = imagerotate($this->image,$angle,$bgcolor);
+
+        return $rotatedOriginal;
     }
 
     /**
@@ -191,8 +300,11 @@ class Resizer
         imagealphablending($imageResized, false);
         imagesavealpha($imageResized, true);
 
+        // get the rotated the original image according to exif orientation
+        $rotatedOriginal = $this->getRotatedOriginal();
+
         // Create the new image
-        imagecopyresampled($imageResized, $this->image, 0, 0, 0, 0, $optimalWidth, $optimalHeight, $this->width, $this->height);
+        imagecopyresampled($imageResized, $rotatedOriginal, 0, 0, 0, 0, $optimalWidth, $optimalHeight, $this->width, $this->height);
 
         $this->image = $imageResized;
 
@@ -294,6 +406,10 @@ class Resizer
         $image = $this->image;
 
         $imageQuality = $this->getOption('quality');
+        
+        if ($this->getOption('interlace')) {
+            imageinterlace($image, true);
+        }
 
         // Determine the image type from the destination file
         $extension = FileHelper::extension($savePath) ?: $this->extension;
@@ -327,9 +443,16 @@ class Resizer
                     imagepng($image, $savePath, $invertScaleQuality);
                 }
                 break;
-
+                
+            case 'webp':
+                // Check WEBP support is enabled
+                if (imagetypes() & IMG_WEBP) {
+                    imagewebp($image, $savePath, $imageQuality);
+                }
+                break;
+                
             default:
-                throw new Exception(sprintf('Invalid image type: %s. Accepted types: jpg, gif, png.', $extension));
+                throw new Exception(sprintf('Invalid image type: %s. Accepted types: jpg, gif, png, webp.', $extension));
                 break;
         }
 
@@ -351,9 +474,10 @@ class Resizer
             case 'image/jpeg': $img = @imagecreatefromjpeg($filePath); break;
             case 'image/gif':  $img = @imagecreatefromgif($filePath);  break;
             case 'image/png':  $img = @imagecreatefrompng($filePath);  break;
+            case 'image/webp': $img = @imagecreatefromwebp($filePath); break;
 
             default:
-                throw new Exception(sprintf('Invalid mime type: %s. Accepted types: image/jpeg, image/gif, image/png.', $mime));
+                throw new Exception(sprintf('Invalid mime type: %s. Accepted types: image/jpeg, image/gif, image/png, image/webp.', $mime));
                 break;
         }
 

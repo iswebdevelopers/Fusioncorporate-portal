@@ -199,6 +199,7 @@ class Parser
         }
 
         $type = isset($params['type']) ? $params['type'] : 'text';
+
         switch ($type) {
             default:
             case 'text':
@@ -213,6 +214,23 @@ class Parser
                 break;
             case 'mediafinder':
                 $result = '{{ ' . $field . '|media }}';
+                break;
+            case 'checkbox':
+                $result = '{% if ' . $field . ' %}' . $params['_content'] . '{% endif %}';
+                break;
+            case 'datepicker':
+                switch($params['mode']) {
+                    default:
+                    case 'datetime':
+                        $result = '{{ ' . $field . '|date("Y-m-d H:i:s") }}';
+                        break;
+                    case 'date':
+                        $result = '{{ ' . $field . '|date("Y-m-d") }}';
+                        break;
+                    case 'time':
+                        $result = '{{ ' . $field . '|date("H:i:s") }}';
+                        break;
+                }
                 break;
         }
 
@@ -239,6 +257,11 @@ class Parser
                 break;
             case 'mediafinder':
                 $result = static::CHAR_OPEN . $field . '|media' . static::CHAR_CLOSE;
+                break;
+            case 'checkbox':
+                $result = static::CHAR_OPEN . '?' . $field . static::CHAR_CLOSE;
+                $result .= $params['_content'];
+                $result .= static::CHAR_OPEN . '/' . $field . static::CHAR_CLOSE;
                 break;
             default:
                 $result = static::CHAR_OPEN . $field . static::CHAR_CLOSE;

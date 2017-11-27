@@ -20,7 +20,7 @@
 
     var FilterWidget = function (element, options) {
 
-        var $el = this.$el = $(element);
+        this.$el = $(element);
 
         this.options = options || {}
         this.scopeValues = {}
@@ -50,7 +50,7 @@
                                 type="text"                                                             \
                                 name="search"                                                           \
                                 autocomplete="off"                                                      \
-                                class="filter-search-input form-control icon search"                    \
+                                class="filter-search-input form-control icon search popup-allow-focus"  \
                                 data-request="{{ optionsHandler }}"                                     \
                                 data-load-indicator-opaque                                              \
                                 data-load-indicator                                                     \
@@ -427,7 +427,7 @@
         })
 
         return result ? result : this
-      }
+    }
 
     $.fn.filterWidget.Constructor = FilterWidget
 

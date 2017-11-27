@@ -2,3 +2,5 @@
 /config
 *.log
 .env
+.config
+/vendor/

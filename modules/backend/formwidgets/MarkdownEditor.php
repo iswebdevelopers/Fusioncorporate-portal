@@ -1,7 +1,6 @@
 <?php namespace Backend\FormWidgets;
 
 use Markdown;
-use Backend\Models\EditorPreferences;
 use Backend\Classes\FormWidgetBase;
 
 /**
@@ -22,27 +21,33 @@ class MarkdownEditor extends FormWidgetBase
      */
     public $mode = 'tab';
 
+    /**
+     * @var bool Render preview with safe markdown.
+     */
+    public $safe = false;
+
     //
     // Object properties
     //
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected $defaultAlias = 'markdown';
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function init()
     {
         $this->fillFromConfig([
             'mode',
+            'safe',
         ]);
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     public function render()
     {
@@ -58,12 +63,12 @@ class MarkdownEditor extends FormWidgetBase
         $this->vars['mode'] = $this->mode;
         $this->vars['stretch'] = $this->formField->stretch;
         $this->vars['size'] = $this->formField->size;
-        $this->vars['name'] = $this->formField->getName();
+        $this->vars['name'] = $this->getFieldName();
         $this->vars['value'] = $this->getLoadValue();
     }
 
     /**
-     * {@inheritDoc}
+     * @inheritDoc
      */
     protected function loadAssets()
     {
@@ -74,12 +79,13 @@ class MarkdownEditor extends FormWidgetBase
 
     public function onRefresh()
     {
-        $value = post($this->formField->getName());
-        $previewHtml = Markdown::parse($value);
+        $value = post($this->getFieldName());
+        $previewHtml = $this->safe
+            ? Markdown::parseSafe($value)
+            : Markdown::parse($value);
 
         return [
             'preview' => $previewHtml
         ];
     }
-
 }

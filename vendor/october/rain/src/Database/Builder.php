@@ -3,6 +3,7 @@
 use Illuminate\Pagination\Paginator;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder as BuilderModel;
+use October\Rain\Support\Facades\DbDongle;
 
 /**
  * Query builder class.
@@ -14,7 +15,6 @@ use Illuminate\Database\Eloquent\Builder as BuilderModel;
  */
 class Builder extends BuilderModel
 {
-
     /**
      * Get an array with the values of a given column.
      *
@@ -24,17 +24,7 @@ class Builder extends BuilderModel
      */
     public function lists($column, $key = null)
     {
-        $results = $this->query->lists($column, $key);
-
-        if ($this->model->hasGetMutator($column)) {
-            foreach ($results as $key => &$value) {
-                $fill = [$column => $value];
-
-                $value = $this->model->newFromBuilder($fill)->$column;
-            }
-        }
-
-        return $results;
+        return $this->pluck($column, $key)->all();
     }
 
     /**
@@ -82,7 +72,7 @@ class Builder extends BuilderModel
             $this->where(function($query) use ($columns, $term) {
                 foreach ($columns as $field) {
                     if (!strlen($term)) continue;
-                    $fieldSql = $this->query->raw(sprintf("lower(%s)", $field));
+                    $fieldSql = $this->query->raw(sprintf("lower(%s)", DbDongle::cast($field, 'text')));
                     $termSql = '%'.trim(mb_strtolower($term)).'%';
                     $query->orWhere($fieldSql, 'LIKE', $termSql);
                 }
@@ -97,7 +87,7 @@ class Builder extends BuilderModel
                     $query->orWhere(function($query) use ($field, $words, $wordBoolean) {
                         foreach ($words as $word) {
                             if (!strlen($word)) continue;
-                            $fieldSql = $this->query->raw(sprintf("lower(%s)", $field));
+                            $fieldSql = $this->query->raw(sprintf("lower(%s)", DbDongle::cast($field, 'text')));
                             $wordSql = '%'.trim(mb_strtolower($word)).'%';
                             $query->where($fieldSql, 'LIKE', $wordSql, $wordBoolean);
                         }
@@ -134,7 +124,7 @@ class Builder extends BuilderModel
         }
 
         $total = $this->query->getCountForPagination();
-        $this->query->forPage($currentPage, $perPage);
+        $this->query->forPage((int) $currentPage, (int) $perPage);
 
         return new LengthAwarePaginator($this->get($columns), $total, $perPage, $currentPage, [
             'path' => Paginator::resolveCurrentPath(),
@@ -150,7 +140,7 @@ class Builder extends BuilderModel
      * @param  array  $columns
      * @return \Illuminate\Contracts\Pagination\Paginator
      */
-    public function simplePaginate($perPage = null, $currentPage = null, $columns = ['*'])
+    public function simplePaginate($perPage = null, $currentPage = null, $pageName = 'page', $columns = ['*'])
     {
         if (is_array($currentPage)) {
             $columns = $currentPage;
@@ -168,7 +158,8 @@ class Builder extends BuilderModel
         $this->skip(($currentPage - 1) * $perPage)->take($perPage + 1);
 
         return new Paginator($this->get($columns), $perPage, $currentPage, [
-            'path' => Paginator::resolveCurrentPath()
+            'path' => Paginator::resolveCurrentPath(),
+            'pageName' => $pageName
         ]);
     }
 
@@ -181,10 +172,9 @@ class Builder extends BuilderModel
     public function __call($method, $parameters)
     {
         if ($this->model->methodExists($scope = 'scope'.ucfirst($method))) {
-            return $this->callScope($scope, $parameters);
+            return $this->callScope([$this->model, $scope], $parameters);
         }
 
         return parent::__call($method, $parameters);
     }
-
 }

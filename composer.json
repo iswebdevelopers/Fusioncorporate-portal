@@ -1,0 +1,23 @@
+{
+    "name": "fusion/test",
+    "description": "Fusion retail brands pvt ltd corporate website",
+    "type": "Website",
+    "require": {
+        "php": "7.1",
+        "ext-mbstring": "*",
+        "ext-openssl": "*",
+        "october/rain": "~1.0",
+        "october/system": "~1.0",
+        "october/backend": "~1.0",
+        "october/cms": "~1.0",
+        "laravel/framework": "5.5.*",
+        "wikimedia/composer-merge-plugin": "dev-master"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "^1.7",
+        "phpunit/phpunit": "^6.4",
+        "phpunit/phpunit-selenium": "^4.1"
+    },
+    "license": "Fusion retail Brands",
+    "minimum-stability": "stable"
+}

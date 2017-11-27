@@ -1,6 +1,7 @@
 <?php namespace RainLab\Blog\Components;
 
 use Redirect;
+use BackendAuth;
 use Cms\Classes\Page;
 use Cms\Classes\ComponentBase;
 use RainLab\Blog\Models\Post as BlogPost;
@@ -107,6 +108,15 @@ class Posts extends ComponentBase
                 'default'     => 'blog/post',
                 'group'       => 'Links',
             ],
+            'exceptPost' => [
+                'title'             => 'rainlab.blog::lang.settings.posts_except_post',
+                'description'       => 'rainlab.blog::lang.settings.posts_except_post_description',
+                'type'              => 'string',
+                'validationPattern' => 'string',
+                'validationMessage' => 'rainlab.blog::lang.settings.posts_except_post_validation',
+                'default'           => '',
+                'group'             => 'Exceptions',
+            ],
         ];
     }
 
@@ -162,12 +172,16 @@ class Posts extends ComponentBase
         /*
          * List all the posts, eager load their categories
          */
+        $isPublished = !$this->checkEditor();
+
         $posts = BlogPost::with('categories')->listFrontEnd([
             'page'       => $this->property('pageNumber'),
             'sort'       => $this->property('sortOrder'),
             'perPage'    => $this->property('postsPerPage'),
             'search'     => trim(input('search')),
-            'category'   => $category
+            'category'   => $category,
+            'published'  => $isPublished,
+            'exceptPost' => $this->property('exceptPost'),
         ]);
 
         /*
@@ -186,12 +200,24 @@ class Posts extends ComponentBase
 
     protected function loadCategory()
     {
-        if (!$categoryId = $this->property('categoryFilter'))
+        if (!$slug = $this->property('categoryFilter')) {
             return null;
+        }
 
-        if (!$category = BlogCategory::whereSlug($categoryId)->first())
-            return null;
+        $category = new BlogCategory;
 
-        return $category;
+        $category = $category->isClassExtendedWith('RainLab.Translate.Behaviors.TranslatableModel')
+            ? $category->transWhere('slug', $slug)
+            : $category->where('slug', $slug);
+
+        $category = $category->first();
+
+        return $category ?: null;
+    }
+
+    protected function checkEditor()
+    {
+        $backendUser = BackendAuth::getUser();
+        return $backendUser && $backendUser->hasAccess('rainlab.blog.access_posts');
     }
 }

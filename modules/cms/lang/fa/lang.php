@@ -10,12 +10,15 @@ return [
         'invalid_file_extension'=>'پسوند :invalid برای فایل نا معتبر است. پسوند های معتبر عبارتند از: :allowed.',
         'error_deleting' => 'خطا در خذف فایل ":name". لطفا سطح دسترسی ها را بررسی نمایید.',
         'delete_success' => 'تعداد :count فایل با موفقیت حذف شد.',
-        'file_name_required' => 'نام فایل را وارد نمایید.'
+        'file_name_required' => 'نام فایل را وارد نمایید.',
+        'safe_mode_enabled' => 'حالت محافظت شده فعال می باشد.',
     ],
     'dashboard' => [
         'active_theme' => [
+            'widget_title_default' => 'وب سایت',
             'online' => 'online',
             'maintenance' => 'در حال به روز رسانی',
+            'manage_themes' => 'مدیریت قالب ها',
         ]
     ],
     'theme' => [
@@ -91,7 +94,8 @@ return [
         'settings_menu' => 'حالت تعمیرات',
         'settings_menu_description' => 'تنظیم کردن صفحه مربوط به تعمیرات و تغییر تنظیمات این حالت.',
         'is_enabled' => 'فعال سازی حالت تعمیرات',
-        'is_enabled_comment' => 'اگر فعال شود کاربران به این صفحه هدایت خواهند شد.'
+        'is_enabled_comment' => 'اگر فعال شود کاربران به این صفحه هدایت خواهند شد.',
+        'hint' => 'حالت تعمیرات کاربرانی را که در بخش مدیریت وارد نشده اند را به صفحه تعمیرات منتقل می کند.',
     ],
     'page' => [
         'not_found_name' => "صفحه ای با نام ':name' یافت نشد",
@@ -106,11 +110,12 @@ return [
         'menu_label' => 'صفحات',
         'unsaved_label' => 'صفحه(های) ذخیره نشده',
         'no_list_records' => 'صفحه ای یافت نشد',
-        'new' => 'New page',
+        'new' => 'صفحه جدید',
         'invalid_url' => 'قالب آدرس صحیح نمی باشد. آدرس باید با اسلش شروع شده و می تواند شامل اعداد، حروف لاتین و این کاراکتر ها باشد: ._-[]:?|/+*^$',
         'delete_confirm_multiple' => 'آیا از حذف صفحات انتخاب شده اطمینان دارید؟',
         'delete_confirm_single' => 'آیا از حذف این صفحه اطمینان دارید؟',
-        'no_layout' => '-- بدون طرح بندی --'
+        'no_layout' => '-- بدون طرح بندی --',
+        'cms_page' => 'صفحات مدیریت محتوی'
     ],
     'layout' => [
         'not_found_name' => "طرح بندی ی ':name' یافت نشد",
@@ -169,7 +174,11 @@ return [
         'hidden' => 'مخفی',
         'hidden_comment' => 'صفحات مخفی فقط برای کاربران وارد شده به سیستم نمایش داده می شود.',
         'enter_fullscreen' => 'حالت تمام صفحه',
-        'exit_fullscreen' => 'خروج از حالت تمام صفحه'
+        'exit_fullscreen' => 'خروج از حالت تمام صفحه',
+         'open_searchbox' => 'نمایش جستجو',
+        'close_searchbox'  => 'بستن جستجو',
+        'open_replacebox' => 'نمایش جایگزینی',
+        'close_replacebox'  => 'بستن جایگزینی'
     ],
     'asset' => [
         'menu_label' => "فایلها",
@@ -211,6 +220,8 @@ return [
         'error_moving_file' => 'خطایی در جابجایی :file رخ داده است',
         'error_moving_directory' => 'خطایی در جابجایی :dir رخ داده است',
         'error_deleting_directory' => 'خطایی در حذف :dir رخ داده است',
+        'no_list_records' => 'فایلی وجود ندارد',
+        'delete_confirm' => 'آیا از حذف فایل ها یا پوشه های انتخاب شده اطمینان دارید؟',
         'path' => 'محل قرار گیری'
     ],
     'component' => [
@@ -228,7 +239,9 @@ return [
     'template' => [
         'invalid_type' => "نوع قالب معتبر نمی باشد.",
         'not_found' => "قالب درخواست شده یافت نشد.",
-        'saved'=> "قالب با موفقیت ذخیره شد."
+        'saved'=> "قالب با موفقیت ذخیره شد.",
+        'no_list_records' => 'موردی یافت نشد',
+        'delete_confirm' => 'آیا از حذف قالب های انتخاب شده اطمینان دارید؟'
     ],
     'permissions' => [
         'name' => 'مدیریت محتوی',
@@ -238,70 +251,5 @@ return [
         'manage_layouts' => 'مدیریت طرح بندی ها',
         'manage_partials' => 'مدیریت بخش ها',
         'manage_themes' => 'مدیریت قالب ها',
-        'manage_media' => 'مدیریت چند رسانه ها'
     ],
-    'mediafinder' => [
-        'default_prompt' => '%s را جهت انتخاب فایل چند رسانه ای انتخاب کنید'
-    ],
-    'media' => [
-        'invalid_path' => "آدرس فایل ':path' معتبر نیست.",
-        'menu_label' => 'چند رسانه ای',
-        'upload' => 'ارسال',
-        'move' => 'جابجایی',
-        'delete' => 'حذف',
-        'add_folder' => 'پوشه جدید',
-        'search' => 'جستجو',
-        'display' => 'نمایش',
-        'filter_everything' => 'همه',
-        'filter_images' => 'تصاویر',
-        'filter_video' => 'ویدیو',
-        'filter_audio' => 'صوتی',
-        'filter_documents' => 'اسناد',
-        'library' => 'کتاب خانه',
-        'folder_size_items' => 'مورد(ها)',
-        'size' => 'اندازه',
-        'title' => 'عنوان',
-        'last_modified' => 'آخرین تغییرات',
-        'public_url' => 'آدرس عمومی',
-        'click_here' => 'اینجا کلیک کنید',
-        'thumbnail_error' => 'خطا در ایجاد تصویر بند انگشتی',
-        'return_to_parent' => 'بازگشت به پوشه قبل',
-        'return_to_parent_label' => 'بازگشت ..',
-        'nothing_selected' => 'چیزی انتخاب نشده است.',
-        'multiple_selected' => 'چند مورد انتخاب شده',
-        'uploading_file_num' => 'ارسال :number فایل(ها)...',
-        'uploading_complete' => 'ارسال انجام شد',
-        'uploading_error' => 'خطا در ارسال',
-        'order_by' => 'مرتب سازی با',
-        'folder' => 'پوشه',
-        'no_files_found' => 'فایلی با درخواست شما یافت نشد',
-        'delete_empty' => 'لطفا موارد را جهت حذف انتخاب نمایید',
-        'delete_confirm' => 'آیا از حذف مورد(های) انتخاب شده اطمینان دارید؟',
-        'error_renaming_file' => 'خطا در تغییر نام.',
-        'new_folder_title' => 'پوشه ی جدید',
-        'folder_name' => 'نام پوشه',
-        'error_creating_folder' => 'خطا در ایجاد پوشه',
-        'folder_or_file_exist' => 'پوشه یا فایلی با نام وارد شده از قبل وجود دارد.',
-        'move_empty' => 'لطفا موارد را جهت جابجایی انتخاب نمایید',
-        'move_popup_title' => 'جابحایی فایل یا پوشه ها',
-        'move_destination' => 'پوشه مقصد',
-        'please_select_move_dest' => 'لطفا پوشه مقصد را انتخاب نمائید.',
-        'move_dest_src_match' => 'لطفا پوشه دیگری را انتخاب نمایید.',
-        'empty_library' => 'چیزی یافت نشد.',
-        'insert' => 'قرار دادن',
-        'crop_and_insert' => 'بریدن و افزودن',
-        'select_single_image' => 'لطفا یک تصویر انتخاب نمایید',
-        'selection_not_image' => 'مورد انتخاب شده تصویر نمی باشد',
-        'restore' => 'حذف همه تغییرات',
-        'resize' => 'تغییر اندازه...',
-        'selection_mode_normal' => 'معمولی',
-        'selection_mode_fixed_ratio' => 'نصبت ثابت',
-        'selection_mode_fixed_size' => 'اندازه ثابت',
-        'height' => 'ارتفاع',
-        'width' => 'عرض',
-        'selection_mode' => 'حالت انتخابی',
-        'resize_image' => 'تغییر اندازه تصویر',
-        'image_size' => 'اندازه تصویر:',
-        'selected_size' => 'انتخاب شده:'
-    ]
 ];

@@ -5,37 +5,6 @@ return [
         'name' => 'OctoberCMS',
         'tagline' => 'Visszatérés az alapokhoz'
     ],
-    'locale' => [
-        'en' => 'Angol (amerikai)',
-        'en-au' => 'Angol (ausztrál)',
-        'en-ca' => 'Angol (kanadai)',
-        'en-gb' => 'Angol (brit)',
-        'cs' => 'Cseh',
-        'da' => 'Dán',
-        'de' => 'Német',
-        'el' => 'Görög',
-        'es' => 'Spanyol',
-        'es-ar' => 'Spanyol (argentin)',
-        'fa' => 'Perzsa',
-        'fr' => 'Francia',
-        'fr-ca' => 'Francia (kanadai)',
-        'hu' => 'Magyar',
-        'id' => 'Indonéz',
-        'it' => 'Olasz',
-        'ja' => 'Japán',
-        'lv' => 'Litván',
-        'nb-no' => 'Norvég',
-        'nl' => 'Holland',
-        'pl' => 'Lengyel',
-        'pt-br' => 'Portugál (brazil)',
-        'ro' => 'Román',
-        'ru' => 'Orosz',
-        'sv' => 'Svéd',
-        'sk' => 'Szlovák',
-        'tr' => 'Török',
-        'zh-cn' => 'Kínai',
-        'zh-tw' => 'Kínai (tajvani)'
-    ],
     'directory' => [
         'create_fail' => 'Nem hozható létre a könyvtár: :name'
     ],
@@ -58,9 +27,11 @@ return [
             'users' => 'Felhasználók',
             'system' => 'Rendszer',
             'social' => 'Közösség',
+            'backend' => 'Admin',
             'events' => 'Események',
             'customers' => 'Vevők',
-            'my_settings' => 'Beállításaim'
+            'my_settings' => 'Beállításaim',
+            'notifications' => 'Értesítések'
         ]
     ],
     'theme' => [
@@ -77,7 +48,7 @@ return [
         'installed' => 'Telepítve',
         'no_themes' => 'A piactérről még nem lett telepítve téma.',
         'recommended' => 'Ajánlott',
-        'remove_confirm' => 'Valóban törölni akarja ezt a témát?'
+        'remove_confirm' => 'Valóban törölni akarja a témát?'
     ],
     'plugin' => [
         'label' => 'Bővítmény',
@@ -121,7 +92,7 @@ return [
         'none' => 'Nincs',
         'id' => [
             'label' => 'Projekt azonosító',
-            'help' => 'Segítség (angol nyelvű)',
+            'help' => 'Súgó (angol nyelvű)',
             'missing' => 'Adjon meg egy projekt azonosítót.'
         ],
         'detach_confirm' => 'Biztosan le akarja választani a projektet?',
@@ -179,12 +150,16 @@ return [
     ],
     'mail_templates' => [
         'menu_label' => 'Sablonok',
-        'menu_description' => 'A kimenő levelek megjelenésének testreszabása.',
+        'menu_description' => 'Levél típusok és elrendezések menedzselése.',
         'new_template' => 'Új sablon',
         'new_layout' => 'Új elrendezés',
+        'new_partial' => 'Új részlap',
         'template' => 'Sablon',
         'templates' => 'Sablonok',
+        'partial' => 'Részlap',
+        'partials' => 'Részlapok',
         'menu_layouts_label' => 'Levél elrendezések',
+        'menu_partials_label' => 'Levél részlapok',
         'layout' => 'Elrendezés',
         'layouts' => 'Elrendezések',
         'no_layout' => '-- nincs --',
@@ -212,8 +187,59 @@ return [
         'sending' => 'Üzenet küldése folyamatban...',
         'return' => 'Vissza a sablonokhoz'
     ],
+    'mail_brand' => [
+        'menu_label' => 'Kinézet',
+        'menu_description' => 'A színek és más vizuális jellemzők módosítása.',
+        'page_title' => 'Levél megjelenésének testreszabása',
+        'sample_template' => [
+            'heading' => 'Címsor',
+            'paragraph' => 'Ez egy bekezdés Lorem Ipsum szöveggel és hivatkozással. Cumque dicta <a>doloremque eaque</a>, enim error laboriosam pariatur possimus tenetur veritatis voluptas.',
+            'table' => [
+                'item' => 'Elem',
+                'description' => 'Leírás',
+                'price' => 'Ár',
+                'centered' => 'középre igazítva',
+                'right_aligned' => 'jobbra igazítva'
+            ],
+            'buttons' => [
+                'primary' => 'Elsődleges gomb',
+                'positive' => 'Pozitív gomb',
+                'negative' => 'Negatív gomb'
+            ],
+            'panel' => 'Kiemelt szöveg',
+            'more' => 'Még több szöveg',
+            'promotion' => 'Kupon kód: OCTOBER',
+            'subcopy' => 'Utóirat helye',
+            'thanks' => 'Üdvözlettel'
+        ],
+        'fields' => [
+            '_section_background' => 'Hátterek',
+            'body_bg' => 'Törzs háttere',
+            'content_bg' => 'Tartalom háttere',
+            'content_inner_bg' => 'Belső tartalom háttere',
+            '_section_buttons' => 'Gombok',
+            'button_text_color' => 'Szöveg színe',
+            'button_primary_bg' => 'Elsődleges gomb háttere',
+            'button_positive_bg' => 'Pozitív gomb háttere',
+            'button_negative_bg' => 'Negatív gomb háttere',
+            '_section_type' => 'Tipográfia',
+            'header_color' => 'Fejléc színe',
+            'heading_color' => 'Címsorok színe',
+            'text_color' => 'Szöveg színe',
+            'link_color' => 'Hivatkozás színe',
+            'footer_color' => 'Lábléc színe',
+            '_section_borders' => 'Szegélyek',
+            'body_border_color' => 'Törzs szegély színe',
+            'subcopy_border_color' => 'Utóirat szegély színe',
+            'table_border_color' => 'Táblázat szegély színe',
+            '_section_components' => 'Komponensek',
+            'panel_bg' => 'Panel háttere',
+            'promotion_bg' => 'Promóció háttere',
+            'promotion_border_color' => 'Promóció szegély színe'
+        ]
+    ],
     'install' => [
-        'project_label' => 'Csatolás projekthez',
+        'project_label' => 'Csatolás',
         'plugin_label' => 'Bővítmény telepítése',
         'theme_label' => 'Téma telepítése',
         'missing_plugin_name' => 'Adja meg a telepítendő bővítmény nevét.',
@@ -234,11 +260,12 @@ return [
         'plugin_description' => 'Leírás',
         'plugin_version' => 'Verzió',
         'plugin_author' => 'Fejlesztő',
+        'plugin_not_found' => 'A bővítmény nem található',
         'core_current_build' => 'Verzió',
         'core_build' => 'Új verzió: :build',
         'core_build_help' => 'Elérhető a legújabb hivatalos kiadás.',
-        'core_downloading' => 'Honlap frissítés letöltése...',
-        'core_extracting' => 'Honlap frissítés kicsomagolása...',
+        'core_downloading' => 'Rendszer frissítés letöltése...',
+        'core_extracting' => 'Rendszer frissítés kicsomagolása...',
         'plugins' => 'Bővítmények',
         'themes' => 'Témák',
         'disabled' => 'Letiltva',
@@ -247,8 +274,8 @@ return [
         'plugin_version_none' => 'Új bővítmény',
         'plugin_current_version' => 'Aktuális verzió',
         'theme_new_install' => 'Új téma telepítése.',
-        'theme_downloading' => 'Letöltendő téma: :name',
-        'theme_extracting' => 'Kicsomagolandó téma: :name',
+        'theme_downloading' => 'Téma letöltése: :name',
+        'theme_extracting' => 'Téma kicsomagolása: :name',
         'update_label' => 'Honlap frissítése',
         'update_completing' => 'Frissítési folyamat befejezése',
         'update_loading' => 'Elérhető frissítések betöltése...',
@@ -265,20 +292,25 @@ return [
         ],
         'important_action' => [
             'empty' => 'Művelet kiválasztása',
-            'confirm' => 'Frissítések elfogadása',
-            'skip' => 'Bővítmény kihagyása (csak most)',
-            'ignore' => 'Bővítmény kihagyása (mindig)'
+            'confirm' => 'Frissítés elfogadása',
+            'skip' => 'Frissítés kihagyása (csak most)',
+            'ignore' => 'Frissítés kihagyása (mindig)'
         ],
         'important_action_required' => 'Művelet szükséges',
         'important_view_guide' => 'Frissítési útmutató megtekintése',
+        'important_view_release_notes' => 'Kiadási megjegyzések megtekintése',
         'important_alert_text' => 'Néhány frissítés körültekintést igényel.',
         'details_title' => 'Bővítmény részletei',
-        'details_view_homepage' => 'Honlap megtekintése',
+        'details_view_homepage' => 'Weboldal',
         'details_readme' => 'Dokumentáció',
-        'details_readme_missing' => 'Nincs megadva dokumentáció.',
+        'details_readme_missing' => 'Nincs megadva leírás.',
+        'details_changelog' => 'Kiadott verziók',
+        'details_changelog_missing' => 'Nincs kiadási jegyzék.',
         'details_upgrades' => 'Frissítési útmutató',
         'details_upgrades_missing' => 'Nincs megadva instrukció.',
-        'details_current_version' => 'Aktuális verzió',
+        'details_licence' => 'Felhasználási feltételek',
+        'details_licence_missing' => 'Nincs megadva licenc.',
+        'details_current_version' => 'Verzió',
         'details_author' => 'Fejlesztő'
     ],
     'server' => [
@@ -301,34 +333,34 @@ return [
     ],
     'event_log' => [
         'hint' => 'Ez a napló a rendszerben történt lehetséges hibákat listázza ki. Például a kivételeket és a hibakeresési információkat.',
-        'menu_label' => 'Eseménynapló',
-        'menu_description' => 'A rendszernapló üzeneteinek megtekintése.',
-        'empty_link' => 'Eseménynapló kiürítése',
-        'empty_loading' => 'Az eseménynapló kiürítése...',
-        'empty_success' => 'Az eseménynapló kiürítése sikerült.',
-        'return_link' => 'Vissza az eseménynaplóhoz',
+        'menu_label' => 'Esemény napló',
+        'menu_description' => 'A rendszer üzeneteinek megtekintése.',
+        'empty_link' => 'Kiürítés',
+        'empty_loading' => 'A kiürítés folyamatban...',
+        'empty_success' => 'Az esemény napló kiürítése sikerült.',
+        'return_link' => 'Vissza az esemény naplóhoz',
         'id' => 'Azonosító',
-        'id_label' => 'Esemény azonosítója',
+        'id_label' => 'Azonosító',
         'created_at' => 'Időpont',
         'message' => 'Üzenet',
         'level' => 'Típus',
-        'preview_title' => 'Esemény'
+        'preview_title' => 'Esemény részletei'
     ],
     'request_log' => [
         'hint' => 'Ez a napló a böngészőkérelmeket listázza ki. Ha például egy látogató nem létező aloldalt nyit meg, akkor egy 404-es állapotkódú bejegyzés jön létre.',
-        'menu_label' => 'Kérelemnapló',
+        'menu_label' => 'Kérelem napló',
         'menu_description' => 'Rossz vagy átirányított kérelmek megtekintése.',
-        'empty_link' => 'Kérelemnapló kiürítése',
-        'empty_loading' => 'A kérelemnapló kiürítése...',
-        'empty_success' => 'A kérelemnapló kiürítése megtörtént.',
-        'return_link' => 'Vissza a kérelemnaplóhoz',
+        'empty_link' => 'Kiürítés',
+        'empty_loading' => 'A kiürítés folyamatban...',
+        'empty_success' => 'A kérelem napló kiürítése megtörtént.',
+        'return_link' => 'Vissza a kérelem naplóhoz',
         'id' => 'Azonosító',
-        'id_label' => 'Napló azonosító',
+        'id_label' => 'Azonosító',
         'count' => 'Számláló',
         'referer' => 'Hivatkozás',
         'url' => 'Webcím',
-        'status_code' => 'Állapotkód',
-        'preview_title' => 'Kérelem'
+        'status_code' => 'Kód',
+        'preview_title' => 'Kérelem részletei'
     ],
     'permissions' => [
         'name' => 'Rendszer',
@@ -341,6 +373,21 @@ return [
         'manage_preferences' => 'Saját beállítások kezelése',
         'manage_editor' => 'Kódszerkesztő testreszabása',
         'view_the_dashboard' => 'Vezérlőpult elérése',
-        'manage_branding' => 'Admin felület testreszabása'
-    ]
+        'manage_branding' => 'Kinézet testreszabása'
+    ],
+    'log' => [
+        'menu_label' => 'Engedélyek',
+        'menu_description' => 'Válassza ki, hogy mely műveleteket szeretne naplózni.',
+        'default_tab' => 'Engedélyek',
+        'log_events' => 'Események naplózása',
+        'log_events_comment' => 'A rendszer üzeneteinek eltárolása.',
+        'log_requests' => 'Kérelmek naplózása',
+        'log_requests_comment' => 'Rossz vagy átirányított kérelmek eltárolása.',
+        'log_theme' => 'Téma változtatások naplózása',
+        'log_theme_comment' => 'A fájlokban történt változtatások eltárolása.'
+    ],
+    'media' => [
+        'invalid_path' => "Érvénytelen elérési útvonal: ':path'",
+        'folder_size_items' => 'fájl',
+    ],
 ];

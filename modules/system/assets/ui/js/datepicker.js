@@ -12,6 +12,7 @@
  */
 
 +function ($) { "use strict";
+
     var Base = $.oc.foundation.base,
         BaseProto = Base.prototype
 
@@ -45,6 +46,7 @@
         this.$timePicker = $('[data-timepicker]', this.$el)
         this.hasDate = !!this.$datePicker.length
         this.hasTime = !!this.$timePicker.length
+        this.ignoreTimezone = this.$el.get(0).hasAttribute('data-ignore-timezone')
 
         this.initRegion()
 
@@ -95,12 +97,15 @@
     //
 
     DatePicker.prototype.initDatePicker = function() {
-        var self = this
+        var self = this,
+            dateFormat = this.getDateFormat(),
+            now = moment().tz(this.timezone).format(dateFormat)
 
         var pikadayOptions = {
             yearRange: this.options.yearRange,
-            format: this.getDateFormat(),
-            setDefaultDate: moment().tz(this.timezone).format('l'), // now
+            firstDay: this.options.firstDay,
+            format: dateFormat,
+            setDefaultDate: now,
             onOpen: function() {
                 var $field = $(this._o.trigger)
 
@@ -119,7 +124,7 @@
             pikadayOptions.i18n = lang
         }
 
-        this.$datePicker.val(this.getDataLockerValue('l'))
+        this.$datePicker.val(this.getDataLockerValue(dateFormat))
 
         if (this.options.minDate) {
             pikadayOptions.minDate = new Date(this.options.minDate)
@@ -160,9 +165,12 @@
     }
 
     DatePicker.prototype.getDateFormat = function() {
-        var format = this.options.format
+        var format = 'YYYY-MM-DD'
 
-        if (this.locale) {
+        if (this.options.format) {
+            format = this.options.format
+        }
+        else if (this.locale) {
             format = moment()
                 .locale(this.locale)
                 .localeData()
@@ -285,6 +293,12 @@
         if (!this.timezone) {
             this.timezone = 'UTC'
         }
+
+        // Set both timezones to UTC to disable converting between them
+        if (this.ignoreTimezone) {
+            this.appTimezone = 'UTC'
+            this.timezone = 'UTC'
+        }
     }
 
     DatePicker.prototype.getLang = function(name, defaultValue) {
@@ -298,8 +312,9 @@
     DatePicker.DEFAULTS = {
         minDate: null,
         maxDate: null,
-        format: 'YYYY-MM-DD',
-        yearRange: 10
+        format: null,
+        yearRange: 10,
+        firstDay: 0
     }
 
     // PLUGIN DEFINITION

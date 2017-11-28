@@ -1,7 +1,7 @@
 name: Fusion
 description: 'This theme is customised from valilla theme - october cms'
 author: RGopinath
-homepage: 'http://fusionretailbrands.com'
+homepage: 'http://fusionretailbrands.com.au'
 code: Fusion
 require:
     - RainLab.User

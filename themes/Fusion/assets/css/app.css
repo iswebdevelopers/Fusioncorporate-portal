@@ -13,6 +13,13 @@
 	vertical-align: top;
 }
 
+.navbar {
+  position: relative;
+  min-height: 50px;
+  border: 1px solid transparent;
+  margin-bottom: 0px;
+}
+
 .navbar .navbar-collapse {
 	text-align: center;
 }

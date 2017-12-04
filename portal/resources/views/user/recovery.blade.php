@@ -53,7 +53,7 @@
         var token = $('#token').val();
         $.ajax({
             method: "POST",
-            url: "/user/recovery?token=" + token,
+            url: "user/recovery?token=" + token,
             data: $(this).serializeArray(),
         success: function( data ) {
             if(data.status == 'success'){

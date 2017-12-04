@@ -64,7 +64,7 @@
                     </span> -->
                 </div>
                 <div class="text-right">
-                    <a data-vbtype="ajax" class="venbobox" href="user/recovery/{{$user['id']}}">Account Settings <i class="fa fa-arrow-circle-right"></i></a>
+                    <a data-vbtype="ajax" class="venbobox" href="/user/recovery/{{$user['id']}}">Account Settings <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

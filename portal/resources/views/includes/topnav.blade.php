@@ -14,7 +14,7 @@
                         <i class="fa fa-user fa-fw"></i> @if (!empty($user)) {{ucfirst($user['name'])}} @endif <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="user/logout"><i class="fa fa-sign-out fa-fw"></i> @if (!empty($user))
+                        <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> @if (!empty($user))
                             Logout
                         @else
                             Login

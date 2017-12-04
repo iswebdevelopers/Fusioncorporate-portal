@@ -18,10 +18,10 @@
 				^FX Third section with barcode.
 				^BY3,2,230
 				^FO30,550^BCN,150,N,N,Y
-				^FD{{$details['pibarcode']}}^FS
+				^FD{{$carton['product_indicator_barcode']}}^FS
 				^FO30,720
 				^A0N,50,40
-				^FD{{$details['pinumber']}}^FS
+				^FD{{$carton['product_indicator_number']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).
 				^BY2,2,150

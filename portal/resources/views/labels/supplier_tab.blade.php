@@ -2,9 +2,9 @@
 <div class="tab-pane fade" id="supplier">
     <div class="table-responsive">
     <p>
-        <a class="btn btn-primary btn-lg" href="label/print/stickies/{{$order_no}}">Print all sticky labels</a>
+        <a class="btn btn-primary btn-lg" href="/label/print/stickies/{{$order_no}}">Print all sticky labels</a>
     @if((!empty($orderdetails['cartonpack'])) or (!empty($orderdetails['cartonloose'])))
-        <a class="btn btn-primary btn-lg" href="label/print/cartons/{{$order_no}}">Print all Carton labels</a>
+        <a class="btn btn-primary btn-lg" href="/label/print/cartons/{{$order_no}}">Print all Carton labels</a>
     @endif
     </p>
     @if(!empty($orderdetails['cartonpack']))
@@ -26,7 +26,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
-                    <td><a class="btn btn-primary btn-sm" href="label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
                 </tr>
             @endforeach    
             </tbody>
@@ -53,7 +53,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
-                    <td><a class="btn btn-primary btn-sm" href="label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
                 </tr>
             @endforeach    
             </tbody>

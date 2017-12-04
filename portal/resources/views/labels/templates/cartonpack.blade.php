@@ -23,10 +23,10 @@
 			^BY3,2,230
 			^FO50,550
 			^BCN,150,N,N,Y
-			^FD{{$carton['pibarcode']}}^FS
+			^FD{{$data['product_indicator_barcode']}}^FS
 			^FO50,720
 			^A0N,50,40
-			^FD{{$carton['pinumber']}}^FS
+			^FD{{$data['product_indicator_number']}}^FS
 
 			^FX Fourth section (the two boxes on the bottom).
 			^BY2,2,150

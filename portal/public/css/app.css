@@ -734,7 +734,7 @@ button, input, select, textarea {
     line-height: inherit;
 }
 a {
-    color: #000;
+    color: #777;
     text-decoration: none;
 }
 a:focus, a:hover {

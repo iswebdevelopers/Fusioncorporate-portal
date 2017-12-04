@@ -23,7 +23,7 @@
                                 <td>{{$order['supplier']}}</td>
                                 <td>{{$order['approval_date']}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm" href="label/order/{{$order['order_number']}}">Labels</a><br/>
+                                    <a class="btn btn-primary btn-sm" href="/label/order/{{$order['order_number']}}">Labels</a><br/>
                                 </td>
                             </tr>
                         @endforeach    

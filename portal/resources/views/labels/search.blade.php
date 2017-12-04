@@ -74,7 +74,7 @@
                                         <td>{{$order['style']}}</td>
                                         <td>{{$order['item']}}</td>
                                         <td>{{$order['quantity']}}</td>
-                                        <td><a class="btn btn-primary btn-sm" href="/label/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                                        <td><a class="btn btn-primary btn-sm" href="/portal/label/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
                                     </tr>
                                 @endforeach    
                                 </tbody>

@@ -38,7 +38,7 @@
                                     <td>{{ucfirst($_user['name'])}}</td>
                                     <td>{{$_user['email']}}</td>
                                     <td>{{ucfirst($_user['role'])}}</td>
-                                    <td><a data-vbtype="ajax" class="venbobox" href="/user/recovery/{{$_user['id']}}" >Recover Password</a></td>
+                                    <td><a data-vbtype="ajax" class="venbobox" href="/portal/user/recovery/{{$_user['id']}}" >Recover Password</a></td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -6,7 +6,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">Fusion Portal</a>
+                <a class="navbar-brand" href="/portal">Fusion Portal</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li class="dropdown">
@@ -14,7 +14,7 @@
                         <i class="fa fa-user fa-fw"></i> @if (!empty($user)) {{ucfirst($user['name'])}} @endif <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/user/logout"><i class="fa fa-sign-out fa-fw"></i> @if (!empty($user))
+                        <li><a href="/portal/user/logout"><i class="fa fa-sign-out fa-fw"></i> @if (!empty($user))
                             Logout
                         @else
                             Login

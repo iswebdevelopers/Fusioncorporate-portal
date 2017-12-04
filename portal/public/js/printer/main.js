@@ -162,7 +162,7 @@
     function printZPL(id) {
         var config = getUpdatedConfig();
         $.ajax({
-        	url: '/label/rawdata/' + id,
+        	url: '/portal/label/rawdata/' + id,
         	success: function(result) {
         		data = $.parseJSON(result);
         		console.log(data.data);
@@ -837,7 +837,7 @@
         setPrinter(data);
         
         $.ajax({
-        	url: '/printer/setting/host/' + userId,
+        	url: '/portal/printer/setting/host/' + userId,
         	method: 'POST',
         	headers: { 'X-CSRF-TOKEN': _token },
         	data: data,

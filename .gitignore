@@ -11,3 +11,4 @@ storage/framework/views
 storage/framework/sessions
 storage/cms/combiner
 storage/cms/cache
+/Backup

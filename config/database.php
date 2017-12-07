@@ -15,6 +15,7 @@ return [
 
     'fetch' => PDO::FETCH_CLASS,
 
+'strict' => false,
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name

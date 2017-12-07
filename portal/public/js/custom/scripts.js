@@ -88,7 +88,15 @@ $( function() {
     "ordering": false
   });
 
-  $("#printfiles").DataTable({
+  $("#cartonfiles").DataTable({
+    "sPaginationType": "full_numbers",
+    "bPaginate":true,
+    "iDisplayLength": 10,
+    "searching": false,
+    "ordering": false
+  });
+
+   $("#stickyfiles").DataTable({
     "sPaginationType": "full_numbers",
     "bPaginate":true,
     "iDisplayLength": 10,

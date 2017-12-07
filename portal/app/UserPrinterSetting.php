@@ -26,6 +26,15 @@ class UserPrinterSetting extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id'
+        'user_id','settings'
+    ];
+
+     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'settings' => 'array'
     ];
 }

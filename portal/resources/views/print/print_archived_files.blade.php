@@ -1,5 +1,5 @@
 <div class="tab-pane fade in" id="archive">
-<br/>
+
 	@if(count($archives) > 0)
     	<table id="printfiles" class="table table-striped table-bordered table-hover">
             <thead>
@@ -19,7 +19,7 @@
                         <td>{{$archive->type}}</td>
                         <td>{{$archive->quantity}}</td>
                         <td>
-                            <button type="button" class="btn btn-default" onclick="printZPL({{$archive->id}});">ZPL</button>
+                            <button type="button" class="btn btn-sm" onclick="printZPL({{$archive->id}});">ZPL</button>
                         </td>
                     </tr>
 		    	@endforeach

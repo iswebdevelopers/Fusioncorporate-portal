@@ -17,14 +17,16 @@ class PrintController extends FrontController
      */
     public function index(Request $request)
     {
-        $prints = UserLabelPrint::Print()->latest()->get(['order_id','type','quantity','id','updated_at']);
+        $cartons = UserLabelPrint::Print()->OfType('carton')->latest()->get(['order_id','type','quantity','id','updated_at']);
+        $stickies = UserLabelPrint::Print()->OfType('sticky')->latest()->get(['order_id','type','quantity','id','updated_at']);
         $archives = UserLabelPrint::Archived()->latest()->get(['order_id','type','quantity','id','updated_at']);
         $setting = UserPrinterSetting::all()->first();
-        
+        $printer_settings = Config::get('user.settings.printer');
+
         $request->session()->flash('message', "In order to print files to local printer, it is necessary to install a print client on your local machine. Print Shop client can be downloaded from <a target='_blank' href =".Config::get('services.print.client').">Download Print Client</a>.");
         $request->session()->flash('class', 'alert-info');
-        
-        return view('print.home', ['prints' => $prints,'archives' => $archives, 'setting' => $setting])->withTitle('print-shop');
+
+        return view('print.home', ['cartons' => $cartons,'archives' => $archives, 'stickies' => $stickies,'user_settings' => $setting->settings,'printer_settings' => $printer_settings])->withTitle('print-shop');
     }
 
     /**
@@ -57,5 +59,24 @@ class PrintController extends FrontController
         $setting->save();
 
         return $setting;
+    }
+
+    /**
+     * Saving printer settings for user printer
+     * @param Request $request
+     * @param settings object
+     */
+    public function setPrinterSetting(Request $request, int $id)
+    {
+
+        $printer = UserPrinterSetting::firstOrCreate(['user_id' => $id]);
+
+        $setting['carton'] = $request->carton;
+        $setting['sticky'] = $request->sticky;
+
+        $printer->settings = $setting;
+
+        $printer->save();
+        return $printer;
     }
 }

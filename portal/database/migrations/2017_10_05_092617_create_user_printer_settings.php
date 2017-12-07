@@ -17,10 +17,7 @@ class CreateUserPrinterSettings extends Migration
             Schema::create('user_printer_settings', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->bigInteger('user_id');
-                $table->string('host')->nullable();
-                $table->integer('port')->nullable();
-                $table->string('default')->nullable();
-                $table->string('current')->nullable();
+                $table->json('settings');
                 $table->timestamps();
             });
         }

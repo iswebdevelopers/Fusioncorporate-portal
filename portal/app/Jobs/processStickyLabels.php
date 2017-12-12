@@ -17,15 +17,17 @@ class processStickyLabels implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, CreateLabelPrint;
     public $data;
     public $user;
+    public $printer_settings;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $data)
+    public function __construct($user, $data, $user_printer_setting)
     {
         $this->data = $data;
         $this->user = $user;
+        $this->printer_settings = $user_printer_setting;
     }
 
     /**
@@ -38,7 +40,8 @@ class processStickyLabels implements ShouldQueue
         if (!empty($this->data)) {
             foreach ($this->data as $type => $sticky) {
                 if ($sticky) {
-                    $view = View::make('labels.templates.'.$type, ['data' => $sticky]);
+                    
+                    $view = View::make('labels.templates.sticky', ['data' => $sticky, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
 
                     try {
@@ -49,6 +52,7 @@ class processStickyLabels implements ShouldQueue
                     }
                 }
             }
+            
         }
     }
 }

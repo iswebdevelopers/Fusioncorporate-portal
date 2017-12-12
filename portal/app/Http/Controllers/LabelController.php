@@ -7,7 +7,9 @@ use App\Http\Requests;
 use App\TicketRequest;
 use Setting;
 use App\Jobs\processCartonLabels;
+use App\Jobs\processStickyLabels;
 use GuzzleHttp\Exception\ClientException as Exception;
+use App\UserPrinterSetting;
 
 class LabelController extends FrontController
 {
@@ -37,16 +39,20 @@ class LabelController extends FrontController
             
             if (count($ticket_list) > 0) {
                 // $data = array_map([$this, 'getTipsTicketData'], $ticket_list['data'], $request);
-                $data = array_map(function ($ticket) use ($request) {
+                $tipsdata = array_map(function ($ticket) use ($request) {
                     return $this->getTipsTicketData($ticket, $request);
                 }, $ticket_list);
             }
-            
-            foreach ($data as $key => $labeldata) {
-                if (strtolower($key) == 'sticky') {
-                    processStickyLabels::dispatch($authUser, $data['sticky']);
-                } else {
-                    processCartonLabels::dispatch($authUser, $data[$key]);
+
+            foreach ($tipsdata as $key => $label) {
+                foreach ($label as $labelkey => $labeldata) {
+                    if(!empty($labeldata)){
+                        if (strtolower($labelkey) == 'sticky') {
+                            processStickyLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('sticky'));
+                        } else {
+                            processCartonLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('carton'));
+                        }
+                    }
                 }
             }
 
@@ -90,7 +96,7 @@ class LabelController extends FrontController
             }
 
             //add it to the queue job
-            processCartonLabels::dispatch($authUser, $data);
+            processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
             
             $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
             $request->session()->flash('class', 'alert-info');
@@ -139,7 +145,7 @@ class LabelController extends FrontController
                 $data['looseitem'] = $result['data'];
             }
 
-            processStickyLabels::dispatch($authUser, $data);
+            processStickyLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('sticky'));
             $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
             $request->session()->flash('class', 'alert-info');
 
@@ -172,8 +178,8 @@ class LabelController extends FrontController
                 $result = json_decode($response->getBody()->getContents(), true);
                 $data[$cartontype] = $result['data'];
             }
-            
-            processCartonLabels::dispatch($authUser, $data);
+            dd($data);
+            processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
             
             $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
             $request->session()->flash('class', 'alert-info');

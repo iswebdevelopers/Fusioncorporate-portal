@@ -3,17 +3,21 @@
     $(document).ready(function() {
         window.readingWeight = false;
         
-        var showPrinterForm = true;
+        //show printer setting form if it has not been set
+        var hidePrinterForm = $("#user-printer-list").data('dialog');
         var printerForm = $("#askPrinterSettingModal");
 
-        var infoWindow = $("p.alert-info").parent();
-
+        if (!hidePrinterForm) {
+            showPrinterSetting(printerForm);
+        }
+        
+        //start connecting to printing client
         startConnection();
 
-        // if (showPrinterForm) {
-        //     showPrinterSetting();
-        // }
-        setTimeout(function() {  infoWindow.hide(); }, 10000);
+        //Hide alert after 10 seconds
+        var infoWindow = $("p.alert-info").parent();
+        setTimeout(function() {  infoWindow.hide(1000); }, 10000);
+ 
         //search printer based on Input
         $("#printerSearch").on('keyup', function(e) {
             if (e.which == 13 || e.keyCode == 13) {
@@ -132,10 +136,17 @@
         if (!qz.websocket.isActive()) {
             updateState('Waiting', 'default');
             qz.websocket.connect(config).then(function() {
+                console.log(1);
                 updateState('Active', 'success');
                 findVersion();
                 findPrinters();
-                setPrinter($("#configPrinter em").html());
+                
+                if ($("#configPrinter em").html() !== undefined){
+                    setPrinter($("#configPrinter em").html());
+                } else {
+                    findDefaultPrinter(true);
+                }
+
             }).catch(handleConnectionError);
         } else {
             displayMessage('An active connection with QZ already exists.', 'alert-warning');
@@ -181,8 +192,7 @@
 
     function findDefaultPrinter(set) {
         qz.printers.getDefault().then(function(data) {
-            displayMessage("<strong>Found:</strong> " + data);
-            if (set) { setPrinter(data); }
+            if (set) { setPrinter(data); } else { displayMessage("<strong>Found:</strong> " + data); }
         }).catch(displayError);
     }
 
@@ -221,7 +231,7 @@
         return true;
     }    
 
-    function showPrinterSetting() {
+    function showPrinterSetting(printerForm) {
         printerForm.addClass("in").show();
     }
 
@@ -247,8 +257,9 @@
             headers: { 'X-CSRF-TOKEN': _token },
             data: formData,
             success: function(result) {
-                displayMessage("Printers set to: carton:" + carton + "and sticky : " + sticky);
-                $("#askPrinterSettingModal").removeClass('in').hide();
+                displayMessage("Printers settings saved");
+                $("#askPrinterSettingModal").modal('hide');
+                $
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 displayMessage("Status: " + textStatus + "Error: " + errorThrown); 

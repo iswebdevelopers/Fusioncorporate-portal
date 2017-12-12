@@ -26,7 +26,7 @@ class PrintController extends FrontController
         $request->session()->flash('message', "In order to print files to local printer, it is necessary to install a print client on your local machine. Print Shop client can be downloaded from <a target='_blank' href =".Config::get('services.print.client').">Download Print Client</a>.");
         $request->session()->flash('class', 'alert-info');
 
-        return view('print.home', ['cartons' => $cartons,'archives' => $archives, 'stickies' => $stickies,'user_settings' => $setting->settings,'printer_settings' => $printer_settings])->withTitle('print-shop');
+        return view('print.home', ['cartons' => $cartons,'archives' => $archives, 'stickies' => $stickies,'user_setting' => $setting,'printer_settings' => $printer_settings])->withTitle('print-shop');
     }
 
     /**
@@ -66,17 +66,28 @@ class PrintController extends FrontController
      * @param Request $request
      * @param settings object
      */
-    public function setPrinterSetting(Request $request, int $id)
+    public function PrinterSetting(Request $request)
     {
+        if ($request->isMethod('post')) {
+            $printer = UserPrinterSetting::first();
 
-        $printer = UserPrinterSetting::firstOrCreate(['user_id' => $id]);
+            if(!$printer){
+                $printer = New UserPrinterSetting();
+            }
 
-        $setting['carton'] = $request->carton;
-        $setting['sticky'] = $request->sticky;
+            $setting['carton'] = $request->carton;
+            $setting['sticky'] = $request->sticky;
 
-        $printer->settings = $setting;
+            $printer->settings = $setting;
 
-        $printer->save();
-        return $printer;
+            $printer->save();
+
+            return $printer;
+        } else{
+            $setting = UserPrinterSetting::all()->first();
+            $printer_settings = Config::get('user.settings.printer');
+            
+            return view('print.setting', ['user_setting' => $setting,'printer_settings' => $printer_settings])->withTitle('setting');            
+        }    
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException as Exception;
 use Config;
+use App\UserPrinterSetting;
 
 class FrontController extends Controller
 {
@@ -52,6 +53,7 @@ class FrontController extends Controller
             if ($response->getstatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents(), true);
                 return $result['data'];
+
             }
         } catch (Exception $e) {
             throw new Exception("Error Processing Request - Method:getTipsTicketData", 1);
@@ -77,6 +79,19 @@ class FrontController extends Controller
             }
         } catch (Exception $e) {
             throw new Exception("Error Processing Request - Method:getCreatedTickets", 1);
+        }
+    }
+
+    /**
+     * getUserPrinterSettings - get teh user printer setting
+     * @param  Request $request
+     */
+    public function getUserPrinterSettings($type)
+    {
+        if ($type){
+            return UserPrinterSetting::first()->settings[$type];
+        } else {
+            return UserPrinterSetting::first()->settings;    
         }
     }
 }

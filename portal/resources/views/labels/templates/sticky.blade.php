@@ -1,25 +1,54 @@
-@if(!empty($data))
-	@foreach ($data as $item)
-		^XA
-			^FX Top section.
-			^CF0,60
-			^FO30,30^FD{{$item['stockroomlocator']}}^FS
+@if(!empty($settings))
+	<?php 
+		//convert the width and height to dots/mm
+		$width = ceil(($settings['width']/$settings['count']) * $settings['density']);
+		$height = ceil($settings['height'] * $settings['density']);
+		$label_per_row = $settings['count'];
 
-			^FX Second.
-			^CF0,30
-			^FO10,90^FDSize:{{$item['size']}}^FS
-			^FO80,90^FDitem: {{$item['item']}}^FS
+		//margin
+		$margin_left = ceil(($width/100) * 10);  
+		$margin_top = ceil(($height/100) * 10);
 
-			^FX Third section with barcode.
-			^BY2,2,50
-			^FO30,140^BE^FD{{$item['barcode']}}^FS
+		//fontsizes
+		$font_1 = ceil(($height/100) * 20);
+		$font_2 = ceil(($height/100) * 10);
 
-			^FX Fourth section (the two boxes on the bottom).
-			^CF0,30,
-			^FO50,220^FH^FD{{str_replace('~','_7e',$item['description'])}}^FS
-			^CF0,30,
-			^FO50,250^FH^FD{{str_replace('~','_7e',$item['colour'])}}^FS
-		^XZ
-		<br/>
-	@endforeach
-@endif
+		//count
+		$count = 1;
+	?>
+	@if(!empty($data)) 		
+		@foreach ($data as $item)
+			@if($count == 0)
+				^XA
+			@endif
+			@for ($i=1; $i <= $item['quantity']; $i++)
+					^FX Top section.
+					^CF0,{{$font_1}}
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top}}^FD{{$item['stockroomlocator']}}^FS
+
+					^FX Second.
+					^CF0,{{$font_2}}
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 2.5}}^FDSize:{{$item['size']}}^FS
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 3.3}}^FDitem: {{$item['item']}}^FS
+
+					^FX Third section with barcode.
+					^BY2,2,150
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 4}}^BE^FD{{$item['barcode']}}^FS
+
+					^FX Fourth section (the two boxes on the bottom).
+					^CF0,{{$font_2}},
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 7}}^FH^FD{{str_replace('~','_7e',$item['description'])}}^FS
+					^CF0,{{$font_2}},
+					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 8}}^FH^FD{{str_replace('~','_7e',$item['colour'])}}^FS
+				
+				@if($count < $label_per_row)
+					<?php $count++; ?>
+				@elseif ($count >= $label_per_row) 
+					<?php $count = 1; ?>
+				^XZ
+				<br/>
+				@endif
+			@endfor
+		@endforeach
+	@endif
+@endif	

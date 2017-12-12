@@ -1,6 +1,17 @@
 $( function() {
     
-  $("select").selectmenu();
+  $("select").selectmenu({
+    change: function( event, data ) {
+      // hide previously shown in target div
+        $("div", "div#extra-fields").hide();
+
+        // read id from your select
+        var value = data.item.value;
+        // show element with selected id
+        $("div#"+value).show();
+        $("div#"+value+" input[name=role_id]").prop('disabled',false);
+      }
+  });
 
   var token = $('#token').val();
   $("#supplier_box").autocomplete({
@@ -77,7 +88,15 @@ $( function() {
     "ordering": false
   });
 
-  $("#printfiles").DataTable({
+  $("#cartonfiles").DataTable({
+    "sPaginationType": "full_numbers",
+    "bPaginate":true,
+    "iDisplayLength": 10,
+    "searching": false,
+    "ordering": false
+  });
+
+   $("#stickyfiles").DataTable({
     "sPaginationType": "full_numbers",
     "bPaginate":true,
     "iDisplayLength": 10,

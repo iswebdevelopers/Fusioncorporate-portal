@@ -18,15 +18,18 @@ class processCartonLabels implements ShouldQueue
 
     public $cartondata;
     public $user;
+    public $printer_settings;
+    
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $cartondata)
+    public function __construct($user, $cartondata, $user_printer_setting)
     {
         $this->cartondata = $cartondata;
         $this->user = $user;
+        $this->printer_settings = $user_printer_setting;
     }
 
     /**
@@ -44,7 +47,8 @@ class processCartonLabels implements ShouldQueue
                 }
 
                 if ($cartons) {
-                    $view = View::make('labels.templates.'.$type, ['data' => $cartons, 'mixed' => $mixed]);
+
+                    $view = View::make('labels.templates.'.$type, ['data' => $cartons, 'mixed' => $mixed, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
 
                     try {

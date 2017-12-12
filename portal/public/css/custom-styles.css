@@ -248,6 +248,7 @@ display: inline-block;
 position: relative;
 display: block;
 padding: 19px 15px;
+color: #fff;
 }
 .top-navbar .nav > li > a:hover, .top-navbar .nav > li > a:focus {
 text-decoration: none;
@@ -401,7 +402,15 @@ line-height: 1.428571429;
   border-color: #ebccd1;
 }
 
+#btnPrint{
+    display: inline-block;
+    vertical-align: top;
+    margin-right:2px;
+}
 
+.no-undeline, .no-underline:focus, .no-underline:hover {
+    text-decoration: none;
+}
 /*----------------------------------------------
     MEDIA QUERIES     
 ------------------------------------------------*/

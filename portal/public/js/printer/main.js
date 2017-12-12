@@ -1,4 +1,47 @@
-	    /// Authentication setup ///
+/// Authentication setup ///
+   /// Page load ///
+    $(document).ready(function() {
+        window.readingWeight = false;
+        
+        //show printer setting form if it has not been set
+        var hidePrinterForm = $("#user-printer-list").data('dialog');
+        var printerForm = $("#askPrinterSettingModal");
+
+        if (!hidePrinterForm) {
+            showPrinterSetting(printerForm);
+        }
+        
+        //start connecting to printing client
+        startConnection();
+
+        //Hide alert after 10 seconds
+        var infoWindow = $("p.alert-info").parent();
+        setTimeout(function() {  infoWindow.hide(1000); }, 10000);
+ 
+        //search printer based on Input
+        $("#printerSearch").on('keyup', function(e) {
+            if (e.which == 13 || e.keyCode == 13) {
+                findPrinter($('#printerSearch').val(), true);
+                return false;
+            }
+        });
+
+        //set printer based on printer clicked from the list
+        $("#printer-list,#user-printer-list").on("click","a",function(e) {
+            e.preventDefault();
+            var printer = $(this).text();
+            setPrinter(printer);
+        });
+
+        //change printer based on tabs clicked
+        $("#print-tab").on("click","a.change",function(e) {
+            e.preventDefault();
+            var type = $(this).data('type');
+            var selected_printer = $("#user-printer-list a." + type).html();
+            setPrinter(selected_printer);    
+        });
+    });
+
     qz.security.setCertificatePromise(function(resolve, reject) {
         //Preferred method - from server
 //        $.ajax("assets/signing/digital-certificate.txt").then(resolve, reject);
@@ -93,9 +136,17 @@
         if (!qz.websocket.isActive()) {
             updateState('Waiting', 'default');
             qz.websocket.connect(config).then(function() {
+                console.log(1);
                 updateState('Active', 'success');
                 findVersion();
                 findPrinters();
+                
+                if ($("#configPrinter em").html() !== undefined){
+                    setPrinter($("#configPrinter em").html());
+                } else {
+                    findDefaultPrinter(true);
+                }
+
             }).catch(handleConnectionError);
         } else {
             displayMessage('An active connection with QZ already exists.', 'alert-warning');
@@ -141,386 +192,100 @@
 
     function findDefaultPrinter(set) {
         qz.printers.getDefault().then(function(data) {
-            displayMessage("<strong>Found:</strong> " + data);
-            if (set) { setPrinter(data); }
+            if (set) { setPrinter(data); } else { displayMessage("<strong>Found:</strong> " + data); }
         }).catch(displayError);
     }
 
     function findPrinters() {
         qz.printers.find().then(function(data) {        	
             var list = '';
+            var options=[];
+            var carton_printer = $("#user-printer-list a.carton").html();
+            var sticky_printer = $("#user-printer-list a.sticky").html();
             for(var i = 0; i < data.length; i++) {
                 list += "<a href='#' class='list-group-item list-group-item-action'>" + data[i] + "</a>";
+                if (carton_printer == data[i]) {
+                    options['carton'] += "<option value='" + data[i] + "' selected>" + data[i] + "</option>";
+                } else{
+                    options['carton'] += "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                }
+                if (sticky_printer == data[i]) {
+                    options['sticky'] += "<option value='" + data[i] + "' selected>" + data[i] + "</option>";
+                } else{
+                    options['sticky'] += "<option value='" + data[i] + "'>" + data[i] + "</option>";
+                }                
             }
+            setPrinterOptions(options);  
+            $("#carton-select-button span.ui-selectmenu-text").append(carton_printer);
+            $("#sticky-select-button span.ui-selectmenu-text").append(sticky_printer);  
             $("#printer-list").append(list);
             $("#printer-list").show();
             // displayMessage("<strong>Available printers:</strong><br/>" + list);
         }).catch(displayError);
     }
 
+    function setPrinterOptions(options) {
+        $("#sticky-select").append(options['sticky']);
+        $("#carton-select").append(options['carton']);
+
+        return true;
+    }    
+
+    function showPrinterSetting(printerForm) {
+        printerForm.addClass("in").show();
+    }
+
+    function showInfoWindow() {
+        infoWindow.show();
+    }
+
+    function hideInfoWindow() {
+        infoWindow.show();
+    }
+
+    function setPrinterSetting(userId) {
+        var carton = $("#carton-select").val();
+        var sticky = $("#sticky-select").val();
+        var _token = $("input[name='_token']").val();
+        var formData = $("#formPrinterSetting").serialize();
+        
+        var data = { carton: carton, sticky: sticky };
+        
+        $.ajax({
+            url: '/portal/printer/setting/' + userId,
+            method: 'POST',
+            headers: { 'X-CSRF-TOKEN': _token },
+            data: formData,
+            success: function(result) {
+                displayMessage("Printers settings saved");
+                $("#askPrinterSettingModal").modal('hide');
+                $
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
+            }   
+        });
+
+        
+        
+    }
+
     /// Raw Printers ///
     function printZPL(id) {
         var config = getUpdatedConfig();
         $.ajax({
-        	url: '/label/rawdata/' + id,
+        	url: '/portal/label/rawdata/' + id,
         	success: function(result) {
         		data = $.parseJSON(result);
-        		console.log(data.data);
-        		var printData = [data.data];
-        		qz.print(config, printData).catch(displayError);
-                displayMessage("File has been sent to Printer");  
+        		var printData = [data.data]; 
+                qz.print(config, printData).catch(displayError);
         	},
         	error: function(XMLHttpRequest, textStatus, errorThrown) { 
         		displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
     		}
     	});
+        displayMessage("File has been sent to Printer");
     }
-
-    /// Serial ///
-    function listSerialPorts() {
-        qz.serial.findPorts().then(function(data) {
-            var list = '';
-            for(var i = 0; i < data.length; i++) {
-                list += "&nbsp; <code>" + data[i] + "</code>" + serialButton(["serialPort"], [data[i]]) + "<br/>";
-            }
-
-            displayMessage("<strong>Available serial ports:</strong><br/>" + list);
-        }).catch(displayError);
-    }
-
-    function openSerialPort() {
-        var widthVal = $("#serialWidth").val();
-        if (!widthVal) { widthVal = null; }
-
-        var bounds = {
-            start: $("#serialStart").val(),
-            end: $("#serialEnd").val(),
-            width: widthVal
-        };
-
-        qz.serial.openPort($("#serialPort").val(), bounds).then(function() {
-            displayMessage("Serial port opened");
-        }).catch(displayError);
-    }
-
-    function sendSerialData() {
-        var properties = {
-            baudRate: $("#serialBaud").val(),
-            dataBits: $("#serialData").val(),
-            stopBits: $("#serialStop").val(),
-            parity: $("#serialParity").val(),
-            flowControl: $("#serialFlow").val()
-        };
-
-        qz.serial.sendData($("#serialPort").val(), $("#serialCmd").val(), properties).catch(displayError);
-    }
-
-    function closeSerialPort() {
-        qz.serial.closePort($("#serialPort").val()).then(function() {
-            displayMessage("Serial port closed");
-        }).catch(displayError);
-    }
-
-
-    /// USB ///
-    function listUsbDevices() {
-        qz.usb.listDevices(true).then(function(data) {
-            var list = '';
-            for(var i = 0; i < data.length; i++) {
-                var device = data[i];
-                if (device.hub) { list += "USB Hub"; }
-
-                list += "<p>" +
-                        "   VendorID: <code>0x" + device.vendorId + "</code>" +
-                        usbButton(["usbVendor", "usbProduct"], [device.vendorId, device.productId]) + "<br/>" +
-                        "   ProductID: <code>0x" + device.productId + "</code><br/>";
-
-                if (device.manufacturer) { list += "   Manufacturer: <code>" + device.manufacturer + "</code><br/>"; }
-                if (device.product) { list += "   Product: <code>" + device.product + "</code><br/>"; }
-
-                list += "</p><hr/>";
-            }
-
-            pinMessage("<strong>Available usb devices:</strong><br/>" + list);
-        }).catch(displayError);
-    }
-
-    function listUsbDeviceInterfaces() {
-        qz.usb.listInterfaces($("#usbVendor").val(), $("#usbProduct").val()).then(function(data) {
-            var list = '';
-            for(var i = 0; i < data.length; i++) {
-                list += "&nbsp; <code>0x" + data[i] + "</code>" + usbButton(["usbInterface"], [data[i]]) + "<br/>";
-            }
-
-            displayMessage("<strong>Available device interfaces:</strong><br/>" + list);
-        }).catch(displayError);
-    }
-
-    function listUsbInterfaceEndpoints() {
-        qz.usb.listEndpoints($("#usbVendor").val(), $("#usbProduct").val(), $("#usbInterface").val()).then(function(data) {
-            var list = '';
-            for(var i = 0; i < data.length; i++) {
-                list += "&nbsp; <code>0x" + data[i] + "</code>" + usbButton(["usbEndpoint"], [data[i]]) + "<br/>";
-            }
-
-            displayMessage("<strong>Available interface endpoints:</strong><br/>" + list);
-        }).catch(displayError);
-    }
-
-    function claimUsbDevice() {
-        qz.usb.claimDevice($("#usbVendor").val(), $("#usbProduct").val(), $("#usbInterface").val()).then(function() {
-            displayMessage("USB Device claimed");
-        }).catch(displayError);
-    }
-
-    function checkUsbDevice() {
-        qz.hid.isClaimed($("#usbVendor").val(), $("#usbProduct").val()).then(function(claimed) {
-            displayMessage("USB Device is " + (claimed ? "" : "not ") + "claimed");
-        }).catch(displayError);
-    }
-
-    function sendUsbData() {
-        qz.usb.sendData($("#usbVendor").val(), $("#usbProduct").val(), $("#usbEndpoint").val(), $("#usbData").val()).catch(displayError);
-    }
-
-    function readUsbData() {
-        qz.usb.readData($("#usbVendor").val(), $("#usbProduct").val(), $("#usbEndpoint").val(), $("#usbResponse").val()).then(function(data) {
-            displayMessage("<strong>Response:</strong> " + (window.readingWeight ? readScaleData(data) : data) + "<br/>");
-        }).catch(displayError);
-    }
-
-    function openUsbStream() {
-        qz.usb.openStream($("#usbVendor").val(), $("#usbProduct").val(), $("#usbEndpoint").val(), $("#usbResponse").val(), $("#usbStream").val()).then(function() {
-            pinMessage("Waiting on device", '' + $("#usbVendor").val() + $("#usbProduct").val());
-        }).catch(displayError);
-    }
-
-    function closeUsbStream() {
-        qz.usb.closeStream($("#usbVendor").val(), $("#usbProduct").val(), $("#usbEndpoint").val()).then(function() {
-            $('#' + $("#usbVendor").val() + $("#usbProduct").val()).attr('id', '').html("Stream closed");
-        }).catch(displayError);
-    }
-
-    function releaseUsbDevice() {
-        qz.usb.releaseDevice($("#usbVendor").val(), $("#usbProduct").val()).then(function() {
-            displayMessage("USB Device released");
-        }).catch(displayError);
-    }
-
-
-    /// HID ///
-    function listHidDevices() {
-        qz.hid.listDevices().then(function(data) {
-            var list = '';
-            for(var i = 0; i < data.length; i++) {
-                var device = data[i];
-
-                list += "<p>" +
-                        "   VendorID: <code>0x" + device.vendorId + "</code>" +
-                        usbButton(["hidVendor", "hidProduct"], [device.vendorId, device.productId]) + "<br/>" +
-                        "   ProductID: <code>0x" + device.productId + "</code><br/>" +
-                        "   Manufacturer: <code>" + device.manufacturer + "</code><br/>" +
-                        "   Product: <code>" + device.product + "</code><br/>" +
-                        "</p><hr/>";
-            }
-
-            pinMessage("<strong>Available hid devices:</strong><br/>" + list);
-        }).catch(displayError);
-    }
-
-    function startHidListen() {
-        qz.hid.startListening().then(function() {
-            displayMessage("Started listening for HID events");
-        }).catch(displayError);
-    }
-
-    function stopHidListen() {
-        qz.hid.stopListening().then(function() {
-            displayMessage("Stopped listening for HID events");
-        }).catch(displayError);
-    }
-
-    function claimHidDevice() {
-        qz.hid.claimDevice($("#hidVendor").val(), $("#hidProduct").val()).then(function() {
-            displayMessage("HID Device claimed");
-        }).catch(displayError);
-    }
-
-    function checkHidDevice() {
-        qz.hid.isClaimed($("#hidVendor").val(), $("#hidProduct").val()).then(function(claimed) {
-            displayMessage("HID Device is " + (claimed ? "" : "not ") + "claimed");
-        }).catch(displayError);
-    }
-
-    function sendHidData() {
-        qz.hid.sendData($("#hidVendor").val(), $("#hidProduct").val(), $("#hidData").val(), $("#hidReport").val()).catch(displayError);
-    }
-
-    function readHidData() {
-        qz.hid.readData($("#hidVendor").val(), $("#hidProduct").val(), $("#hidResponse").val()).then(function(data) {
-            displayMessage("<strong>Response:</strong> " + (window.readingWeight ? readScaleData(data) : data) + "<br/>");
-        }).catch(displayError);
-    }
-
-    function openHidStream() {
-        qz.hid.openStream($("#hidVendor").val(), $("#hidProduct").val(), $("#hidResponse").val(), $("#hidStream").val()).then(function() {
-            pinMessage("Waiting on device", '' + $("#hidVendor").val() + $("#hidProduct").val());
-        }).catch(displayError);
-    }
-
-    function closeHidStream() {
-        qz.hid.closeStream($("#hidVendor").val(), $("#hidProduct").val()).then(function() {
-            $('#' + $("#hidVendor").val() + $("#hidProduct").val()).attr('id', '').html("Stream closed");
-        }).catch(displayError);
-    }
-
-    function releaseHidDevice() {
-        qz.hid.releaseDevice($("#hidVendor").val(), $("#hidProduct").val()).then(function() {
-            displayMessage("HID Device released");
-        }).catch(displayError);
-    }
-
-
-    /// Resets ///
-    function resetRawOptions() {
-        $("#rawPerSpool").val(1);
-        $("#rawEncoding").val(null);
-        $("#rawEndOfDoc").val(null);
-        $("#rawAltPrinting").prop('checked', false);
-        $("#rawCopies").val(1);
-    }
-
-    function resetPixelOptions() {
-        $("#pxlColorType").val("color");
-        $("#pxlCopies").val(1);
-        $("#pxlDensity").val('');
-        $("#pxlDuplex").prop('checked', false);
-        $("#pxlInterpolation").val("");
-        $("#pxlJobName").val("");
-        $("#pxlOrientation").val("");
-        $("#pxlPaperThickness").val(null);
-        $("#pxlPrinterTray").val(null);
-        $("#pxlRasterize").prop('checked', true);
-        $("#pxlRotation").val(0);
-        $("#pxlScale").prop('checked', true);
-        $("#pxlUnitsIN").prop('checked', true);
-
-        $("#pxlMargins").val(0).css('display', '');
-        $("#pxlMarginsTop").val(0);
-        $("#pxlMarginsRight").val(0);
-        $("#pxlMarginsBottom").val(0);
-        $("#pxlMarginsLeft").val(0);
-        $("#pxlMarginsActive").prop('checked', false);
-        $("#pxlMarginsGroup").css('display', 'none');
-
-        $("#pxlSizeWidth").val('');
-        $("#pxlSizeHeight").val('');
-        $("#pxlSizeActive").prop('checked', false);
-        $("#pxlSizeGroup").css('display', 'none');
-    }
-
-    function checkSizeActive() {
-        if ($("#pxlSizeActive").prop('checked')) {
-            $("#pxlSizeGroup").css('display', '');
-        } else {
-            $("#pxlSizeGroup").css('display', 'none');
-        }
-    }
-
-    function checkMarginsActive() {
-        if ($("#pxlMarginsActive").prop('checked')) {
-            $("#pxlMarginsGroup").css('display', '');
-            $("#pxlMargins").css('display', 'none');
-        } else {
-            $("#pxlMarginsGroup").css('display', 'none');
-            $("#pxlMargins").css('display', '');
-        }
-    }
-
-    function resetSerialOptions() {
-        $("#serialPort").val('');
-        $("#serialCmd").val('');
-        $("#serialStart").val("0x0002"); //String.fromCharCode(2)
-        $("#serialEnd").val("0x000D"); //String.fromCharCode(13)
-
-        $("#serialBaud").val(9600);
-        $("#serialData").val(8);
-        $("#serialStop").val(1);
-        $("#serialParity").val('NONE');
-        $("#serialFlow").val('NONE');
-
-        // M/T PS60 - 9600, 7, 1, EVEN, NONE
-    }
-
-    function resetUsbOptions() {
-        $("#usbVendor").val('');
-        $("#usbProduct").val('');
-
-        $("#usbInterface").val('');
-        $("#usbEndpoint").val('');
-        $("#usbData").val('');
-        $("#usbResponse").val(8);
-        $("#usbStream").val(10);
-
-        // M/T PS60 - V:0x0EB8 P:0xF000, I:0x0 E:0x81
-        // Dymo S100 - V:0x0922 P:0x8009, I:0x0 E:0x82
-    }
-
-    function resetHidOptions() {
-        $("#hidVendor").val('');
-        $("#hidProduct").val('');
-
-        $("#hidInterface").val('');
-        $("#hidEndpoint").val('');
-        $("#hidData").val('');
-        $("#hidReport").val('');
-        $("#hidResponse").val(8);
-        $("#hidStream").val(10);
-    }
-
-
-    /// Page load ///
-    $(document).ready(function() {
-        window.readingWeight = false;
-
-        resetRawOptions();
-        resetPixelOptions();
-        resetSerialOptions();
-        resetUsbOptions();
-        resetHidOptions();
-
-        startConnection();
-
-        $("#printerSearch").on('keyup', function(e) {
-            if (e.which == 13 || e.keyCode == 13) {
-                findPrinter($('#printerSearch').val(), true);
-                return false;
-            }
-        });
-
-        $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-            if (window.readingWeight) {
-                $("#usbWeightRadio").click();
-                $("#hidWeightRadio").click();
-            } else {
-                $("#usbRawRadio").click();
-                $("#hidRawRadio").click();
-            }
-        });
-
-        $("#usbRawRadio").click(function() { window.readingWeight = false; });
-        $("#usbWeightRadio").click(function() { window.readingWeight = true; });
-        $("#hidRawRadio").click(function() { window.readingWeight = false; });
-        $("#hidWeightRadio").click(function() { window.readingWeight = true; });
-
-        $("[data-toggle='tooltip']").tooltip();
-
-        $("#printer-list").on("click","a",function(e) {
-        	e.preventDefault();
-        	var printer = $(this).text();
-        	setPrinter(printer);
-        });
-    });
 
     qz.websocket.setClosedCallbacks(function(evt) {
         updateState('Inactive', 'default');
@@ -532,62 +297,6 @@
     });
 
     qz.websocket.setErrorCallbacks(handleConnectionError);
-
-    qz.serial.setSerialCallbacks(function(streamEvent) {
-        if (streamEvent.type !== 'ERROR') {
-            console.log('Serial', streamEvent.portName, 'received output', streamEvent.output);
-            displayMessage("Received output from serial port [" + streamEvent.portName + "]: <em>" + streamEvent.output + "</em>");
-        } else {
-            console.log(streamEvent.exception);
-            displayMessage("Received an error from serial port [" + streamEvent.portName + "]: <em>" + streamEvent.exception + "</em>", 'alert-error');
-
-        }
-    });
-
-    qz.usb.setUsbCallbacks(function(streamEvent) {
-        var vendor = streamEvent.vendorId;
-        var product = streamEvent.productId;
-
-        if (vendor.substring(0, 2) != '0x') { vendor = '0x' + vendor; }
-        if (product.substring(0, 2) != '0x') { product = '0x' + product; }
-        var $pin = $('#' + vendor + product);
-
-        if (streamEvent.type !== 'ERROR') {
-            if (window.readingWeight) {
-                $pin.html("<strong>Weight:</strong> " + readScaleData(streamEvent.output));
-            } else {
-                $pin.html("<strong>Raw data:</strong> " + streamEvent.output);
-            }
-        } else {
-            console.log(streamEvent.exception);
-            $pin.html("<strong>Error:</strong> " + streamEvent.exception);
-        }
-    });
-
-    qz.hid.setHidCallbacks(function(streamEvent) {
-        var vendor = streamEvent.vendorId;
-        var product = streamEvent.productId;
-
-        if (vendor.substring(0, 2) != '0x') { vendor = '0x' + vendor; }
-        if (product.substring(0, 2) != '0x') { product = '0x' + product; }
-        var $pin = $('#' + vendor + product);
-
-        if (streamEvent.type === 'RECEIVE') {
-            if (window.readingWeight) {
-                var weight = readScaleData(streamEvent.output);
-                if (weight) {
-                    $pin.html("<strong>Weight:</strong> " + weight);
-                }
-            } else {
-                $pin.html("<strong>Raw data:</strong> " + streamEvent.output);
-            }
-        } else if (streamEvent.type === 'ACTION') {
-            displayMessage("<strong>Device status changed:</strong> " + "[v:" + vendor + " p:" + product + "] - " + streamEvent.actionType);
-        } else { //ERROR type
-            console.log(streamEvent.exception);
-            $pin.html("<strong>Error:</strong> " + streamEvent.exception);
-        }
-    });
 
     var qzVersion = 0;
     function findVersion() {
@@ -670,95 +379,6 @@
         return path.substring(0, path.lastIndexOf("/"));
     }
 
-    function usbButton(ids, data) {
-        var click = "";
-        for(var i = 0; i < ids.length; i++) {
-            click += "$('#" + ids[i] + "').val('0x" + data[i] + "');$('#" + ids[i] + "').fadeOut(300).fadeIn(500);";
-        }
-        return '<button class="btn btn-default btn-xs" onclick="' + click + '" data-dismiss="alert">Use This</button>';
-    }
-
-    function serialButton(serialPort, data) {
-        var click = "";
-        for(var i = 0; i < serialPort.length; i++ ) {
-            click += "$('#" + serialPort[i] + "').val('" + data[i] + "');$('#" + serialPort[i] + "').fadeOut(300).fadeIn(500);";
-        }
-        return '<button class="btn btn-default btn-xs" onclick="' + click + '" data-dismiss="alert">Use This</button>';
-    }
-
-    function formatHexInput(inputId) {
-        var $input = $('#' + inputId);
-        var val = $input.val();
-
-        if (val.length > 0 && val.substring(0, 2) != '0x') {
-            val = '0x' + val;
-        }
-
-        $input.val(val.toLowerCase());
-    }
-
-    /** Attempts to parse scale reading from USB raw output */
-    function readScaleData(data) {
-        // Filter erroneous data
-        if (data.length < 4 || data.slice(2, 8).join('') == "000000000000") {
-            return null;
-        }
-
-        // Get status
-        var status = parseInt(data[1], 16);
-        switch(status) {
-            case 1: // fault
-            case 5: // underweight
-            case 6: // overweight
-            case 7: // calibrate
-            case 8: // re-zero
-                status = 'Error';
-                break;
-            case 3: // busy
-                status = 'Busy';
-                break;
-            case 2: // stable at zero
-            case 4: // stable non-zero
-            default:
-                status = 'Stable';
-        }
-
-        // Get precision
-        var precision = parseInt(data[3], 16);
-        precision = precision ^ -256; //unsigned to signed
-
-        // xor on 0 causes issues
-        if (precision == -256) { precision = 0; }
-
-        // Get units
-        var units = parseInt(data[2], 16);
-        switch(units) {
-            case 2:
-                units = 'g';
-                break;
-            case 3:
-                units = 'kg';
-                break;
-            case 11:
-                units = 'oz';
-                break;
-            case 12:
-            default:
-                units = 'lbs';
-        }
-
-        // Get weight
-        data.splice(0, 4);
-        data.reverse();
-        var weight = parseInt(data.join(''), 16);
-
-        weight *= Math.pow(10, precision);
-        weight = weight.toFixed(Math.abs(precision));
-
-        return weight + units + ' - ' + status;
-    }
-
-
     /// QZ Config ///
     var cfg = null;
     function getUpdatedConfig() {
@@ -837,7 +457,7 @@
         setPrinter(data);
         
         $.ajax({
-        	url: '/printer/setting/host/' + userId,
+        	url: '/portal/printer/setting/host/' + userId,
         	method: 'POST',
         	headers: { 'X-CSRF-TOKEN': _token },
         	data: data,
@@ -875,4 +495,4 @@
             }
             $("#configPrinter").html(printer);
         }
-    }
+    }    

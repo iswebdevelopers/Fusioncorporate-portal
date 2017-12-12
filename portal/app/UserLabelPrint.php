@@ -52,6 +52,16 @@ class UserLabelPrint extends Model
     }
 
     /**
+     * Scope of type.
+     *
+     * @param  string  $query
+     * @return string
+     */
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type','like',$type.'%');
+    }    
+    /**
      * Scope Archived.
      *
      * @param  string  $query

@@ -1,10 +1,10 @@
 <!-- SUpplier labels -->
 <div class="tab-pane fade" id="supplier">
     <div class="table-responsive">
-    <p>
-        <a class="btn btn-primary btn-lg" href="/portal/label/print/stickies/{{$order_no}}">Print all sticky labels</a>
+    <p class="pull-right">
+        <a class="btn btn-primary btn-md" href="/portal/label/print/stickies/{{$order_no}}">Print all sticky</a>
     @if((!empty($orderdetails['cartonpack'])) or (!empty($orderdetails['cartonloose'])))
-        <a class="btn btn-primary btn-lg" href="/portal/label/print/cartons/{{$order_no}}">Print all Carton labels</a>
+        <a class="btn btn-primary btn-md" href="/portal/label/print/cartons/{{$order_no}}">Print all Carton</a>
     @endif
     </p>
     @if(!empty($orderdetails['cartonpack']))

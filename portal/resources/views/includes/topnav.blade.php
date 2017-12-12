@@ -14,11 +14,10 @@
                         <i class="fa fa-user fa-fw"></i> @if (!empty($user)) {{ucfirst($user['name'])}} @endif <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="/portal/user/logout"><i class="fa fa-sign-out fa-fw"></i> @if (!empty($user))
-                            Logout
-                        @else
-                            Login
-                        @endif </a>
+                        @if (!empty($user))
+                        <li><a data-vbtype="ajax" class="venbobox"  href="/portal/user/recovery/{{$user['id']}}"><i class="fa fa-cog fa-fw"></i>User Setting</a></li>
+                        <li><a href="/portal/user/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                        @endif
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->

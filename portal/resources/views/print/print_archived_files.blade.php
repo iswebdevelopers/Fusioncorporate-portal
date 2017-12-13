@@ -1,5 +1,5 @@
 <div class="tab-pane fade in" id="archive">
-
+<br/>
 	@if(count($archives) > 0)
     	<table id="printfiles" class="table table-striped table-bordered table-hover">
             <thead>

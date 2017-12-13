@@ -178,7 +178,7 @@ class LabelController extends FrontController
                 $result = json_decode($response->getBody()->getContents(), true);
                 $data[$cartontype] = $result['data'];
             }
-            dd($data);
+
             processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
             
             $request->session()->flash('message', 'Carton Labels has been added to Print Shop');

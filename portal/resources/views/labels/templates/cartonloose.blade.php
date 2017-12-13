@@ -10,7 +10,7 @@
 		$margin_top = ceil(($height/100) * 6);
 
 		//fontsizes
-		$font_1 = ceil(($height/100) * 5);
+		$font_1 = ceil(($height/100) * 6);
 		$font_2 = ceil(($height/100) * 4);
 
 		//count
@@ -22,30 +22,30 @@
 				^XA
 					^FX Top section.
 					^CF0,{{$font_1}}
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top}}^FDOrder No: {{$carton['order_number']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 2}}^FDStyle No: {{$carton['style']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 3}}^FDSize: {{$carton['item_size']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 4}}^FH^FDColour: {{str_replace('~',' _7e ',$carton['colour'])}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 5}}^FDQty: {{$carton['pick_location']}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top}}^FDOrder No: {{$carton['order_number']}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 2}}^FDStyle No: {{$carton['style']}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 3}}^FDSize: {{$carton['item_size']}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 4}}^FH^FDColour: {{str_replace('~',' _7e ',$carton['colour'])}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 5}}^FDQty: {{$carton['pick_location']}}^FS
 
 					^FX Second.
 					^CF0,{{$font_2}}
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 6.5}}^FDItem No  {{$carton['item']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 7}}^FH^FDDescription   {{str_replace('~',' _7e ',$carton['description'])}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 6.5}}^FDItem No  {{$carton['item']}}^FS
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 7.5}}^FH^FDDescription   {{str_replace('~',' _7e ',$carton['description'])}}^FS
 
 					^FX Third section with barcode.
-					^BY3,2
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 8}}^BCN,{{$margin_top * 3}},N,N,Y
+					^BY2,2
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 8.5}}^BCN,{{$margin_top * 3}},N,N,Y
 					^FD{{$details['pibarcode']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 11.2}}
-					^A0N,{{$font_1}},{{$font_1 - 10}}
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 11.7}}
+					^A0N,{{$font_1}},{{$font_1 - 20}}
 					^FD{{$details['pinumber']}}^FS
 
 					^FX Fourth section (the two boxes on the bottom).
 					^BY2,2
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 12.2}}^BCN,{{$margin_top * 3}},N,N,Y
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 12.7}}^BCN,{{$margin_top * 3}},N,N,Y
 					^FD{{$details['barcode']}}^FS
-					^FO{{$margin_left + ($count * $width)}},{{$margin_top * 15.4}}
+					^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 15.9}}
 					^A0N,{{$font_1}},{{$font_1 - 10}}
 					^FD{{$details['number']}}^FS
 				^XZ

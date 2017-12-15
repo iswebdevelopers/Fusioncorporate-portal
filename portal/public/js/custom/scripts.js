@@ -18,7 +18,11 @@ $( function() {
     source: function( request, response ) {
       $.ajax({
         url: "/supplier/search/" + request.term + "/?token=" + token,
-        // dataType: "jsonp",
+        statusCode: {
+                401: function() {
+                  window.location.replace("/portal/login");
+                }
+            },
         success: function( data ) {
           response($.map((data.data), function (item) {                                
               var AC = new Object();

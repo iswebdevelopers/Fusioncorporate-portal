@@ -40,6 +40,18 @@
             var selected_printer = $("#user-printer-list a." + type).html();
             setPrinter(selected_printer);    
         });
+
+        //print all
+        $("#print-sticky,#print-carton").on("click","button#print-all",function(e) {
+            e.preventDefault();
+            var type = $(this).data('type');
+            var selector = $("table#"+ type + "files tbody tr");
+
+            selector.each(function(){
+                var id = $(this).data('id');
+                printZPL(id);
+            });    
+        });
     });
 
     qz.security.setCertificatePromise(function(resolve, reject) {
@@ -136,7 +148,6 @@
         if (!qz.websocket.isActive()) {
             updateState('Waiting', 'default');
             qz.websocket.connect(config).then(function() {
-                console.log(1);
                 updateState('Active', 'success');
                 findVersion();
                 findPrinters();
@@ -256,10 +267,14 @@
             method: 'POST',
             headers: { 'X-CSRF-TOKEN': _token },
             data: formData,
+            statusCode: {
+                401: function() {
+                  window.location.replace("/portal/login");
+                }
+            },
             success: function(result) {
                 displayMessage("Printers settings saved");
                 $("#askPrinterSettingModal").modal('hide');
-                $
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
@@ -275,16 +290,22 @@
         var config = getUpdatedConfig();
         $.ajax({
         	url: '/portal/label/rawdata/' + id,
-        	success: function(result) {
+            statusCode: {
+                401: function() {
+                  window.location.replace("/portal/login");
+                }
+            },
+        	success: function(xhr, result) {
         		data = $.parseJSON(result);
         		var printData = [data.data]; 
-                qz.print(config, printData).catch(displayError);
+                var printed = qz.print(config, printData).catch(displayError);
+                displayMessage("File has been sent to Printer");    
         	},
         	error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        		displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
+        		displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
     		}
     	});
-        displayMessage("File has been sent to Printer");
+        
     }
 
     qz.websocket.setClosedCallbacks(function(evt) {
@@ -461,6 +482,11 @@
         	method: 'POST',
         	headers: { 'X-CSRF-TOKEN': _token },
         	data: data,
+            statusCode: {
+                401: function() {
+                  window.location.replace("/portal/login");
+                }
+            },
         	success: function(result) {
         		displayMessage("Host set to: " + host + ": " + port);
         	},

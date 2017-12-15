@@ -11,9 +11,9 @@
                 </tr>
             </thead>
             <tbody>
-                <button type="button" class="btn btn-default pull-right" onclick="printAll('carton');">Print All</button>
+                <button type="button" class="btn btn-default pull-right" id="print-all" data-type="carton">Print All</button>
 		    	@foreach($cartons as $carton)
-		    		<tr>
+		    		<tr data-id="{{$carton->id}}">
                         <td>{{$carton->order_id}}</td>
                         <td>{{$carton->updated_at}}</td>
                         <td>{{$carton->type}}</td>

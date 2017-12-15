@@ -11,9 +11,9 @@
                 </tr>
             </thead>
             <tbody>
-                <button type="button" class="btn btn-default pull-right" onclick="printAll('sticky');">Print All</button>
+                <button type="button" class="btn btn-default pull-right" id="print-all" data-type="sticky">Print All</button>
 		    	@foreach($stickies as $sticky)
-		    		<tr>
+		    		<tr data-id="{{$sticky->id}}">
                         <td>{{$sticky->order_id}}</td>
                         <td>{{$sticky->updated_at}}</td>
                         <td>{{$sticky->type}}</td>

@@ -181,9 +181,7 @@ class UserController extends FrontController
      */
     public function logout(Request $request)
     {
-        $token = $request->token;
-
-        $loggedout = $request->session->flush();
+        $loggedout = $request->session()->flush();
 
         return redirect('login');
     }

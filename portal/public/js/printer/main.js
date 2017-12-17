@@ -295,7 +295,7 @@
                   window.location.replace("/portal/login");
                 }
             },
-        	success: function(xhr, result) {
+        	success: function(result) {
         		data = $.parseJSON(result);
         		var printData = [data.data]; 
                 var printed = qz.print(config, printData).catch(displayError);

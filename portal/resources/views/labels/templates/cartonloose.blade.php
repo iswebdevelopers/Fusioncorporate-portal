@@ -10,7 +10,7 @@
 		$margin_top = ceil(($height/100) * 6);
 
 		//fontsizes
-		$font_1 = ceil(($height/100) * 6);
+		$font_1 = ceil(($height/100) * 5);
 		$font_2 = ceil(($height/100) * 3);
 
 		//count

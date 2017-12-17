@@ -9,9 +9,9 @@
 		//margin
 		$margin_left = ceil(($width/100) * 11);  
 		$margin_top = ceil(($height/100) * 6);
-		$pack_margin_left = ceil(($width/100) * 82);
+		$pack_margin_left = ceil(($width/100) * 84);
 		//fontsizes
-		$font_1 = ceil(($height/100) * 6);
+		$font_1 = ceil(($height/100) * 5);
 		$font_2 = ceil(($height/100) * 3);
 		$font_3 = ceil(($height/100) * 22);
 
@@ -52,7 +52,7 @@
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 11.7}}^BCN,{{$margin_top * 3}},N,N,Y
 				^FD{{$details['barcode']}}^FS
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 15}}
-				^A0N,{{$font_1}},{{$font_1 - 10}}
+				^A0N,{{$font_1}},{{$font_1 - 20}}
 				^FD{{$details['number']}}^FS
 				^XZ
 				@if($count < $label_per_row)

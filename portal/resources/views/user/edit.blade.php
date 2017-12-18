@@ -33,6 +33,7 @@
                     <form action="{{action('UserController@create')}}" method="post">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                     <input name="token" type="hidden" id="token" value="{{$token}}" />
+                    <input class="form-control supplier" id="supplier_box" name="role_id" type="hidden" value="0">
                     @if($user['roles'] == 'administrator')
                         <div class="form-group">
                             <label>Role *</label>

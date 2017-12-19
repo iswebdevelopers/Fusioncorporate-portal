@@ -10,7 +10,7 @@
                     <li>
                         <a @if (substr($title,6) == 'orders') class="active-menu" @endif href="/portal/label/orders">Orders</a>
                     </li>
-                    @if(($user['roles'] == 'administrator') || ($user['roles'] == 'warehouse'))
+                    @if((strtolower($user['roles']) == 'administrator') || ($user['roles'] == 'warehouse'))
                     <li>
                         <a @if (substr($title,6) == 'carton') class="active-menu" @endif href="/portal/label/carton/search">Individual Carton</a>
                     </li>
@@ -20,7 +20,7 @@
                     </li>
                 </ul>
             </li>
-            @if($user['roles'] == 'administrator')
+            @if(strtolower($user['roles']) == 'administrator')
             <li>
                 <a @if ($title == 'users') class="active-menu" @endif href="/portal/users"><i class="fa fa-user" aria-hidden="true"></i> Users</a>
             </li>

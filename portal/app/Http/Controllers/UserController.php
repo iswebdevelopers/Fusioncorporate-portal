@@ -103,18 +103,23 @@ class UserController extends FrontController
                 return $data = ['status' => 'error','result' => $errors];
             }
         } else {
-            try {
-                $response = $this->client->request('GET', 'users/'.$id, ['query' => ['token' => $token]]);
-                
-                if ($response->getstatusCode() == 200) {
-                    $result = json_decode($response->getBody()->getContents(), true);
-                }
-            } catch (Exception $e) {
-                $error = json_decode((string) $e->getResponse()->getBody(), true);
-                $errors = [$error['message']];
-                
-                return view('user.recovery')->withErrors($errors)->withTitle('setting')->withToken($token)->withInput($request->all());
+            if($id) {
+                try {
+                    $response = $this->client->request('GET', 'users/'.$id, ['query' => ['token' => $token]]);
+                    
+                    if ($response->getstatusCode() == 200) {
+                        $result = json_decode($response->getBody()->getContents(), true);
+                    }
+                } catch (Exception $e) {
+                    $error = json_decode((string) $e->getResponse()->getBody(), true);
+                    $errors = [$error['message']];
+                    
+                    return view('user.recovery')->withErrors($errors)->withTitle('setting')->withToken($token)->withInput($request->all());
+                }    
+            } else {
+                return view('user.recovery', ['users' => []]);
             }
+            
         }
         return view('user.recovery', ['users' => $result['data'][0]])->withToken($token)->withTitle('setting');
     }

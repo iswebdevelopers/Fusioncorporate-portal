@@ -49,15 +49,15 @@ Route::group(['middleware' => 'api'], function () {
     
     Route::post('users/search', 'UserController@search');
     
-    Route::get('user/recovery/{id?}', 'UserController@recovery');
-    Route::post('user/recovery', 'UserController@recovery');
-    
     Route::get('user/logout', 'UserController@logout');
 
     Route::get('suppliers', 'SupplierController@index');
     Route::get('supplier/search/{term?}', 'SupplierController@search');
     Route::post('supplier/search/', 'SupplierController@search');
 });
+
+Route::get('user/recovery/{id?}', 'UserController@recovery');
+Route::post('user/recovery', 'UserController@recovery');
 
 Route::post('login', 'AuthenticateController@login');
 Route::get('login', 'AuthenticateController@login');

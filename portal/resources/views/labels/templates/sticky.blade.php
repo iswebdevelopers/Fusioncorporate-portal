@@ -17,7 +17,7 @@
 		$count = 1;
 	?>
 	@if(!empty($data)) 		
-		@foreach ($data as $item)
+		@foreach ($data as $key => $item)
 			@if($count == 1)
 				^XA
 			@endif

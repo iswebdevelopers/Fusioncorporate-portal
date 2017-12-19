@@ -3,7 +3,7 @@
 <div class="row">
     <div class="col-md-12">
         <h3 class="page-header">
-            Account Edit - {{ucfirst($users['name'])}}
+            Recover Password
         </h3>
     </div>    
     <!--account settings-->
@@ -25,10 +25,16 @@
                 <div class="list-group">
                     <form action="{{action('UserController@recovery')}}" method="post" id="recovery-form">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                    <input name="token" type="hidden" id="token" value="{{$token}}" />
+                    @if(isset($token))
+                        <input name="token" type="hidden" id="token" value="{{$token}}" /> 
+                    @endif          
                         <div class="form-group">
                             <label>User Email</label>
-                            <input class="form-control"  readonly="readonly" name="email" type="email" value="{{$users['email']}}" placeholder="john.smith@mail.com" required>
+                            @if(isset($users))
+                                <input class="form-control"  readonly="readonly" name="email" type="email" value="{{$users['email']}}" placeholder="john.smith@mail.com" required>
+                            @else
+                                <input class="form-control" name="email" type="email" placeholder="john.smith@mail.com" required>    
+                            @endif
                         </div>
 
                         <!-- <div class="form-group">
@@ -51,11 +57,15 @@
     $('#recovery-form').bind("submit",function(e) {
         e.preventDefault();
         var token = $('#token').val();
+        var content = $(".vbox-content div #page-inner .row .col-md-10");
+
         $.ajax({
             method: "POST",
             url: "/portal/user/recovery?token=" + token,
             data: $(this).serializeArray(),
         success: function( data ) {
+            content.children(".alert").remove();
+
             if(data.status == 'success'){
               var html = "<div class='alert alert-success'><ul>";  
             } else {
@@ -64,7 +74,7 @@
 
             html = html + "<li>" +  data.result.data.message + "</li></ul></div>" ;
 
-            $(".vbox-content div #page-inner .row .col-md-10").prepend(html);
+            content.prepend(html);
           },
           error: function() { 
             alert("Something has gone wrong. Please try again."); 

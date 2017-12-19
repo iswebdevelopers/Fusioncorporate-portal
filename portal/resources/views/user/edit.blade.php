@@ -33,12 +33,13 @@
                     <form action="{{action('UserController@create')}}" method="post">
                     <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                     <input name="token" type="hidden" id="token" value="{{$token}}" />
-                    @if($user['roles'] == 'administrator')
+                    <input class="form-control supplier" id="supplier_box" name="role_id" type="hidden" value="0">
+                    @if(strtolower($user['roles']) == 'administrator')
                         <div class="form-group">
                             <label>Role *</label>
                             <select class="form-control" name="role" id="role">
                             @foreach($roles as $role)
-                                 <option value={{$role}}>{{$role}}</option> 
+                                 <option value={{strtolower($role)}}>{{$role}}</option> 
                             @endforeach
                             </select>
                         </div>

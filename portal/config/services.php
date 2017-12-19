@@ -36,7 +36,7 @@ return [
     ],
 
     'api' => [
-        'url' => env('API_URL', 'http://devapi.fusionretailbrands.dev.au/api/'),
+        'url' => env('API_URL', 'http://rmsservices.fusionretailbrands.com.au/api/'),
     ],
 
     'print' => [

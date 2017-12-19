@@ -31,7 +31,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
                     <!-- warehouse table is different from other users -->
-                    @if($user['roles'] == 'warehouse')
+                    @if(strtolower($user['roles']) == 'warehouse')
                         <thead>
                             <tr>
                                 <th>Order No.</th>
@@ -52,7 +52,7 @@
                         </tbody>
                     @endif
                     <!-- Admin and suppliers is different -->
-                    @if($user['roles'] != 'warehouse')
+                    @if(strtolower($user['roles']) != 'warehouse')
                         <thead>
                             <tr>
                                 <th>label ID</th>

@@ -26,6 +26,7 @@
 	                <input name="password" class="form-control" type="password" placeholder="" required>
 	            </div>
 	            <button type="submit" class="btn btn-primary">Submit</button>
+	            <a data-vbtype="ajax" class="venbobox pull-right" href="/portal/user/recovery" >Recover Password</a>
     		</form>
 		</div>
     </div>		

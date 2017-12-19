@@ -16,7 +16,7 @@
             	@include('partials._flash')
                 <ul class="nav nav-pills">  
                 <!-- Admin and Warehouse restricted -->
-                @if(($user['roles'] == 'administrator') || ($user['roles'] == 'warehouse')) 
+                @if((strtolower($user['roles']) == 'administrator') || (strtolower($user['roles']) == 'warehouse')) 
                     <li class="active"><a href="#carton" data-toggle="tab">Carton</a>
                     </li>
                     <li class=""><a href="#stnp" data-toggle="tab">Sticky No Price</a>
@@ -24,7 +24,7 @@
                 @endif
                 
                 <!-- Admin and supplier restricted -->
-                @if($user['roles'] != 'warehouse')
+                @if(strtolower($user['roles']) != 'warehouse')
                     <li class=""><a href="#supplier" data-toggle="tab">Supplier</a>
                     </li>
                 @endif
@@ -32,13 +32,13 @@
 
                 <div class="tab-content">
                 <!-- Admin and supplier restricted -->
-                    @if($user['roles'] != 'warehouse')
+                    @if(strtolower($user['roles']) != 'warehouse')
                         @include('labels.supplier_tab')
                     @endif
                     <!-- End restriction -->
 
                     <!-- Admin and warehouse restricted -->
-                    @if(($user['roles'] == 'administrator') || ($user['roles'] == 'warehouse'))
+                    @if((strtolower($user['roles']) == 'administrator') || (strtolower($user['roles']) == 'warehouse'))
                         @include('labels.carton_tab')
                         @include('labels.sticky_tab')
                     @endif    

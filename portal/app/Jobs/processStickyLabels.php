@@ -40,7 +40,6 @@ class processStickyLabels implements ShouldQueue
         if (!empty($this->data)) {
             foreach ($this->data as $type => $sticky) {
                 if ($sticky) {
-                    
                     $view = View::make('labels.templates.sticky', ['data' => $sticky, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
 

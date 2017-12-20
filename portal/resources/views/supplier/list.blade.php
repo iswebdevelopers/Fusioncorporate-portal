@@ -21,6 +21,7 @@
                     <table id="suppliers-list" class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>contact</th>
@@ -31,6 +32,7 @@
                         <tbody>
                             @foreach ($suppliers as $supplier)
                                 <tr>
+                                    <td>{{$supplier['id']}}</td>
                                     <td>{{$supplier['name']}}</td>
                                     <td>
                                         @foreach (explode(';', $supplier['email']) as $email)

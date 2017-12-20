@@ -7,6 +7,7 @@ $( function() {
 
         // read id from your select
         var value = data.item.value;
+        console.log(value);
         // show element with selected id
         $("div#"+value).show();
         $("div#"+value+" input[name=role_id]").prop('disabled',false);
@@ -14,10 +15,10 @@ $( function() {
   });
 
   var token = $('#token').val();
-  $("#supplier_box").autocomplete({
+  $("#supplier_autocomplete").autocomplete({
     source: function( request, response ) {
       $.ajax({
-        url: "/supplier/search/" + request.term + "/?token=" + token,
+        url: "/portal/supplier/search/" + request.term + "?token=" + token,
         statusCode: {
                 401: function() {
                   window.location.replace("/portal/login");

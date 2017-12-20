@@ -21,8 +21,10 @@
 	@if(!empty($data))
 		@foreach ($data as $carton)
 			@foreach ($carton['carton_details'] as $details)
-				^XA
-
+				<?php label_count = count($carton['carton_details']); ?>
+				@if($count == 1)
+					^XA
+				@endif
 				^FX Top section.
 				^CF0,{{$font_1}}
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top}}^FDOrder No: {{$carton['order_number']}}^FS
@@ -57,8 +59,9 @@
 				^XZ
 				@if($count < $label_per_row)
 				<?php $count++; ?>
-				@elseif ($count >= $label_per_row) 
+				@elseif (($count >= $label_per_row) || ($key == ($label_count - 1)))
 				<?php $count = 1; ?>
+				^XZ
 				<br/>
 				@endif
 			@endforeach	

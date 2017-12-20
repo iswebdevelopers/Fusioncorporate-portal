@@ -57,13 +57,13 @@
                             <input class="form-control" name="password" type="password" required>
                         </div>
                         <div id="extra-fields">
-                            <div class="form-group" id="Supplier">
+                            <div class="form-group" id="supplier">
                                 <label>Supplier *</label>
-                                <input class="form-control supplier" id="supplier_box" name="role_id" type="text">
+                                <input class="form-control supplier" id="supplier_autocomplete" name="role_id" type="text">
                             </div>
-                            <div class="form-group" id="Warehouse">
+                            <div class="form-group" id="warehouse">
                                 <label>Warehouse *</label>
-                                <input class="form-control warehouse" id="warehouse_box" name="role_id" type="text">
+                                <input class="form-control warehouse" id="warehouse" name="role_id" type="text">
                             </div>
                             <div class="form-group">
                             <label>Creator</label>

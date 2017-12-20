@@ -12,7 +12,7 @@
                         <th>Quantity</th>
                         <th>Over Print</th>
                         <th>Sort Order Type</th>
-                        <!-- <th>Printer</th> -->
+                        <th>Type</th>
                         <th>Action</th>
                     </tr>
                 </thead>

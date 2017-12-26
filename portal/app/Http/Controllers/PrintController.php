@@ -73,6 +73,7 @@ class PrintController extends FrontController
 
             if(!$printer){
                 $printer = New UserPrinterSetting();
+                $printer->user_id = $request->id;
             }
 
             $setting['carton'] = $request->carton;

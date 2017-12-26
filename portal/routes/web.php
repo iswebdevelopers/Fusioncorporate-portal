@@ -23,7 +23,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('setting', 'HomeController@setting');
 
     Route::get('print-shop', 'PrintController@index');
-    Route::post('printer/setting/{id}','PrintController@PrinterSetting');
+    Route::post('printer/setting','PrintController@PrinterSetting');
     Route::get('printer/setting','PrintController@PrinterSetting');
 
     Route::get('label/rawdata/{id}', 'PrintController@rawdata');

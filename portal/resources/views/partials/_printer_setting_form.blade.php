@@ -1,4 +1,5 @@
 <form id="formPrinterSetting" class="modal-body" style="overflow:hidden">
+    <input type="hidden" name="id" value="{{$user['id']}}"/>
     <div class="col-xs-6">
         <div class="form-group">
             {{csrf_field()}}
@@ -62,6 +63,6 @@
     </div>        
 </form>
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-primary" onclick="setPrinterSetting()">Set</button>
+    <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
+    <button type="submit" class="btn btn-primary" onclick="setPrinterSetting({{$user['id']}})">Set</button>
 </div>

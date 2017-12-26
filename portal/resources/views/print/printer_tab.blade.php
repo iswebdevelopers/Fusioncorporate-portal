@@ -22,7 +22,9 @@
                 <em>@if(isset($user_setting->settings['carton']['printer'])){{$user_setting->settings['carton']['printer']}}@else NONE @endif</em>
             </div>
         </div>
+
         @include('partials._user_printer_list')
+        
         <div class="form-group">
             <div class="btn-group" role="group">
                 <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#askPrinterSettingModal">Set Printers</button>

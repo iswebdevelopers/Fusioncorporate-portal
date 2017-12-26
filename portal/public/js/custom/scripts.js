@@ -1,13 +1,12 @@
 $( function() {
     
-  $("select").selectmenu({
+  $("select#role").selectmenu({
     change: function( event, data ) {
       // hide previously shown in target div
         $("div", "div#extra-fields").hide();
 
         // read id from your select
         var value = data.item.value;
-        console.log(value);
         // show element with selected id
         $("div#"+value).show();
         $("div#"+value+" input[name=role_id]").prop('disabled',false);

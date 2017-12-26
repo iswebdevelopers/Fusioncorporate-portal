@@ -12,14 +12,14 @@
 				  		<ul class="pagination">
 					  		@if($labels['current_page'] > 1)	
 						    	<li>
-						      		<a href="{{url()->current()}}/?page={{$labels['current_page'] - 1}}" aria-label="Previous">
+						      		<a href="{{url()->current()}}?page={{$labels['current_page'] - 1}}" aria-label="Previous">
 						        		<span aria-hidden="true">&laquo;</span>
 						      		</a>
 						    	</li>
 						    @endif
 					    	@if($labels['current_page'] < $labels['last_page'])
 						    	<li>
-						      		<a href="{{url()->current()}}/?page={{$labels['current_page'] + 1}}" aria-label="Next">
+						      		<a href="{{url()->current()}}?page={{$labels['current_page'] + 1}}" aria-label="Next">
 						        		<span aria-hidden="true">&raquo;</span>
 						      		</a>
 						    	</li>

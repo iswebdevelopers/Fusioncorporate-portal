@@ -14,8 +14,8 @@
     <!-- Bootstrap Js -->
     <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
      <!-- Data Table Js and CSS -->
-    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css"/>
-    <script type="text/javascript" src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="http://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"/>
+    <script type="text/javascript" src="http://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <!-- ui autocomplete -->
     <script src="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script> 
     <link href="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}" rel="stylesheet" />

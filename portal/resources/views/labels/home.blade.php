@@ -25,7 +25,12 @@
                 
                 <!-- Admin and supplier restricted -->
                 @if(strtolower($user['roles']) != 'warehouse')
-                    <li class=""><a href="#supplier" data-toggle="tab">Supplier</a>
+                    @if(strtolower($user['roles']) == 'administrator')
+                        <li class="">
+                    @else
+                        <li class="active">       
+                    @endif    
+                        <a href="#supplier" data-toggle="tab">Supplier</a>
                     </li>
                 @endif
                 </ul>

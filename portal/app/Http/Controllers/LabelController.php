@@ -119,7 +119,7 @@ class LabelController extends FrontController
     public function printstickies(Request $request, int $order_no)
     {
         $authUser = $this->getAuthUser($request);
-        
+        $sticky = array();
         try {
             $token = $request->session()->get('token');
             $data = array();
@@ -128,22 +128,24 @@ class LabelController extends FrontController
             
             if ($response->getstatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents(), true);
-                $data['ratiopack'] = $result['data'];
+                $sticky = array_merge($sticky,$result['data']);
             }
             
             $response =  $this->client->request('GET', 'order/'.$order_no.'/simplepack', ['query' => ['token' => $token]]);
             
             if ($response->getstatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents(), true);
-                $data['simplepack'] = $result['data'];
+                $sticky = array_merge($sticky,$result['data']);
             }
             
             $response =  $this->client->request('GET', 'order/'.$order_no.'/looseitem', ['query' => ['token' => $token]]);
             
             if ($response->getstatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents(), true);
-                $data['looseitem'] = $result['data'];
+                $sticky = array_merge($sticky,$result['data']);
             }
+
+            $data['sticky'] = $sticky;
 
             processStickyLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('sticky'));
             $request->session()->flash('message', 'Carton Labels has been added to Print Shop');

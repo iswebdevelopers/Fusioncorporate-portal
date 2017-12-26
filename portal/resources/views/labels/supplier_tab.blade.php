@@ -1,10 +1,10 @@
 <!-- SUpplier labels -->
-<div class="tab-pane fade" id="supplier">
+<div class="@if((strtolower($user['roles']) != 'warehouse') and (strtolower($user['roles']) != 'administrator')) {{'tab-pane fade active in'}} @else {{'tab-pane fade'}} @endif" id="supplier">
     <div class="table-responsive">
     <p class="pull-right">
-        <a class="btn btn-primary btn-md" href="/portal/label/print/stickies/{{$order_no}}">Print all sticky</a>
+        <a class="btn btn-primary btn-md" href="/portal/label/print/stickies/{{$order_no}}">Generate all sticky</a>
     @if((!empty($orderdetails['cartonpack'])) or (!empty($orderdetails['cartonloose'])))
-        <a class="btn btn-primary btn-md" href="/portal/label/print/cartons/{{$order_no}}">Print all Carton</a>
+        <a class="btn btn-primary btn-md" href="/portal/label/print/cartons/{{$order_no}}">Generate all Carton</a>
     @endif
     </p>
     @if(!empty($orderdetails['cartonpack']))
@@ -26,7 +26,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
-                    <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Generate</a></td>
                 </tr>
             @endforeach    
             </tbody>
@@ -53,7 +53,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
-                    <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                    <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Generate</a></td>
                 </tr>
             @endforeach    
             </tbody>

@@ -4,10 +4,10 @@
         window.readingWeight = false;
         
         //show printer setting form if it has not been set
-        var hidePrinterForm = $("#user-printer-list").data('dialog');
+        var showPrinterForm = $("#user-printer-list").data('dialog');
         var printerForm = $("#askPrinterSettingModal");
 
-        if (!hidePrinterForm) {
+        if (showPrinterForm) {
             showPrinterSetting(printerForm);
         }
         
@@ -32,6 +32,12 @@
             var printer = $(this).text();
             setPrinter(printer);
         });
+
+        //set printer based on printer clicked from the list
+        $("button.cancel").on("click",function() {
+           //printerForm.removeClass("in").hide();
+           $("#askPrinterSettingModal").modal('show');
+        });        
 
         //change printer based on tabs clicked
         $("#print-tab").on("click","a.change",function(e) {
@@ -254,7 +260,7 @@
         infoWindow.show();
     }
 
-    function setPrinterSetting(userId) {
+    function setPrinterSetting() {
         var carton = $("#carton-select").val();
         var sticky = $("#sticky-select").val();
         var _token = $("input[name='_token']").val();
@@ -263,7 +269,7 @@
         var data = { carton: carton, sticky: sticky };
         
         $.ajax({
-            url: '/portal/printer/setting/' + userId,
+            url: '/portal/printer/setting',
             method: 'POST',
             headers: { 'X-CSRF-TOKEN': _token },
             data: formData,
@@ -273,8 +279,9 @@
                 }
             },
             success: function(result) {
-                displayMessage("Printers settings saved");
                 $("#askPrinterSettingModal").modal('hide');
+                $("#askPrinterSettingModal").removeClass("in").hide();
+                displayMessage("Printers settings saved");
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) { 
                 displayMessage("Status: " + textStatus + "Error: " + errorThrown); 

@@ -30,7 +30,7 @@
 
 					^FX Second.
 					^CF0,{{$font_2}}
-					^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2.5}}^FDSize:{{$item['size']}}^FS
+					^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2.5}}^FDSize:{{$item['item_size']}}^FS
 					^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.3}}^FD{{$item['stockroomlocator']}}^FS
 
 					^FX Third section with barcode.

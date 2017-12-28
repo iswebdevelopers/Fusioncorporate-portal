@@ -88,10 +88,13 @@ class FrontController extends Controller
      */
     public function getUserPrinterSettings($type)
     {
-        if ($type){
-            return UserPrinterSetting::first()->settings[$type];
-        } else {
-            return UserPrinterSetting::first()->settings;    
+        if(UserPrinterSetting::first()->settings) {
+            if ($type){
+                return UserPrinterSetting::first()->settings[$type];
+            } else {
+                return UserPrinterSetting::first()->settings;    
+            }
         }
+        
     }
 }

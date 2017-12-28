@@ -37,7 +37,7 @@ class AuthenticateController extends FrontController
                         $result = json_decode($response->getBody()->getContents());
                         $request->session()->put('token', $result->token);
                         session(['token'=>$result->token]);
-                        return redirect('dashboard');
+                        return redirect('print-shop');
                     } else {
                         $errors = [$response->getstatusCode()." - ".$response->getstatusText()];
                     }

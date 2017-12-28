@@ -33,8 +33,8 @@
                         <a href="#supplier" data-toggle="tab">Supplier</a>
                     </li>
                 @endif
+                <li class=""><a href="#mixed" data-toggle="tab">Mixed</a></li>
                 </ul>
-
                 <div class="tab-content">
                 <!-- Admin and supplier restricted -->
                     @if(strtolower($user['roles']) != 'warehouse')
@@ -46,7 +46,8 @@
                     @if((strtolower($user['roles']) == 'administrator') || (strtolower($user['roles']) == 'warehouse'))
                         @include('labels.carton_tab')
                         @include('labels.sticky_tab')
-                    @endif    
+                    @endif  
+                    @include('labels.mixed_tab')  
                 </div>          
             </div>
         </div>

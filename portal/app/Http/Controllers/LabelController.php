@@ -6,10 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\TicketRequest;
 use Setting;
+use View;
 use App\Jobs\processCartonLabels;
 use App\Jobs\processStickyLabels;
 use GuzzleHttp\Exception\ClientException as Exception;
 use App\UserPrinterSetting;
+use App\UserLabelPrint;
 
 class LabelController extends FrontController
 {
@@ -248,5 +250,39 @@ class LabelController extends FrontController
         } else {
             return view('labels.search')->withTitle('label_carton')->withInput($request->all());
         }
+    }
+
+    /**
+     * list of cartons for order searched
+     * @param  Request $request
+     * @return data array of cartons
+     */
+    public function printmixed(Request $request)
+    { 
+        $authUser = $this->getAuthUser($request);
+
+        if ($request->isMethod('post')) {
+
+            $view = View::make('labels.templates.mixedcarton', ['settings' => $this->getUserPrinterSettings('carton'), 'quantity' => $request->quantity]);
+            
+            $raw_data = (string) $view;
+
+            $labelprint = New UserLabelPrint();
+            $labelprint->user_id = $authUser['id'];
+            $labelprint->order_id = $request->order_no;
+            $labelprint->type = $request->type;
+            $labelprint->raw_data = $raw_data;
+            $labelprint->printed = 0;
+            $labelprint->creator = $authUser['email'];
+            $labelprint->quantity = $request->quantity;
+
+            $labelprint->save();
+
+            $request->session()->flash('message', 'Carton Mixed Labels has been added to Print Shop');
+            $request->session()->flash('class', 'alert-info');
+
+            return redirect('label/order/'.$request->order_no);
+        }
+
     }
 }

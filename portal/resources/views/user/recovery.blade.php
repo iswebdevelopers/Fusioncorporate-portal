@@ -30,7 +30,8 @@
                     @endif          
                         <div class="form-group">
                             <label>User Email</label>
-                            @if(isset($users))
+
+                            @if($users)
                                 <input class="form-control"  readonly="readonly" name="email" type="email" value="{{$users['email']}}" placeholder="john.smith@mail.com" required>
                             @else
                                 <input class="form-control" name="email" type="email" placeholder="john.smith@mail.com" required>    

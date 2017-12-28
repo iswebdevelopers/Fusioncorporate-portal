@@ -17,6 +17,8 @@
                         @if (!empty($user))
                         <li><a data-vbtype="ajax" class="venbobox"  href="/portal/user/recovery/{{$user['id']}}"><i class="fa fa-cog fa-fw"></i>User Setting</a></li>
                         <li><a href="/portal/user/logout"><i class="fa fa-sign-out fa-fw"></i>Logout</a></li>
+                        @else
+                        <li><a href="/portal/login"><i class="fa fa-sign-out fa-fw"></i>Login</a></li>
                         @endif
                         </li>
                     </ul>

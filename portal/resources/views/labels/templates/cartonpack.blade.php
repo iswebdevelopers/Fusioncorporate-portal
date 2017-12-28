@@ -57,12 +57,14 @@
 				^A0N,{{$font_1}},{{$font_1 - 20}}
 				^FD{{$details['number']}}^FS
 				^XZ
-				@if($count < $label_per_row)
-				<?php $count++; ?>
+				@if($key == ($label_count - 1))
+					^XZ
 				@elseif (($count >= $label_per_row) || ($key == ($label_count - 1)))
 				<?php $count = 1; ?>
 				^XZ
 				<br/>
+				@elseif ($count < $label_per_row)
+					<?php $count++; ?>
 				@endif
 			@endforeach	
 		@endforeach	

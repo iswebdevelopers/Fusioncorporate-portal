@@ -41,7 +41,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('label/print/cartons/{order?}', 'LabelController@printcartons');
     Route::get('label/print/stickies/{order?}', 'LabelController@printstickies');
     Route::get('label/print/{cartontype}/{order_no}/{item}', 'LabelController@printcartontype');
-
+    Route::post('label/print/mixed/{order?}', 'LabelController@printmixed');
     Route::get('users', 'UserController@users');
     
     Route::get('user/new', 'UserController@create');

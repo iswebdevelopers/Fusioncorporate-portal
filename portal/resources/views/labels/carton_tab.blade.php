@@ -2,7 +2,7 @@
     <form action="{{ action('LabelController@createticket') }}" method="post">
     <!-- Carton -->
     @if(!empty($orderdetails['cartonpack']))
-        <h4>Warehouse Carton Pack Labels</h4>     
+        <h4>Warehouse Carton Pack</h4>     
             <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -46,13 +46,13 @@
             </table>
             </div>
     @else
-    <h4>Warehouse Carton Loose Labels</h4>
+    <h4>Warehouse Carton Pack</h4>
         <div class="alert alert-danger col-md-6">
             No carton labels to print for this order.
         </div>    
     @endif 
     @if(!empty($orderdetails['cartonloose']))
-        <h4>Warehouse Carton Pack Labels</h4>     
+        <h4>Warehouse Carton Loose</h4>     
             <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -94,7 +94,7 @@
             </table>
             </div>
     @else
-    <h4>Warehouse Carton Loose Labels</h4>
+    <h4>Warehouse Carton Loose</h4>
         <div class="alert alert-danger col-md-6">
             No carton labels to print for this order.
         </div>    

@@ -8,7 +8,7 @@
     @endif
     </p>
     @if(!empty($orderdetails['cartonpack']))
-        <h4>Supplier Carton Pack Labels</h4>
+        <h4>Supplier Carton Pack</h4>
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -34,7 +34,7 @@
         @endif
     </div>
     @if(!empty($orderdetails['cartonloose']))
-        <h4>Supplier Carton Loose Labels</h4>
+        <h4>Supplier Carton Loose</h4>
         <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead>

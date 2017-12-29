@@ -37,6 +37,9 @@
             <li>
                 <a target="_blank" href="https://qz.io/download/"><i class="fa fa-download" aria-hidden="true"></i>Print Client</a>
             </li>
+            <li>
+                <a @if ($title == 'faq') class="active-menu" @endif href="/portal/faq"><i class="fa fa-question-circle" aria-hidden="true"></i>FAQ</a>
+            </li>
         </ul>
 
     </div>

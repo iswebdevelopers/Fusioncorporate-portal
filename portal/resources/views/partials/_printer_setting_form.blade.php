@@ -1,3 +1,6 @@
+<div class="alert alert-info">
+    In order to detect and set the local printers to print the generated labels, it is necessary to install print client - <a class="btn btn-default btn-xs" href="https://qz.io/download/" target='_blank'>Download Print Client</a>
+</div>
 <form id="formPrinterSetting" class="modal-body" style="overflow:hidden">
     <input type="hidden" name="id" value="{{$user['id']}}"/>
     <div class="col-xs-6">

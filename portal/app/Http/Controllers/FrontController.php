@@ -86,14 +86,16 @@ class FrontController extends Controller
      * getUserPrinterSettings - get teh user printer setting
      * @param  Request $request
      */
-    public function getUserPrinterSettings($type)
+    public function getUserPrinterSettings(string $type='')
     {
-        if(UserPrinterSetting::first()->settings) {
+        if(UserPrinterSetting::first()) {
             if ($type){
                 return UserPrinterSetting::first()->settings[$type];
             } else {
                 return UserPrinterSetting::first()->settings;    
             }
+        } else{
+            return false;
         }
         
     }

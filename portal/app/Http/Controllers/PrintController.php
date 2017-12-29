@@ -23,7 +23,7 @@ class PrintController extends FrontController
         $setting = UserPrinterSetting::all()->first();
         $printer_settings = Config::get('user.settings.printer');
 
-        $request->session()->flash('message', "In order to print files to local printer, it is necessary to install a print client on your local machine. Print Shop client can be downloaded from <a target='_blank' href =".Config::get('services.print.client').">Download Print Client</a>.");
+        $request->session()->flash('message', "In order to print files to local printer, it is necessary to install a print client on your local machine. Print Shop client can be downloaded from <a class='btn btn-default btn-xs' target='_blank' href =".Config::get('services.print.client').">Download Print Client</a>.");
         $request->session()->flash('class', 'alert-info');
 
         return view('print.home', ['cartons' => $cartons,'archives' => $archives, 'stickies' => $stickies,'user_setting' => $setting,'printer_settings' => $printer_settings])->withTitle('print-shop');

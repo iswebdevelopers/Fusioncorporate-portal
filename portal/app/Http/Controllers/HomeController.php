@@ -89,4 +89,12 @@ class HomeController extends FrontController
             return view('account.edit')->withTitle('setting');
         }
     }
+
+    /**
+     * Faq
+     */
+    public function faq()
+    {
+        return view('faq')->withTitle('faq');
+    }
 }

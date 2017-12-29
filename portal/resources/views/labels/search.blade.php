@@ -56,6 +56,7 @@
                         Order Search List
                     </div>
                     <div class="panel-body">
+                        @include('partials._flash')
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -74,7 +75,7 @@
                                         <td>{{$order['style']}}</td>
                                         <td>{{$order['item']}}</td>
                                         <td>{{$order['quantity']}}</td>
-                                        <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Print</a></td>
+                                        <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">View</a></td>
                                     </tr>
                                 @endforeach    
                                 </tbody>

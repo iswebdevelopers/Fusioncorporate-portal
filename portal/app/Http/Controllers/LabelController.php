@@ -15,6 +15,15 @@ use App\UserLabelPrint;
 
 class LabelController extends FrontController
 {
+    private $printer_check = false;
+    
+    public function __construct()
+    {
+        parent::__construct();
+        $this->sticky_printer_setting = $this->getUserPrinterSettings('sticky');
+        $this->carton_printer_setting = $this->getUserPrinterSettings('carton');
+    }
+
     /**
      * Tickets Creation for warehouse users only
      * @param  Request $request
@@ -26,42 +35,48 @@ class LabelController extends FrontController
         
         try {
             $token = $request->session()->get('token');
-            foreach ($request->data as $data) {
-                $data['ticket_type'] = $request->type;
-                $order_no = $data['order_no'];
 
-                $response = $this->client->request('POST', 'ticket/create/tips/request?token='.$token, [
-                    'form_params' => $data
-                       ]);
-            }
-            
-            if ($response->getstatusCode() == 200) {
-                $ticket_list = $this->getCreatedTickets($request, $request->type);
-            }
-            
-            if (count($ticket_list) > 0) {
-                // $data = array_map([$this, 'getTipsTicketData'], $ticket_list['data'], $request);
-                $tipsdata = array_map(function ($ticket) use ($request) {
-                    return $this->getTipsTicketData($ticket, $request);
-                }, $ticket_list);
-            }
+            if ($this->sticky_printer_setting && $this->carton_printer_setting) {
+                foreach ($request->data as $data) {
+                    $data['ticket_type'] = $request->type;
+                    $order_no = $data['order_no'];
 
-            foreach ($tipsdata as $key => $label) {
-                foreach ($label as $labelkey => $labeldata) {
-                    if(!empty($labeldata)){
-                        if (strtolower($labelkey) == 'sticky') {
-                            processStickyLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('sticky'));
-                        } else {
-                            processCartonLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('carton'));
+                    $response = $this->client->request('POST', 'ticket/create/tips/request?token='.$token, [
+                        'form_params' => $data
+                           ]);
+                }
+                
+                if ($response->getstatusCode() == 200) {
+                    $ticket_list = $this->getCreatedTickets($request, $request->type);
+                }
+                
+                if (count($ticket_list) > 0) {
+                    // $data = array_map([$this, 'getTipsTicketData'], $ticket_list['data'], $request);
+                    $tipsdata = array_map(function ($ticket) use ($request) {
+                        return $this->getTipsTicketData($ticket, $request);
+                    }, $ticket_list);
+                }
+
+                foreach ($tipsdata as $key => $label) {
+                    foreach ($label as $labelkey => $labeldata) {
+                        if(!empty($labeldata)){
+                            if (strtolower($labelkey) == 'sticky') {
+                                processStickyLabels::dispatch($authUser, $label, $this->sticky_printer_setting);
+                            } else {
+                                processCartonLabels::dispatch($authUser, $label, $this->carton_printer_setting);
+                            }
                         }
                     }
                 }
-            }
 
-            $request->session()->flash('message', 'All Labels has been added to Print Shop');
-            $request->session()->flash('class', 'alert-info');
+                $request->session()->flash('message', 'All Labels has been added to Print Shop');
+                $request->session()->flash('class', 'alert-info');
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index')." >Printer Settings</a>.");
+                $request->session()->flash('class', "alert-error");
+            }
             
-            return redirect('label/order/'.$order_no);
+            return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
@@ -83,27 +98,31 @@ class LabelController extends FrontController
             $token = $request->session()->get('token');
             $data = array();
             
-            $response = $this->client->request('GET', 'order/'.$order_no.'/cartonpack', ['query' => ['token' => $token]]);
+            if ($this->carton_printer_settings) {
+                $response = $this->client->request('GET', 'order/'.$order_no.'/cartonpack', ['query' => ['token' => $token]]);
             
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $data['cartonpack'] = $result['data'];
-            }
-            
-            $response =  $this->client->request('GET', 'order/'.$order_no.'/cartonloose', ['query' => ['token' => $token]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $data['cartonloose'] = $result['data'];
-            }
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $data['cartonpack'] = $result['data'];
+                }
+                
+                $response =  $this->client->request('GET', 'order/'.$order_no.'/cartonloose', ['query' => ['token' => $token]]);
+                
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $data['cartonloose'] = $result['data'];
+                }
 
-            //add it to the queue job
-            processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
+                //add it to the queue job
+                processCartonLabels::dispatch($authUser, $data,  $this->carton_printer_settings);
+                
+                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('class', 'alert-info');
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
+            }
             
-            $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
-            $request->session()->flash('class', 'alert-info');
-            
-            return redirect('label/order/'.$order_no);
+            return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
@@ -123,37 +142,43 @@ class LabelController extends FrontController
         $authUser = $this->getAuthUser($request);
         $sticky = array();
         try {
-            $token = $request->session()->get('token');
-            $data = array();
             
-            $response =  $this->client->request('GET', 'order/'.$order_no.'/ratiopack', ['query' => ['token' => $token]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $sticky = array_merge($sticky,$result['data']);
-            }
-            
-            $response =  $this->client->request('GET', 'order/'.$order_no.'/simplepack', ['query' => ['token' => $token]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $sticky = array_merge($sticky,$result['data']);
-            }
-            
-            $response =  $this->client->request('GET', 'order/'.$order_no.'/looseitem', ['query' => ['token' => $token]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $sticky = array_merge($sticky,$result['data']);
+            if ($this->sticky_printer_setting) {
+                $token = $request->session()->get('token');
+                $data = array();
+                
+                $response =  $this->client->request('GET', 'order/'.$order_no.'/ratiopack', ['query' => ['token' => $token]]);
+                
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $sticky = array_merge($sticky,$result['data']);
+                }
+                
+                $response =  $this->client->request('GET', 'order/'.$order_no.'/simplepack', ['query' => ['token' => $token]]);
+                
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $sticky = array_merge($sticky,$result['data']);
+                }
+                
+                $response =  $this->client->request('GET', 'order/'.$order_no.'/looseitem', ['query' => ['token' => $token]]);
+                
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $sticky = array_merge($sticky,$result['data']);
+                }
+
+                $data['sticky'] = $sticky;
+
+                processStickyLabels::dispatch($authUser, $data,  $this->sticky_printer_setting);
+                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('class', 'alert-info');       
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
+                $request->session()->flash('class', "alert-error");
             }
 
-            $data['sticky'] = $sticky;
-
-            processStickyLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('sticky'));
-            $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
-            $request->session()->flash('class', 'alert-info');
-
-            return redirect('label/order/'.$order_no);
+            return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
@@ -176,19 +201,23 @@ class LabelController extends FrontController
         $token = $request->session()->get('token');
 
         try {
-            $response = $this->client->request('GET', 'order/'.$order_no.'/'.$cartontype.'/'.$item_number, ['query' => ['token' => $token]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-                $data[$cartontype] = $result['data'];
-            }
+            if ($this->sticky_printer_setting) {
+                $response = $this->client->request('GET', 'order/'.$order_no.'/'.$cartontype.'/'.$item_number, ['query' => ['token' => $token]]);
+                
+                if ($response->getstatusCode() == 200) {
+                    $result = json_decode($response->getBody()->getContents(), true);
+                    $data[$cartontype] = $result['data'];
+                }
 
-            processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
-            
-            $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
-            $request->session()->flash('class', 'alert-info');
-            
-            return redirect('label/order/'.$order_no);
+                processCartonLabels::dispatch($authUser, $data,  $this->sticky_printer_setting);
+                
+                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('class', 'alert-info');
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
+                $request->session()->flash('class', "alert-error");
+            }            
+            return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
@@ -263,25 +292,29 @@ class LabelController extends FrontController
 
         if ($request->isMethod('post')) {
 
-            $view = View::make('labels.templates.mixedcarton', ['settings' => $this->getUserPrinterSettings('carton'), 'quantity' => $request->quantity]);
+            if ($this->carton_printer_setting) {
+                $view = View::make('labels.templates.mixedcarton', ['settings' => $this->getUserPrinterSettings('carton'), 'quantity' => $request->quantity]);
             
-            $raw_data = (string) $view;
+                $raw_data = (string) $view;
 
-            $labelprint = New UserLabelPrint();
-            $labelprint->user_id = $authUser['id'];
-            $labelprint->order_id = $request->order_no;
-            $labelprint->type = $request->type;
-            $labelprint->raw_data = $raw_data;
-            $labelprint->printed = 0;
-            $labelprint->creator = $authUser['email'];
-            $labelprint->quantity = $request->quantity;
+                $labelprint = New UserLabelPrint();
+                $labelprint->user_id = $authUser['id'];
+                $labelprint->order_id = $request->order_no;
+                $labelprint->type = $request->type;
+                $labelprint->raw_data = $raw_data;
+                $labelprint->printed = 0;
+                $labelprint->creator = $authUser['email'];
+                $labelprint->quantity = $request->quantity;
 
-            $labelprint->save();
+                $labelprint->save();
 
-            $request->session()->flash('message', 'Carton Mixed Labels has been added to Print Shop');
-            $request->session()->flash('class', 'alert-info');
+                $request->session()->flash('message', 'Carton Mixed Labels has been added to Print Shop');
+                $request->session()->flash('class', 'alert-info');
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
+            }
 
-            return redirect('label/order/'.$request->order_no);
+            return back();
         }
 
     }

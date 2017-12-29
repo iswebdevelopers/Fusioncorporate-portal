@@ -54,6 +54,8 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('suppliers', 'SupplierController@index');
     Route::get('supplier/search/{term?}', 'SupplierController@search');
     Route::post('supplier/search/', 'SupplierController@search');
+
+    Route::get('faq', 'HomeController@faq');
 });
 
 Route::get('user/recovery/{id?}', 'UserController@recovery');

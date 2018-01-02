@@ -63,6 +63,5 @@
 				@endif
 			@endforeach	
 		@endforeach
-		@include('labels.templates.mixedcarton')	
 	@endif
 @endif	

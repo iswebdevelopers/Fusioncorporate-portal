@@ -51,7 +51,7 @@
 
             selector.each(function(){
                 var id = $(this).data('id');
-                printZPL(id);
+                setTimeout(function() { printZPL(id) }, 5000);
             });    
         });
     });

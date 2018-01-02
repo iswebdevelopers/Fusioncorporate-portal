@@ -20,7 +20,7 @@
 	?>
 	@if(!empty($data))
 		@foreach ($data as $carton)
-			@foreach ($carton['carton_details'] as $details)
+			@foreach ($carton['carton_details'] as $key =>  $details)
 				<?php $label_count = count($carton['carton_details']); ?>
 				@if($count == 1)
 					^XA

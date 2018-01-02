@@ -13,10 +13,6 @@
         
         //start connecting to printing client
         startConnection();
-
-        //Hide alert after 10 seconds
-        var infoWindow = $("p.alert-info").parent();
-        setTimeout(function() {  infoWindow.hide(1000); }, 10000);
  
         //search printer based on Input
         $("#printerSearch").on('keyup', function(e) {

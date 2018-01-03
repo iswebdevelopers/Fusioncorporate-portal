@@ -22,11 +22,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="sticky">Width:</label>
+            <label for="sticky">Width:(mm)</label>
             <input name="sticky[width]" class="form-control" value="{{$user_setting->settings['sticky']['width'] or 148}}" required/>
         </div>
         <div class="form-group">
-            <label for="sticky">Height:()</label>
+            <label for="sticky">Height:(mm)</label>
             <input name="sticky[height]" class="form-control" value="{{$user_setting->settings['sticky']['height'] or 48}}" required/>
         </div>
         <div class="form-group">
@@ -52,11 +52,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="carton">Width:</label>
+            <label for="carton">Width:(mm)</label>
             <input name="carton[width]" class="form-control" value="{{$user_setting->settings['carton']['width'] or 105}}" required/>
         </div>
         <div class="form-group">
-            <label for="carton">Height:</label>
+            <label for="carton">Height:(mm)</label>
             <input name="carton[height]" class="form-control" value="{{$user_setting->settings['carton']['height'] or 150}}" required/>
         </div>
         <div class="form-group">

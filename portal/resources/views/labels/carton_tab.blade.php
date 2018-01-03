@@ -100,7 +100,7 @@
         </div>    
     @endif
     @if (!empty($orderdetails['cartonpack']) || !empty($orderdetails['cartonloose']))
-    <button type="submit" class="btn btn-primary">Save &amp; Generate</button>
+    <button type="submit" class="btn btn-primary pull-right">Save &amp; Generate</button>
     @endif         
     </form>   
 </div>

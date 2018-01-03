@@ -44,7 +44,7 @@ class processCartonLabels implements ShouldQueue
     {
         if ($this->carton) {
             try {
-                $view = View::make('labels.templates.'.$this->type, ['carton' => $this->carton, 'settings' => $this->printer_settings, 'break' => $this->pagebreak]);
+                $view = View::make('labels.templates.'.$this->type, ['carton' => $this->carton, 'settings' => $this->printer_settings, 'pagebreak' => $this->pagebreak]);
                 $raw_data = (string) $view;
                 //add it to user label print
                 $this->addLabelPrint($this->carton, $raw_data, $this->type);

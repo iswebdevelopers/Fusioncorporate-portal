@@ -17,7 +17,7 @@
 		$count = 1;
 	?>
 	@if(!empty($carton))
-		@if(($label_per_row == 1) and ($break)) 
+		@if(($label_per_row == 1) and ($pagebreak)) 
 			^XA
 			^FX Top section.
 			^CF0,{{$font_1}}

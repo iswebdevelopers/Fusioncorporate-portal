@@ -16,6 +16,7 @@
                     <th>Style</th>
                     <th>Item Number</th>
                     <th>Quantity</th>
+                    <th>Type</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -26,6 +27,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
+                    <td>Pack - {{$order['pack_type']}}</td>
                     <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Generate</a></td>
                 </tr>
             @endforeach    
@@ -43,6 +45,7 @@
                     <th>Style</th>
                     <th>Item Number</th>
                     <th>Quantity</th>
+                    <th>Type</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -53,6 +56,7 @@
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
                     <td>{{$order['quantity']}}</td>
+                    <td>Loose</td>
                     <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Generate</a></td>
                 </tr>
             @endforeach    

@@ -37,7 +37,7 @@
                                 <option value="L" <?php if((empty($input['sort_order_type'])) ? '' : $input['sort_order_type'] == 'L'){echo "selected";}?>>Loose</option>
                             </select>
                         </td>
-                        <td>Pack</td>
+                        <td>Pack - {{$order['pack_type']}}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" id="btn_delete"><i class="fa fa-times"></i> Delete
                             </button></td>
                     </tr>

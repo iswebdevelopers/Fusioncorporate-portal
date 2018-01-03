@@ -49,9 +49,9 @@
             var type = $(this).data('type');
             var selector = $("table#"+ type + "files tbody tr");
 
-            selector.each(function(){
+            selector.each(function(index){
                 var id = $(this).data('id');
-                setTimeout(function() { printZPL(id) }, 5000);
+                setTimeout(function(){ printZPL(id); }, index * 10000);
             });    
         });
     });
@@ -195,6 +195,7 @@
 
 
     /// Detection ///
+
     function findPrinter(query, set) {
         $("#printerSearch").val(query);
         qz.printers.find(query).then(function(data) {
@@ -291,6 +292,7 @@
     /// Raw Printers ///
     function printZPL(id) {
         var config = getUpdatedConfig();
+        var row = $("table tbody tr[data-id='" + id +"']");
         $.ajax({
         	url: '/portal/label/rawdata/' + id,
             statusCode: {
@@ -301,12 +303,15 @@
         	success: function(result) {
         		data = $.parseJSON(result);
         		var printData = [data.data]; 
-                var printed = qz.print(config, printData).catch(displayError);
-                displayMessage("File has been sent to Printer");    
+                var printed = qz.print(config, printData).catch(displayError);    
         	},
         	error: function(XMLHttpRequest, textStatus, errorThrown) { 
         		displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
-    		}
+    		},
+            complete: function(result) {
+                row.remove();
+                displayMessage("File has been sent to Printer");
+            }
     	});
         
     }

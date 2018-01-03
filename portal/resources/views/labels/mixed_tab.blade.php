@@ -20,7 +20,7 @@
                     <td class="col-xs-1"><input name="quantity" class="form-control" type="text" value="4"></td>
                 </tr>
             </tbody>
-        </table><button type="submit" class="btn btn-primary pull-right">Generate</button>
+        </table><button type="submit" class="btn btn-primary">Generate</button>
         </div>
     </form>
 </div>    

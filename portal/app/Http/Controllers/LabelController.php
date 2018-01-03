@@ -49,21 +49,14 @@ class LabelController extends FrontController
                     }, $ticket_list);
                 }
 
-                $last_type = '';
-
                 foreach ($tipsdata as $key => $label) {
-                    foreach ($label as $type => $labeldata) {
-                        if($type != $last_type){
-                            $last_type = $type;
-                            $pagebreak = true;
-                        } else {
-                            $pagebreak =false;
-                        }
-
-                        if (strtolower($type) == 'sticky') {
-                            processStickyLabels::dispatch($authUser, $labeldata, $type, $this->getUserPrinterSettings('sticky'));
-                        } else {
-                            processCartonLabels::dispatch($authUser, $labeldata, $type, $pagebreak, $this->getUserPrinterSettings('carton'));
+                    foreach ($label as $labelkey => $labeldata) {
+                        if(!empty($labeldata)){
+                            if (strtolower($labelkey) == 'sticky') {
+                                processStickyLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('sticky'));
+                            } else {
+                                processCartonLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('carton'));
+                            }
                         }
                     }
                 }

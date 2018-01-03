@@ -15,21 +15,19 @@ use Log;
 class processStickyLabels implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, CreateLabelPrint;
-    public $sticky;
+    public $data;
     public $user;
     public $printer_settings;
-    public $type;
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $sticky, $type, $user_printer_setting)
+    public function __construct($user, $data, $user_printer_setting)
     {
-        $this->sticky = $sticky;
+        $this->data = $data;
         $this->user = $user;
         $this->printer_settings = $user_printer_setting;
-        $this->type = $type;
     }
 
     /**
@@ -39,15 +37,21 @@ class processStickyLabels implements ShouldQueue
      */
     public function handle()
     {
-        if (!empty($this->sticky)) {
-            try {
-                $view = View::make('labels.templates.sticky', ['sticky' => $this->sticky, 'settings' => $this->printer_settings]);
-                $raw_data = (string) $view;
-                //add it to user label print
-                $this->addLabelPrint($this->sticky, $raw_data, $type);
-            } catch (Exception $e) {
-                Log::info('Exception running queue job processCartonLabels '. $e->getMessage());
+        if (!empty($this->data)) {
+            foreach ($this->data as $type => $sticky) {
+                if ($sticky) {
+                    $view = View::make('labels.templates.sticky', ['data' => $sticky, 'settings' => $this->printer_settings]);
+                    $raw_data = (string) $view;
+
+                    try {
+                        //add it to user label print
+                        $this->addLabelPrint($sticky, $raw_data, $type);
+                    } catch (Exception $e) {
+                        Log::info('Exception running queue job processCartonLabels '. $e->getMessage());
+                    }
+                }
             }
+            
         }
     }
 }

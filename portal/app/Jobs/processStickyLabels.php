@@ -15,19 +15,23 @@ use Log;
 class processStickyLabels implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels, CreateLabelPrint;
-    public $data;
+    public $stickydata;
     public $user;
     public $printer_settings;
+    public $type;
+    public $pagebreak;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($user, $data, $user_printer_setting)
+    public function __construct($user, $stickydata, $type, $user_printer_setting)
     {
-        $this->data = $data;
+        $this->stickydata = $stickydata;
         $this->user = $user;
         $this->printer_settings = $user_printer_setting;
+        $this->type = $type;
     }
 
     /**
@@ -37,15 +41,15 @@ class processStickyLabels implements ShouldQueue
      */
     public function handle()
     {
-        if (!empty($this->data)) {
-            foreach ($this->data as $type => $sticky) {
+        if (!empty($this->stickydata)) {
+            foreach ($this->stickydata as $sticky) {
                 if ($sticky) {
-                    $view = View::make('labels.templates.sticky', ['data' => $sticky, 'settings' => $this->printer_settings]);
+                    $view = View::make('labels.templates.sticky', ['sticky' => $sticky, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
 
                     try {
                         //add it to user label print
-                        $this->addLabelPrint($sticky, $raw_data, $type);
+                        $this->addLabelPrint($sticky, $raw_data, $this->type);
                     } catch (Exception $e) {
                         Log::info('Exception running queue job processCartonLabels '. $e->getMessage());
                     }

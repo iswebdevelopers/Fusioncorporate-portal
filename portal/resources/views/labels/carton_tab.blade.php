@@ -21,15 +21,15 @@
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <input name="type" class="form-control" type="hidden" value="carton">
                 @foreach ($orderdetails['cartonpack'] as $order)
-                    <input name="data[{{$order['item']}}][location_type]" class="form-control" type="hidden" value="{{$order['location_type']}}">
-                    <input name="data[{{$order['item']}}][location]" class="form-control" type="hidden" value="{{$order['location']}}">
-                    <input name="data[{{$order['item']}}][item]" class="form-control" type="hidden" value="{{$order['item']}}">
-                    <input name="data[{{$order['item']}}][order_no]" class="form-control" type="hidden" value="{{$order['order_number']}}">
                     <tr>
+                        <input name="data[{{$order['item']}}][location_type]" class="form-control" type="hidden" value="{{$order['location_type']}}">
+                        <input name="data[{{$order['item']}}][location]" class="form-control" type="hidden" value="{{$order['location']}}">
+                        <input name="data[{{$order['item']}}][item]" class="form-control" type="hidden" value="{{$order['item']}}">
+                        <input name="data[{{$order['item']}}][order_no]" class="form-control" type="hidden" value="{{$order['order_number']}}">
                         <td>{{$order['order_number']}}</td>
                         <td>{{$order['style']}}</td>
                         <td>{{$order['item']}}</td>
-                        <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}"></td>
+                        <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}" required></td>
                         <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
                         <td >
                             <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">
@@ -68,15 +68,15 @@
                 </thead>
                 <tbody>
             @foreach ($orderdetails['cartonloose'] as $order)
-                <input name="data[{{$order['item']}}][location_type]" class="form-control" type="hidden" value="{{$order['location_type']}}">
-                <input name="data[{{$order['item']}}][location]" class="form-control" type="hidden" value="{{$order['location']}}">
-                <input name="data[{{$order['item']}}][item]" class="form-control" type="hidden" value="{{$order['item']}}">
-                <input name="data[{{$order['item']}}][order_no]" class="form-control" type="hidden" value="{{$order['order_number']}}">
                 <tr>
+                    <input name="data[{{$order['item']}}][location_type]" class="form-control" type="hidden" value="{{$order['location_type']}}">
+                    <input name="data[{{$order['item']}}][location]" class="form-control" type="hidden" value="{{$order['location']}}">
+                    <input name="data[{{$order['item']}}][item]" class="form-control" type="hidden" value="{{$order['item']}}">
+                    <input name="data[{{$order['item']}}][order_no]" class="form-control" type="hidden" value="{{$order['order_number']}}">
                     <td>{{$order['order_number']}}</td>
                     <td>{{$order['style']}}</td>
                     <td>{{$order['item']}}</td>
-                    <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}"></td>
+                    <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}" required></td>
                     <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
                     <td >
                         <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">

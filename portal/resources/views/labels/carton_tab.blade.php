@@ -33,8 +33,7 @@
                         <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
                         <td >
                             <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">
-                                <option value="PL" <?php if((empty($input['sort_order_type'])) ? '' : $input['sort_order_type'] == 'PL'){echo "selected";}?>>Pack Then Loose</option>
-                                <option value="L" <?php if((empty($input['sort_order_type'])) ? '' : $input['sort_order_type'] == 'L'){echo "selected";}?>>Loose</option>
+                                <option value="PL" selected>Pack Then Loose</option>
                             </select>
                         </td>
                         <td>Pack - {{$order['pack_type']}}</td>
@@ -81,8 +80,7 @@
                     <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
                     <td >
                         <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">
-                            <option value="L" <?php if((empty($input['sort_order_type'])) ? '' : $input['sort_order_type'] == 'L'){echo "selected";}?>>Loose</option>
-                            <option value="PL" <?php if((empty($input['sort_order_type'])) ? '' : $input['sort_order_type'] == 'PL'){echo "selected";}?>>Pack Then Loose</option>
+                            <option value="L" selected>Loose</option>
                         </select>
                     </td>
                     <td>Loose</td>

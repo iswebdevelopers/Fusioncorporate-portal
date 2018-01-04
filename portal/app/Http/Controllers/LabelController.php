@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\TicketRequest;
 use Setting;
 use View;
+use Log;
 use App\Jobs\processCartonLabels;
 use App\Jobs\processStickyLabels;
 use GuzzleHttp\Exception\ClientException as Exception;
@@ -15,7 +16,6 @@ use App\UserLabelPrint;
 
 class LabelController extends FrontController
 {
-
     /**
      * Tickets Creation for warehouse users only
      * @param  Request $request
@@ -43,21 +43,23 @@ class LabelController extends FrontController
                 }
                 
                 if (count($ticket_list) > 0) {
-                    // $data = array_map([$this, 'getTipsTicketData'], $ticket_list['data'], $request);
-                    $tipsdata = array_map(function ($ticket) use ($request) {
-                        return $this->getTipsTicketData($ticket, $request);
-                    }, $ticket_list);
-                }
-
-                foreach ($tipsdata as $key => $label) {
-                    foreach ($label as $labelkey => $labeldata) {
-                        if(!empty($labeldata)){
-                            if (strtolower($labelkey) == 'sticky') {
-                                processStickyLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('sticky'));
+                    foreach ($ticket_list as $ticket) {
+                        $ticketsdata = $this->getTipsTicketData($ticket, $request);
+                        foreach ($ticketsdata as $type => $tipsdata) {
+                            if(isset($tipsticketdata[$type])){
+                                $tipsticketdata[$type] = array_merge($tipsticketdata[$type],$tipsdata);
                             } else {
-                                processCartonLabels::dispatch($authUser, $label, $this->getUserPrinterSettings('carton'));
+                                $tipsticketdata[$type] = $tipsdata;
                             }
                         }
+                    }
+                }
+
+                foreach ($tipsticketdata as $type => $ticketdata) {
+                    if (strtolower($type) == 'sticky') {
+                        processStickyLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('sticky'));
+                    } else {
+                        processCartonLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('carton'));
                     }
                 }
 
@@ -105,8 +107,10 @@ class LabelController extends FrontController
                     $data['cartonloose'] = $result['data'];
                 }
 
-                //add it to the queue job
-                processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
+                foreach ($data as $type => $cartondata) {
+                    //add it to the queue job
+                    processCartonLabels::dispatch($authUser, $cartondata, $type, $this->getUserPrinterSettings('carton'));
+                }
                 
                 $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
                 $request->session()->flash('class', 'alert-info');
@@ -161,8 +165,9 @@ class LabelController extends FrontController
                 }
 
                 $data['sticky'] = $sticky;
-
-                processStickyLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('sticky'));
+                foreach ($data as $type => $stickydata) {
+                    processStickyLabels::dispatch($authUser, $data, $type, $this->getUserPrinterSettings('sticky'));
+                }
                 $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
                 $request->session()->flash('class', 'alert-info');       
             } else {
@@ -201,7 +206,10 @@ class LabelController extends FrontController
                     $data[$cartontype] = $result['data'];
                 }
 
-                processCartonLabels::dispatch($authUser, $data,  $this->getUserPrinterSettings('carton'));
+                foreach ($data as $type => $cartondata) {
+                    //add it to the queue job
+                    processCartonLabels::dispatch($authUser, $cartondata, $type, $this->getUserPrinterSettings('carton'));
+                }
                 
                 $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
                 $request->session()->flash('class', 'alert-info');

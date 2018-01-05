@@ -19,10 +19,14 @@
 	?>
 	@if(!empty($sticky))
 		<?php $total = $sticky['quantity'];?> 		
+		@if($label_no = 1)
+			^XA
+			^FX Top section.
+			^CF0,{{$font_1}}
+			^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top}}^FD{{$sticky['order_number']}}^FS
+			<?php $label_no++; ?>
+		@endif
 		@for ($i=1; $i <= $sticky['quantity']; $i++)
-			@if($count == 1)
-				^XA
-			@endif
 				^FX Top section.
 				^CF0,{{$font_1}}
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top}}^FD{{$sticky['item']}}^FS
@@ -33,24 +37,24 @@
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.3}}^FD{{$sticky['stockroomlocator']}}^FS
 
 				^FX Third section with barcode.
-				^BY2,2,150
+				^BY3,2,150
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 4}}^BE^FD{{$sticky['barcode']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).
 				^CF0,{{$font_2}},
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 7}}^FH^FD{{str_replace('~','_7e',$sticky['description'])}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 7.1}}^FH^FD{{str_replace('~','_7e',$sticky['description'])}}^FS
 				^CF0,{{$font_2}},
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 8}}^FH^FD{{str_replace('~','_7e',$sticky['colour'])}}^FS
-			<?php $label_no++; ?>	
 			@if ($count == $total)
 				^XZ
-			@elseif ($count % $label_per_row == 0) 
+			@elseif ($count % $label_per_row == 0)
 				^XZ
 				^XA
 				<?php $label_no = 1; ?>
 			@endif
 			@if($count < $total)
 				<?php $count++; ?>
+				<?php $label_no++; ?>
 			@endif	
 		@endfor
 	@endif

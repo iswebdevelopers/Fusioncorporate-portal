@@ -53,8 +53,8 @@
 				<?php $label_no = 1; ?>
 			@endif
 			@if($count < $total)
-				<?php $count++; ?>
 				<?php $label_no++; ?>
+				<?php $count++; ?>
 			@endif	
 		@endfor
 	@endif

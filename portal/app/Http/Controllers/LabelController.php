@@ -8,6 +8,7 @@ use App\TicketRequest;
 use Setting;
 use View;
 use Log;
+use Config;
 use App\Jobs\processCartonLabels;
 use App\Jobs\processStickyLabels;
 use GuzzleHttp\Exception\ClientException as Exception;
@@ -56,7 +57,7 @@ class LabelController extends FrontController
                 }
 
                 foreach ($tipsticketdata as $type => $ticketdata) {
-                    if (strtolower($type) == 'sticky') {
+                    if (config::get('ticket.process.'.strtolower($type)) == 'sticky') {
                         processStickyLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('sticky'));
                     } else {
                         processCartonLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('carton'));

@@ -5,8 +5,7 @@ return [
 	'reprint' => 'N',
 	'supplier_trait' => '9006',
 	'mixed' => [
-		'quantity' => '5',
-		'type' => 'cartonloose',
+		'quantity' => '5'
 	],
 	'request_default' => [
 		'print_online_ind' => 'Y',
@@ -17,8 +16,16 @@ return [
 		'sticky' => 'STCK',
 		'carton' => 'CTRN'
 	],
-	'sort_type' => [
-		'packandloose' => 'PL',
-		'loose' => 'L'
+	'process' => [
+		'sticky' => 'sticky',
+		'simplepack' => 'sticky',
+		'pack' => 'sticky'
+	],
+	'templates' => [
+		'cartonpack' => 'cartonpack',
+		'cartonloose' => 'cartonloose',
+		'sticky' => 'sticky',
+		'simplepack' => 'stickypack',
+		'pack' => 'stickypack'
 	],
 ];

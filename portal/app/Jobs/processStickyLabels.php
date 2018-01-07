@@ -11,6 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\UserLabelPrint;
 use View;
 use Log;
+use config;
 
 class processStickyLabels implements ShouldQueue
 {
@@ -41,21 +42,18 @@ class processStickyLabels implements ShouldQueue
      */
     public function handle()
     {
-        if (!empty($this->stickydata)) {
-            foreach ($this->stickydata as $sticky) {
-                if ($sticky) {
-                    $view = View::make('labels.templates.sticky', ['sticky' => $sticky, 'settings' => $this->printer_settings]);
+        try {
+            if (!empty($this->stickydata)) {
+                foreach ($this->stickydata as $sticky) {
+                    $view = View::make('labels.templates.'.$this->type, ['sticky' => $sticky, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
-
-                    try {
-                        //add it to user label print
-                        $this->addLabelPrint($sticky, $raw_data, $this->type);
-                    } catch (Exception $e) {
-                        Log::info('Exception running queue job processCartonLabels '. $e->getMessage());
-                    }
+                    //add it to user label print
+                    $this->addLabelPrint($sticky, $raw_data, config::get('ticket.process.'.$this->type));    
                 }
+                
             }
-            
+        } catch (Exception $e) {
+            Log::info('Exception running queue job processCartonLabels '. $e->getMessage());
         }
     }
 }

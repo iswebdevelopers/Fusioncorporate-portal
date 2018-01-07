@@ -1,0 +1,1 @@
+@include('labels.templates.pack');

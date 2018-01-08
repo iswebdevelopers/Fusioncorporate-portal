@@ -1,5 +1,5 @@
 <div class="tab-pane fade" id="mixed">
-	<h4>Carton Mixed</h4>
+	<h4>Mixed</h4>
 	<div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead>

@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Label Options
-        </h3>
+        </h4>
     </div>
     @include('errors.error-list')
     <!--labels Options-->                

@@ -1,6 +1,9 @@
 <div class="tab-pane fade active in" id="carton">
     <form action="{{ action('LabelController@createticket') }}" method="post">
+        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                <input name="type" class="form-control" type="hidden" value="carton">
     <!-- Carton -->
+    <div class="col-xs-12">
     @if(!empty($orderdetails['cartonpack']))
         <h4>Carton Pack</h4>     
             <div class="table-responsive">
@@ -18,8 +21,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                <input name="type" class="form-control" type="hidden" value="carton">
                 @foreach ($orderdetails['cartonpack'] as $order)
                     <tr>
                         <input name="data[{{$order['item']}}][location_type]" class="form-control" type="hidden" value="{{$order['location_type']}}">
@@ -50,6 +51,8 @@
             No carton labels to print for this order.
         </div>    
     @endif 
+    </div>
+    <div class="col-xs-12">
     @if(!empty($orderdetails['cartonloose']))
         <h4>Warehouse Carton Loose</h4>     
             <div class="table-responsive">
@@ -97,6 +100,7 @@
             No carton labels to print for this order.
         </div>    
     @endif
+</div>
     @if (!empty($orderdetails['cartonpack']) || !empty($orderdetails['cartonloose']))
     <button type="submit" class="btn btn-primary pull-right">Save &amp; Generate</button>
     @endif         

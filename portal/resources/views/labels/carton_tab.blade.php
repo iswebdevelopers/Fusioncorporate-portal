@@ -92,7 +92,7 @@
             </table>
             </div>
     @else
-    <h4>Warehouse Carton Loose</h4>
+    <h4>Carton Loose</h4>
         <div class="alert alert-danger col-md-6">
             No carton labels to print for this order.
         </div>    

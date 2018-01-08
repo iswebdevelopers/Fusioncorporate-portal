@@ -2,7 +2,7 @@
     <form action="{{ action('LabelController@createticket') }}" method="post">
     <!-- Carton -->
     @if(!empty($orderdetails['cartonpack']))
-        <h4>Warehouse Carton Pack</h4>     
+        <h4>Carton Pack</h4>     
             <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
                 <thead>
@@ -31,12 +31,12 @@
                         <td>{{$order['item']}}</td>
                         <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}" required></td>
                         <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
-                        <td >
+                        <td class="col-xs-2">
                             <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">
                                 <option value="PL" selected>Pack Then Loose</option>
                             </select>
                         </td>
-                        <td>Pack - {{$order['pack_type']}}</td>
+                        <td class="col-xs-1">Pack - {{$order['pack_type']}}</td>
                         <td><button type="button" class="btn btn-danger btn-sm" id="btn_delete"><i class="fa fa-times"></i> Delete
                             </button></td>
                     </tr>
@@ -45,7 +45,7 @@
             </table>
             </div>
     @else
-    <h4>Warehouse Carton Pack</h4>
+    <h4>Carton Pack</h4>
         <div class="alert alert-danger col-md-6">
             No carton labels to print for this order.
         </div>    
@@ -78,12 +78,12 @@
                     <td>{{$order['item']}}</td>
                     <td class="col-xs-1"><input name="data[{{$order['item']}}][qty]" class="form-control" type="text" value="{{$order['quantity']}}" required></td>
                     <td class="col-xs-1"><input name="data[{{$order['item']}}][over_print_qty]" class="form-control" type="number" value="0" required></td>
-                    <td >
+                    <td class="col-xs-2">
                         <select class="form-control" name="data[{{$order['item']}}][sort_order_type]">
                             <option value="L" selected>Loose</option>
                         </select>
                     </td>
-                    <td>Loose</td>
+                    <td class="col-xs-1">Loose</td>
                     <td><button type="button" class="btn btn-danger btn-sm" id="btn_delete"><i class="fa fa-times"></i> Delete
                         </button></td>
                 </tr>

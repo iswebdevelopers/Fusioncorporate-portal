@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Password Reset
-        </h3>
+        </h4>
     </div>    
     @if ( $errors->count() > 0 )
         <div class="alert col-md-4 col-md-offset-4 alert-danger">

@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             New User
-        </h3>
+        </h4>
     </div>    
     @if (!empty($message))
          <div class="alert col-md-4 col-md-offset-4 alert-{{$status}}">
@@ -25,9 +25,6 @@
     <!--account settings-->
     <div class="col-md-6 col-sm-12 col-xs-12">        
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Account Settings
-            </div>
             <div class="panel-body">
                 <div class="list-group">
                     <form action="{{action('UserController@create')}}" method="post">

@@ -3,9 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Frequently Asked Qusetions
-        </h3>
+        </h4>
 		<div class="form-group col-md-8">
             <div class="tab-content panels-faq">
 		        <div class="panel-group" id="help-accordion-1">

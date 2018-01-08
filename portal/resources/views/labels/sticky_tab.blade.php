@@ -1,7 +1,7 @@
 <!-- Sticky No Price -->
 <div class="tab-pane fade" id="stnp">
 @if(!empty($orderdetails['orderdetails']))
-<h4>Warehouse Sticky</h4>
+<h4>Sticky</h4>
         <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -52,7 +52,7 @@
         </div>
     </form>
 @else
-<h4>Warehouse Sticky</h4>
+<h4>Sticky</h4>
     <div class="alert alert-danger col-md-6">
         No Sticky labels to print for this order.
     </div>

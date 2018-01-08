@@ -3,9 +3,9 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Search
-        </h3>
+        </h4>
     </div>
 
     <!-- search panel -->

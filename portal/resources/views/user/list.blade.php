@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Users List
-        </h3>
+        </h4>
     </div>
     @include('errors.error-list')
     @if(isset($users))
@@ -14,10 +14,7 @@
     <div class="col-md-10 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <span class="pull-right">
-                    <a href="user/new"><button class="btn btn-primary btn-sm btn-side">New User</button></a>
-                </span>
-                Users 
+                <a href="user/new"><button class="btn btn-primary btn-sm btn-side">New User</button></a>
             </div>
            <div class="panel-body">
                 <div class="table-responsive">

@@ -1,14 +1,12 @@
-<!-- SUpplier labels -->
-<div class="@if((strtolower($user['roles']) != 'warehouse') and (strtolower($user['roles']) != 'administrator')) {{'tab-pane fade active in'}} @else {{'tab-pane fade'}} @endif" id="supplier">
-    <div class="table-responsive">
+<div class="tab-pane fade active in" id="carton">
+	<div class="table-responsive">
     <p class="pull-right">
-        <a class="btn btn-primary btn-md" href="/portal/label/print/stickies/{{$order_no}}">Generate all sticky</a>
     @if((!empty($orderdetails['cartonpack'])) or (!empty($orderdetails['cartonloose'])))
         <a class="btn btn-primary btn-md" href="/portal/label/print/cartons/{{$order_no}}">Generate all Carton</a>
     @endif
     </p>
     @if(!empty($orderdetails['cartonpack']))
-        <h4>Supplier Carton Pack</h4>
+        <h4>Carton Pack</h4>
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
@@ -36,7 +34,7 @@
         @endif
     </div>
     @if(!empty($orderdetails['cartonloose']))
-        <h4>Supplier Carton Loose</h4>
+        <h4>Carton Loose</h4>
         <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead>

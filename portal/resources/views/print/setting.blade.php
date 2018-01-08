@@ -6,9 +6,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Printer
-        </h3>
+        </h4>
     </div>
     @if (!empty($message))
          <div class="alert col-md-4 col-md-offset-4 alert-{{$status}}">

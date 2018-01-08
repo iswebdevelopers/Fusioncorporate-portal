@@ -3,9 +3,9 @@
         <button class="close tip" data-toggle="tooltip" title="" id="launch" href="#" onclick="launchQZ();" style="display: none;" data-original-title="Launch QZ">
             <i class="fa fa-external-link"></i>
         </button>
-        <h3 class="panel-title">
+        <h4 class="panel-title">
             Connection: <span id="qz-status" class="text-muted" style="font-weight: bold;">Unknown</span>
-        </h3>
+        </h4>
     </div>
 
     <div class="panel-body">

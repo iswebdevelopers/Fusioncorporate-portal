@@ -4,9 +4,9 @@
 
 <div class="row">
     <div class="col-md-12">
-        <h3 class="page-header">
+        <h4 class="page-header">
             Account Edit - {{ucfirst($user['name'])}}
-        </h3>
+        </h4>
     </div>    
     <!--account settings-->
     <div class="col-md-6 col-sm-12 col-xs-12">

@@ -64,8 +64,8 @@
             <input name="carton[count]" class="form-control" value="{{$user_setting->settings['carton']['count'] or 1}}" required/>
         </div>
     </div>        
-</form>
-<div class="modal-footer">
+
     <button type="button" class="btn btn-default cancel" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-primary" onclick="setPrinterSetting({{$user['id']}})">Set</button>
-</div>
+    <button type="submit" class="btn btn-primary">Set</button>
+
+</form>

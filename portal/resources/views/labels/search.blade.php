@@ -7,7 +7,7 @@
             Search
         </h4>
     </div>
-
+    
     <!-- search panel -->
     <div class="col-md-12 col-sm-12 col-xs-12">
     	<div class="panel panel-default">
@@ -39,13 +39,13 @@
 		</div>			
     </div>
     <!-- end search panel -->
-
+    @include('partials._flash')    
     <!-- list -->
     @if ( $errors->count() > 0 )
-        <div class="alert alert-danger col-md-12">
-                @foreach( $errors->all() as $message )
-                  <strong>{{ $message }}</strong>
-                @endforeach
+        <div class="alert alert-danger col-md-6">
+            @foreach( $errors->all() as $message )
+              <strong>{{ $message }}</strong>
+            @endforeach
         </div>
     @endif 
     <div class="col-md-12 col-sm-12 col-xs-12"> 
@@ -56,7 +56,6 @@
                         Order Search List
                     </div>
                     <div class="panel-body">
-                        @include('partials._flash')
                         <div class="table-responsive">
                             <table class="table table-striped table-bordered table-hover">
                                 <thead>
@@ -75,7 +74,7 @@
                                         <td>{{$order['style']}}</td>
                                         <td>{{$order['item']}}</td>
                                         <td>{{$order['quantity']}}</td>
-                                        <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">View</a></td>
+                                        <td><a class="btn btn-primary btn-sm" href="/portal/label/print/{{strtolower($order['carton_type'])}}/{{$order['order_number']}}/{{$order['item']}}">Generate</a></td>
                                     </tr>
                                 @endforeach    
                                 </tbody>

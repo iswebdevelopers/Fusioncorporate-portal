@@ -411,7 +411,15 @@ line-height: 1.428571429;
 .no-undeline, .no-underline:focus, .no-underline:hover {
     text-decoration: none;
 }
-/*----------------------------------------------
+
+input:invalid {
+  border: 2px solid red;
+}
+input:valid {
+  border: 1px solid #ccd0d2;
+}
+/*-----------
+-----------------------------------
     MEDIA QUERIES     
 ------------------------------------------------*/
  

@@ -22,8 +22,8 @@
 	                <input name="email" class="form-control" type="text" placeholder="john.smith@mail.com" required>
 	            </div>
 	    		<div class="form-group">
-	                <label>Password</label>
-	                <input name="password" class="form-control" type="password" placeholder="" required>
+	                <label for="password">Password</label>
+	                <input id="password" name="password" class="form-control" type="password"  required>
 	            </div>
 	            <button type="submit" class="btn btn-primary">Submit</button>
 	            <a data-vbtype="ajax" class="venbobox pull-right" href="/portal/user/recovery" >Forgotten Password?</a>

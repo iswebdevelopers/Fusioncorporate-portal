@@ -54,6 +54,11 @@
                 setTimeout(function(){ printZPL(id); }, index * 10000);
             });    
         });
+
+        $("#formPrinterSetting").on("submit",function(e){
+            e.preventDefault();
+            setPrinterSetting();
+        });
     });
 
     qz.security.setCertificatePromise(function(resolve, reject) {
@@ -308,11 +313,6 @@
         } else {
             pinMessage("Please launch the print client");
         }    
-    }
-
-    function archiveLabel(id) {
-        var row = $("table tbody tr[data-id='" + id +"']");
-        console.log(id);
     }
 
     qz.websocket.setClosedCallbacks(function(evt) {

@@ -74,7 +74,7 @@ class LabelController extends FrontController
             return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
             return view('labels.list')->withErrors($errors)->withTitle('label_history');
         }
     }
@@ -122,7 +122,7 @@ class LabelController extends FrontController
             return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
                 
             return Redirect('label/carton')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
         }
@@ -179,7 +179,7 @@ class LabelController extends FrontController
             return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
                 
             return Redirect('label/carton')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
         }
@@ -221,7 +221,7 @@ class LabelController extends FrontController
             return back();
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
             
             return Redirect('label/carton')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
         }
@@ -245,7 +245,7 @@ class LabelController extends FrontController
             }
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
             
             return view('labels.history')->withErrors($errors)->withTitle('label_history');
         }
@@ -273,7 +273,7 @@ class LabelController extends FrontController
                 return view('labels.search', ['orders' => $result['data']])->withTitle('label_carton')->withInput($request->all());
             } catch (Exception $e) {
                 $error = json_decode((string) $e->getResponse()->getBody(), true);
-                $errors = [$error['message']];
+                $errors = [$error['data']['message']];
                 
                 return Redirect('label/carton')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
             }

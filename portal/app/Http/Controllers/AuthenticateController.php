@@ -30,7 +30,7 @@ class AuthenticateController extends FrontController
             } else {
                 try {
                     $response = $this->client->request('POST', 'auth/login', ['query' =>
-                        ['email' => $request->email, 'password' => $request->password]
+                        ['email' => strtolower($request->email), 'password' => $request->password]
                     ]);
                 
                     if ($response->getstatusCode() == 200) {

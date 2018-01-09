@@ -275,41 +275,38 @@
                 }   
             });
         } else{
-            alert("Please launch the print client");
+            pinMessage("Please launch the print client");
         }  
     }
 
     /// Raw Printers ///
     function printZPL(id) {
         if (ConnectionStatus()){
+            /// Raw Printers ///
             var config = getUpdatedConfig();
-            
+            var row = $("table tbody tr[data-id='" + id +"']");
             $.ajax({
-            	url: '/portal/label/rawdata/' + id,
+                url: '/portal/label/rawdata/' + id,
                 statusCode: {
                     401: function() {
                       window.location.replace("/portal/login");
                     }
                 },
-            	success: function(result) {
-            		data = $.parseJSON(result);
-            		var printData = [data.data]; 
-                    try{
-                        qz.print(config, printData);
-                        console.log(id);
-                    } catch(e) {
-                        displayError(e);
-                    }    
-            	},
-            	error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            		displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
-        		},
+                success: function(result) {
+                    data = $.parseJSON(result);
+                    var printData = [data.data]; 
+                    var printed = qz.print(config, printData).catch(displayError);   
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
+                },
                 complete: function(result) {
+                    row.remove();
                     displayMessage("File has been sent to Printer");
                 }
-        	});
+            });
         } else {
-            alert("Please launch the print client");
+            pinMessage("Please launch the print client");
         }    
     }
 

@@ -1,7 +1,7 @@
 <div id="qz-connection" class="panel panel-success">
     <div class="panel-heading">
-        <button class="close tip" data-toggle="tooltip" title="" id="launch" href="#" onclick="launchQZ();" style="display: none;" data-original-title="Launch QZ">
-            <i class="fa fa-external-link"></i>
+        <button style="opacity:.5; font-size:18px; padding:10px;" class="close tip" data-toggle="tooltip" title="" id="launch" href="#" onclick="launchQZ();" style="display: none;" data-original-title="Launch QZ">
+            Start Client <i class="fa fa-external-link"></i>
         </button>
         <h4 class="panel-title">
             Connection: <span id="qz-status" class="text-muted" style="font-weight: bold;">Unknown</span>

@@ -176,24 +176,13 @@
         }
     }
 
-    function listNetworkInfo() {
-        qz.websocket.getNetworkInfo().then(function(data) {
-            if (data.macAddress == null) { data.macAddress = 'UNKNOWN'; }
-            if (data.ipAddress == null) { data.ipAddress = "UNKNOWN"; }
-
-            var macFormatted = '';
-            for(var i = 0; i < data.macAddress.length; i++) {
-                macFormatted += data.macAddress[i];
-                if (i % 2 == 1 && i < data.macAddress.length - 1) {
-                    macFormatted += ":";
-                }
-            }
-
-            displayMessage("<strong>IP:</strong> " + data.ipAddress + "<br/><strong>Physical Address:</strong> " + macFormatted);
-        }).catch(displayError);
+    function ConnectionStatus() {
+        if ($("#launch").is(":visible")) {
+            return false;
+        } else {
+            return true;
+        }
     }
-
-
     /// Detection ///
 
     function findPrinter(query, set) {
@@ -258,62 +247,75 @@
     }
 
     function setPrinterSetting() {
-        var carton = $("#carton-select").val();
-        var sticky = $("#sticky-select").val();
-        var _token = $("input[name='_token']").val();
-        var formData = $("#formPrinterSetting").serialize();
-        
-        var data = { carton: carton, sticky: sticky };
-        
-        $.ajax({
-            url: '/portal/printer/setting',
-            method: 'POST',
-            headers: { 'X-CSRF-TOKEN': _token },
-            data: formData,
-            statusCode: {
-                401: function() {
-                  window.location.replace("/portal/login");
-                }
-            },
-            success: function(result) {
-                $("#askPrinterSettingModal").modal('hide');
-                $("#askPrinterSettingModal").removeClass("in").hide();
-                displayMessage("Printers settings saved");
-            },
-            error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
-            }   
-        });
-
-        
-        
+        if (ConnectionStatus()){
+            var carton = $("#carton-select").val();
+            var sticky = $("#sticky-select").val();
+            var _token = $("input[name='_token']").val();
+            var formData = $("#formPrinterSetting").serialize();
+            
+            var data = { carton: carton, sticky: sticky };
+            
+            $.ajax({
+                url: '/portal/printer/setting',
+                method: 'POST',
+                headers: { 'X-CSRF-TOKEN': _token },
+                data: formData,
+                statusCode: {
+                    401: function() {
+                      window.location.replace("/portal/login");
+                    }
+                },
+                success: function(result) {
+                    $("#askPrinterSettingModal").modal('hide');
+                    $("#askPrinterSettingModal").removeClass("in").hide();
+                    displayMessage("Printers settings saved");
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
+                }   
+            });
+        } else{
+            alert("Please launch the print client");
+        }  
     }
 
     /// Raw Printers ///
     function printZPL(id) {
-        var config = getUpdatedConfig();
-        var row = $("table tbody tr[data-id='" + id +"']");
-        $.ajax({
-        	url: '/portal/label/rawdata/' + id,
-            statusCode: {
-                401: function() {
-                  window.location.replace("/portal/login");
+        if (ConnectionStatus()){
+            var config = getUpdatedConfig();
+            
+            $.ajax({
+            	url: '/portal/label/rawdata/' + id,
+                statusCode: {
+                    401: function() {
+                      window.location.replace("/portal/login");
+                    }
+                },
+            	success: function(result) {
+            		data = $.parseJSON(result);
+            		var printData = [data.data]; 
+                    try{
+                        qz.print(config, printData);
+                        console.log(id);
+                    } catch(e) {
+                        displayError(e);
+                    }    
+            	},
+            	error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            		displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
+        		},
+                complete: function(result) {
+                    displayMessage("File has been sent to Printer");
                 }
-            },
-        	success: function(result) {
-        		data = $.parseJSON(result);
-        		var printData = [data.data]; 
-                var printed = qz.print(config, printData).catch(displayError);    
-        	},
-        	error: function(XMLHttpRequest, textStatus, errorThrown) { 
-        		displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
-    		},
-            complete: function(result) {
-                row.remove();
-                displayMessage("File has been sent to Printer");
-            }
-    	});
-        
+        	});
+        } else {
+            alert("Please launch the print client");
+        }    
+    }
+
+    function archiveLabel(id) {
+        var row = $("table tbody tr[data-id='" + id +"']");
+        console.log(id);
     }
 
     qz.websocket.setClosedCallbacks(function(evt) {
@@ -470,11 +472,6 @@
                             size: pxlSize,
                             units: $("input[name='pxlUnits']:checked").val()
                         });
-    }
-
-    function setPrintFile() {
-        setPrinter({ file: $("#askFile").val() });
-        $("#askFileModal").modal('hide');
     }
 
     function setPrintHost(userId) {

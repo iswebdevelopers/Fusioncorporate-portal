@@ -6,6 +6,7 @@
         <h4 class="page-header">
             Search
         </h4>
+        @include('partials._flash') 
     </div>
     
     <!-- search panel -->
@@ -36,18 +37,19 @@
     	            <button type="submit" class="btn btn-primary">Submit</button>
     			</form>
     		</div>
-		</div>			
+		</div>	
+        <!-- list -->
+        @if ( $errors->count() > 0 )
+            <div class="alert alert-danger col-md-6">
+                @foreach( $errors->all() as $message )
+                  <strong>{{ $message }}</strong>
+                @endforeach
+            </div>
+        @endif 	
+        <!-- end search panel -->
     </div>
-    <!-- end search panel -->
-    @include('partials._flash')    
-    <!-- list -->
-    @if ( $errors->count() > 0 )
-        <div class="alert alert-danger col-md-6">
-            @foreach( $errors->all() as $message )
-              <strong>{{ $message }}</strong>
-            @endforeach
-        </div>
-    @endif 
+        
+    
     <div class="col-md-12 col-sm-12 col-xs-12"> 
             @if (isset($orders))
                 @if(count($orders) > 0)

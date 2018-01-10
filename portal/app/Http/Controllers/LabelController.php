@@ -64,7 +64,7 @@ class LabelController extends FrontController
                     }
                 }
 
-                $request->session()->flash('message', 'All Labels has been added to Print Shop');
+                $request->session()->flash('message', "All Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index')." >Printer Settings</a>.");
@@ -113,7 +113,7 @@ class LabelController extends FrontController
                     processCartonLabels::dispatch($authUser, $cartondata, $type, $this->getUserPrinterSettings('carton'));
                 }
                 
-                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('message', "Carton Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
@@ -169,7 +169,7 @@ class LabelController extends FrontController
                 foreach ($data as $type => $stickydata) {
                     processStickyLabels::dispatch($authUser, $data, $type, $this->getUserPrinterSettings('sticky'));
                 }
-                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('message', "Sticky Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');       
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
@@ -212,7 +212,7 @@ class LabelController extends FrontController
                     processCartonLabels::dispatch($authUser, $cartondata, $type, $this->getUserPrinterSettings('carton'));
                 }
                 
-                $request->session()->flash('message', 'Carton Labels has been added to Print Shop');
+                $request->session()->flash('message', "Carton Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Printer Settings</a>.");
@@ -263,6 +263,7 @@ class LabelController extends FrontController
         $token = $request->session()->get('token');
 
         if ($request->isMethod('post')) {
+
             try {
                 $response = $this->client->request('POST', 'order/'.$request->carton_type.'?token='.$token, ['form_params' => ['order_no'=>$request->order_no,'item_number' => $request->item_number]]);
                 
@@ -275,7 +276,7 @@ class LabelController extends FrontController
                 $error = json_decode((string) $e->getResponse()->getBody(), true);
                 $errors = [$error['data']['message']];
                 
-                return Redirect('label/carton')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
+                return Redirect('label/carton/search')->withErrors($errors)->withTitle('label_carton')->withInput($request->all());
             }
         } else {
             return view('labels.search')->withTitle('label_carton')->withInput($request->all());

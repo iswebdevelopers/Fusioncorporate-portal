@@ -408,6 +408,11 @@ line-height: 1.428571429;
     margin-right:2px;
 }
 
+.btn:focus {
+    outline: none;
+    background-color: #161616;
+  border-color: #000;
+}
 .no-undeline, .no-underline:focus, .no-underline:hover {
     text-decoration: none;
 }

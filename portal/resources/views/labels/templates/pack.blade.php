@@ -13,8 +13,17 @@
 		$font_1 = ceil(($height/100) * 11);
 		$font_2 = ceil(($height/100) * 6);
 
+		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
+			$start = '${';
+			$end = '}$';
+		} else{
+			$start = '';
+			$end = '';
+		}
+
 	?>
 	@if(!empty($sticky))
+		{{$start}}
 		<?php $total = count($sticky['packs']);?>
 		@for ($i=1; $i <= $sticky['quantity']; $i++)
 			<?php $label_no = 1; $count = 1; ?>
@@ -58,5 +67,6 @@
 				@endif
 			@endforeach
 		@endfor
+		{{$end}}
 	@endif
 @endif	

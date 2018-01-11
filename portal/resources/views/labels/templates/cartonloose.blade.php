@@ -15,8 +15,17 @@
 
 		//count
 		$count = 1;
+
+		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
+			$start = '${';
+			$end = '}$';
+		} else{
+			$start = '';
+			$end = '';
+		}
 	?>
 	@if(!empty($carton))
+		{{$start}}
 		@if(($label_per_row == 1) and $pagebreak) 
 			^XA
 			^FX Top section.
@@ -68,6 +77,7 @@
 			@elseif ($count < $label_per_row)
 				<?php $count++; ?>
 			@endif
-		@endforeach	
+		@endforeach
+		{{$end}}	
 	@endif
 @endif	

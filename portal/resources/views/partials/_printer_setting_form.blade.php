@@ -10,6 +10,12 @@
             <select name="sticky[printer]" class="form-control" id="sticky-select" required></select>
         </div>
         <div class="form-group">
+            <div class="checkbox">
+                    <label><input name="sticky[passthroughmode]" type="checkbox" <?php if (isset($user_setting->settings['sticky']['passthroughmode'])) echo ($user_setting->settings['sticky']['passthroughmode']=='on' ? 'checked' : '');?>> Enable pass through mode</label>
+                    <span id="helpBlock" class="help-block"><i class="fa fa-info-circle"> </i> Enable only if passthrough mode on printer preferences is also enabled</span>
+            </div>
+        </div>    
+        <div class="form-group">
             <label for="density" class="col-xs-3">Density:</label>
             <select name="sticky[density]" class="form-control" required>
                 @foreach ($printer_settings['density'] as $key => $value)
@@ -39,6 +45,12 @@
             <label for="carton" class="col-xs-3">Carton:</label>
             <select name="carton[printer]" class="form-control" id="carton-select" class="col-xs-5" required></select>
         </div>
+        <div class="form-group">
+            <div class="checkbox">
+                    <label><input name="carton[passthroughmode]" type="checkbox" <?php if (isset($user_setting->settings['carton']['passthroughmode'])) echo ($user_setting->settings['carton']['passthroughmode']=='on' ? 'checked' : '');?>>Enable pass through mode</label>
+                    <span id="helpBlock" class="help-block"><i class="fa fa-info-circle"> </i> Enable only if passthrough mode on printer preferences is also enabled</span>
+            </div>
+        </div>  
         <div class="form-group">
             <label for="density" class="col-xs-3">Density:</label>
             <select name="carton[density]" class="form-control" required>

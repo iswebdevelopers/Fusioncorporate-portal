@@ -10,11 +10,11 @@
                     <li>
                         <a @if (substr($title,6) == 'orders') class="active-menu" @endif href="/portal/label/orders">Orders</a>
                     </li>
-                    @if((strtolower($user['roles']) == 'administrator') || ($user['roles'] == 'warehouse'))
+                    <!-- @if((strtolower($user['roles']) == 'administrator') || ($user['roles'] == 'warehouse'))
                     <li>
                         <a @if (substr($title,6) == 'carton') class="active-menu" @endif href="/portal/label/carton/search">Individual Carton</a>
                     </li>
-                    @endif
+                    @endif -->
                     <li>
                         <a @if (substr($title,6) == 'history') class="active-menu" @endif href="/portal/label/history">History</a>
                     </li>

@@ -16,8 +16,17 @@
 		//count
 		$count = 1;
 		$label_no = 1;
+		
+		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
+			$start = '${';
+			$end = '}$';
+		} else{
+			$start = '';
+			$end = '';
+		}
 	?>
 	@if(!empty($sticky))
+		{{$start}}
 		<?php $total = $sticky['quantity'];?> 		
 		@if($label_no = 1)
 			^XA
@@ -57,5 +66,6 @@
 				<?php $count++; ?>
 			@endif	
 		@endfor
+		{{$end}}
 	@endif
 @endif	

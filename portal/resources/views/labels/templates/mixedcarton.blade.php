@@ -14,10 +14,19 @@
 		$font_2 = ceil(($height/100) * 3);
 		$font_3 = ceil(($height/100) * 22);
 
+		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
+			$start = '${';
+			$end = '}$';
+		} else{
+			$start = '';
+			$end = '';
+		}
+
 		//count
 		$count = 1;
 		$label_count = $quantity;
 	?>
+	{{$start}}
 	@for($i=1; $i <= $label_count; $i++)
 		<!-- mixed carton print -->
 		@if($count == 1)
@@ -40,4 +49,5 @@
 			<?php $count++; ?>	
 		@endif
 	@endfor
+	{{$end}}
 @endif

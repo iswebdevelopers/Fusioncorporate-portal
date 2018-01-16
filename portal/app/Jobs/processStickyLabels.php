@@ -11,7 +11,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use App\UserLabelPrint;
 use View;
 use Log;
-use config;
+use Config;
 
 class processStickyLabels implements ShouldQueue
 {

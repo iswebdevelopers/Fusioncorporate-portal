@@ -167,8 +167,9 @@ class LabelController extends FrontController
                 }
 
                 $data['sticky'] = $sticky;
+               
                 foreach ($data as $type => $stickydata) {
-                    processStickyLabels::dispatch($authUser, $data, $type, $this->getUserPrinterSettings('sticky'));
+                    processStickyLabels::dispatch($authUser, $stickydata, $type, $this->getUserPrinterSettings('sticky'));
                 }
                 $request->session()->flash('message', "Sticky Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');       

@@ -67,7 +67,7 @@
                         @foreach ($labels['data'] as $label)
                              <tr>
                                 <td>{{$label['id']}}</td>
-                                <td>{{$label['order']}}</td>
+                                <td><a href="/portal/label/order/{{$label['order']}}">{{$label['order']}}</a></td>
                                 <td>{{$label['date']}}</td>
                                 <td>{{$label['cartons']}}</td>
                             </tr>

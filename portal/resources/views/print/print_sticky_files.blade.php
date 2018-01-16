@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-default pull-right" id="print-all" data-type="sticky">Print All</button>
 		    	@foreach($stickies as $sticky)
 		    		<tr data-id="{{$sticky->id}}">
-                        <td>{{$sticky->order_id}}</td>
+                        <td><a href="/portal/label/order/{{$sticky->order_id}}">{{$sticky->order_id}}</a></td>
                         <td>{{$sticky->updated_at}}</td>
                         <td>{{$sticky->type}}</td>
                         <td>{{$sticky->quantity}}</td>

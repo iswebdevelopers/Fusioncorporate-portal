@@ -14,7 +14,7 @@
             <tbody>
 		    	@foreach($archives as $archive)
 		    		<tr>
-                        <td>{{$archive->order_id}}</td>
+                        <td><a href="/portal/label/order/{{$archive->order_id}}">{{$archive->order_id}}</a></td>
                         <td>{{$archive->updated_at}}</td>
                         <td>{{$archive->type}}</td>
                         <td>{{$archive->quantity}}</td>

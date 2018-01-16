@@ -12,7 +12,7 @@
             <tbody>
             <form action="{{ action('LabelController@printmixed') }}" method="post">
             <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-            <input name="type" class="form-control" type="hidden" value="mixed">
+            <input name="type" class="form-control" type="hidden" value="cartonmixed">
                 <tr>
                 <input name="order_no" class="form-control" type="hidden" value="{{$order_no}}">
                     <td>{{$order_no}}</td>

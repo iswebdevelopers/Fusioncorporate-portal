@@ -27,6 +27,7 @@
             </tbody>
         </table><a class="btn btn-primary btn-sm pull-right" href="/portal/label/print/stickies/{{$order_no}}">Generate</a>
         </div>
+    </form>
 @else
 <h4>Sticky</h4>
     <div class="alert alert-danger col-md-6">

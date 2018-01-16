@@ -30,7 +30,7 @@
                         <tbody>
                         @foreach ($orders as $order) 
                             <tr>
-                                <td>{{$order['order_number']}}</td>
+                                <td><a href="/portal/label/order/{{$order['order_number']}}">{{$order['order_number']}}</a></td>
                                 <td>{{$order['supplier']}}</td>
                                 <td>{{$order['approval_date']}}</td>
                             </tr>

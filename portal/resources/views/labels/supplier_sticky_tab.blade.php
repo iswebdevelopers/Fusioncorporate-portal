@@ -1,5 +1,5 @@
 <!-- Sticky No Price -->
-<div class="tab-pane fade" id="stnp">
+<div class="tab-pane fade" id="sticky">
 @if(!empty($orderdetails['orderdetails']))
 <h4>Sticky</h4>
         <div class="table-responsive">

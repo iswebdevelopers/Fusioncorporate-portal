@@ -14,7 +14,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
             	@include('partials._flash')
-                <ul class="nav nav-pills">  
+                <ul class="nav nav-pills nav-justified">  
                     <li class="active"><a href="#carton" data-toggle="tab">Carton</a></li>
                     <li class=""><a href="#sticky" data-toggle="tab">Sticky No Price</a></li>
                     <li class=""><a href="#mixed" data-toggle="tab">Mixed</a></li>

@@ -35,7 +35,7 @@
                 </tr>
             @endforeach        
             </tbody>
-        </table><button type="submit" class="btn btn-primary pull-right">Save &amp; Generate</button>
+        </table><button type="submit" class="btn btn-primary btn-sm pull-right">Save &amp; Generate</button>
         </div>
     </form>
 @else

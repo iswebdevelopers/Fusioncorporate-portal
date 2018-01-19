@@ -7,7 +7,7 @@
 		$label_per_row = $settings['count'];
 
 		//margin
-		$margin_left = ceil(($width/100) * 11);  
+		$margin_left = ceil(($width/100) * 9);  
 		$margin_top = ceil(($height/100) * 6);
 		$pack_margin_left = ceil(($width/100) * 82);
 		//fontsizes

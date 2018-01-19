@@ -312,7 +312,7 @@ class LabelController extends FrontController
 
                 $labelprint->save();
 
-                $request->session()->flash('message', 'Carton Mixed Labels has been added to Print Shop');
+                $request->session()->flash('message', "Carton Mixed Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting').">Printer Settings</a>.");

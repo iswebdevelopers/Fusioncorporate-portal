@@ -17,6 +17,8 @@
 		$count = 1;
 		$label_no = 1;
 		
+		$barcode = '^BY'. ($settings['density']/6).','.($settings['density']/6).','.($settings['density']*7);
+
 		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
 			$start = '${';
 			$end = '}$';
@@ -33,9 +35,13 @@
 			^FX Top section.
 			^CF0,{{$font_1}}
 			^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top}}^FD{{$sticky['order_number']}}^FS
-			<?php $label_no++; ?>
 		@endif
 		@for ($i=1; $i <= $sticky['quantity']; $i++)
+				@if ($count % $label_per_row == 0)
+					^XZ
+					^XA
+					<?php $label_no = 1; ?>
+				@endif
 				^FX Top section.
 				^CF0,{{$font_1}}
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top}}^FD{{$sticky['item']}}^FS
@@ -46,7 +52,7 @@
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.3}}^FD{{$sticky['stockroomlocator']}}^FS
 
 				^FX Third section with barcode.
-				^BY3,2,150
+				{{$barcode}}
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 4}}^BE^FD{{$sticky['barcode']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).
@@ -56,10 +62,6 @@
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 8}}^FH^FD{{str_replace('~','_7e',$sticky['colour'])}}^FS
 			@if ($count == $total)
 				^XZ
-			@elseif ($count % $label_per_row == 0)
-				^XZ
-				^XA
-				<?php $label_no = 1; ?>
 			@endif
 			@if($count < $total)
 				<?php $label_no++; ?>

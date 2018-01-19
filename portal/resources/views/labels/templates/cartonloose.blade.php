@@ -6,8 +6,14 @@
 		$label_per_row = $settings['count'];
 
 		//margin
-		$margin_left = ceil(($width/100) * 11);  
+		$margin_left = ceil(($width/100) * 9);  
 		$margin_top = ceil(($height/100) * 6);
+
+		if ($settings['density'] == 6){
+			$barcodemargin_left = 10;
+		} else {
+			$barcodemargin_left = $margin_left;
+		}
 
 		//fontsizes
 		$font_1 = ceil(($height/100) * 5);
@@ -54,7 +60,7 @@
 
 				^FX Third section with barcode.
 				^BY2,2
-				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 8.5}}^BCN,{{$margin_top * 3}},N,N,Y
+				^FO{{$barcodemargin_left + (($count - 1) * $width)}},{{$margin_top * 8.5}}^BCN,{{$margin_top * 3}},N,N,Y
 				^FD{{$details['pibarcode']}}^FS
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 11.7}}
 				^A0N,{{$font_1}},{{$font_1 - 20}}
@@ -62,7 +68,7 @@
 
 				^FX Fourth section (the two boxes on the bottom).
 				^BY2,2
-				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 12.7}}^BCN,{{$margin_top * 3}},N,N,Y
+				^FO{{$barcodemargin_left + (($count - 1) * $width)}},{{$margin_top * 12.7}}^BCN,{{$margin_top * 3}},N,N,Y
 				^FD{{$details['barcode']}}^FS
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 15.9}}
 				^A0N,{{$font_1}},{{$font_1 - 10}}

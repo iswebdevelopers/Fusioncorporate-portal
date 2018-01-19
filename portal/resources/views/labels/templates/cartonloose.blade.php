@@ -16,7 +16,7 @@
 		}
 
 		//fontsizes
-		$font_1 = ceil(($height/100) * 5);
+		$font_1 = ceil(($height/100) * 4);
 		$font_2 = ceil(($height/100) * 3);
 
 		//count

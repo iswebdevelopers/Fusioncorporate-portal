@@ -13,6 +13,8 @@
 		$font_1 = ceil(($height/100) * 11);
 		$font_2 = ceil(($height/100) * 6);
 
+		$barcode = '^BY'. ceil($height/200).','.ceil($height/300).','.ceil($height/5);
+
 		if(isset($settings['passthroughmode']) and ($settings['passthroughmode'] == 'on')) {
 			$start = '${';
 			$end = '}$';
@@ -35,34 +37,36 @@
 			^CF0,{{$font_1}}
 			^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2.5}}^FDPACK:{{$sticky['pack_type']}}^FS
 			^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 4}}^FD{{$sticky['pack_number']}}^FS
-			@foreach ($sticky['packs'] as $item => $pack)
 				<?php $label_no++; ?>
+			@foreach ($sticky['packs'] as $item => $pack)
+				@if (($label_no - 1) % $label_per_row == 0) 
+					^XZ
+					^XA
+					<?php $label_no = 1;?>
+				@endif
 				^FX Top section.
 				^CF0,{{$font_1}}
 				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top}}^FD{{$item}}^FS
 
 				^FX Second.
 				^CF0,{{$font_2}}
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2.5}}^FDSize:{{$pack['item_size']}}^FS
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.3}}^FD{{$pack['stockroomlocator']}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2}}^FDSize:{{$pack['item_size']}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 2.5}}^FD{{$pack['stockroomlocator']}}^FS
 
 				^FX Third section with barcode.
-				^BY3,2,150
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 4}}^BE^FD{{$pack['barcode']}}^FS
+				{{$barcode}}
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.5}}^BE^FD{{$pack['barcode']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).
 				^CF0,{{$font_2}},
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 7.1}}^FH^FD{{str_replace('~','_7e',$pack['description'])}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 6.5}}^FH^FD{{str_replace('~','_7e',$pack['description'])}}^FS
 				^CF0,{{$font_2}},
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 8}}^FH^FD{{str_replace('~','_7e',$pack['colour'])}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 7}}^FH^FD{{str_replace('~','_7e',$pack['colour'])}}^FS
 				@if ($count == $total)
 					^XZ
-				@elseif ($label_no % $label_per_row == 0) 
-					^XZ
-					^XA
-					<?php $label_no = 0;?>
 				@endif
 				@if($count < $total)
+					<?php $label_no++; ?>
 					<?php $count++; ?>
 				@endif
 			@endforeach

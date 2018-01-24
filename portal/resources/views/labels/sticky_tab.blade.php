@@ -1,7 +1,7 @@
 <!-- Sticky No Price -->
 <div class="tab-pane fade" id="sticky">
 @if(!empty($orderdetails['orderdetails']))
-<h4>Sticky - {{$order_no}}</h4>
+<h4>Unit - {{$order_no}}</h4>
         <div class="table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead>

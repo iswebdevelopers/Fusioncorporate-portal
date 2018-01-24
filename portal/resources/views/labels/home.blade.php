@@ -16,7 +16,7 @@
             	@include('partials._flash')
                 <ul class="nav nav-pills nav-justified">  
                     <li class="active"><a href="#carton" data-toggle="tab">Carton</a></li>
-                    <li class=""><a href="#sticky" data-toggle="tab">Sticky No Price</a></li>
+                    <li class=""><a href="#sticky" data-toggle="tab">Unit</a></li>
                     <li class=""><a href="#mixed" data-toggle="tab">Mixed</a></li>
                 </ul>
                 <div class="tab-content">
@@ -25,14 +25,9 @@
                     <!-- End restriction -->
 
                     <!-- Admin and warehouse restricted -->
-                    @if((strtolower($user['roles']) == 'administrator') || (strtolower($user['roles']) == 'warehouse'))
                         @include('labels.carton_tab')
                         @include('labels.sticky_tab')
-                    @else
-                        @include('labels.supplier_carton_tab')
-                        @include('labels.supplier_sticky_tab')    
-                    @endif  
-                    @include('labels.mixed_tab')  
+                        @include('labels.mixed_tab')  
                 </div>          
             </div>
         </div>

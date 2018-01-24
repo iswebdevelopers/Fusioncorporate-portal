@@ -63,7 +63,7 @@
 				^FO{{$barcodemargin_left + (($count - 1) * $width)}},{{$margin_top * 8.5}}^BCN,{{$margin_top * 3}},N,N,Y
 				^FD{{$details['pibarcode']}}^FS
 				^FO{{$margin_left + (($count - 1) * $width)}},{{$margin_top * 11.7}}
-				^A0N,{{$font_1}},{{$font_1 - 20}}
+				^A0N,{{$font_1}},{{$font_1 - 10}}
 				^FD{{$details['pinumber']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).

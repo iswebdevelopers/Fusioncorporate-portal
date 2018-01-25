@@ -70,5 +70,19 @@ class UserLabelPrint extends Model
     public function scopeArchived($query)
     {
         return $query->where('printed','1');
-    }    
+    } 
+
+    /**
+     * Scope Archived.
+     *
+     * @param  string  $query
+     * @return string
+     */
+    public function scopeMonthOld($query)
+    {
+        $today = new Carbon();
+        $start = $today->subMonth()->format('Y-m-d');
+        return $query->where('created_at', '<=', $start);
+    } 
+
 }

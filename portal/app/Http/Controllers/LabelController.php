@@ -323,4 +323,49 @@ class LabelController extends FrontController
         }
 
     }
+
+    /**
+     * create sample labels
+     * @return data sample labels
+     */
+    public function printsamples(Request $request)
+    { 
+        $authUser = $this->getAuthUser($request);
+
+        if ($this->getUserPrinterSettings('carton')) {
+            $view = View::make('labels.templates.samplecarton', ['settings' => $this->getUserPrinterSettings('carton')]);
+        
+            $raw_data = (string) $view;
+
+            $labelprint = New UserLabelPrint();
+            $labelprint->user_id = $authUser['id'];
+            $labelprint->order_id = '1234567';
+            $labelprint->type = 'cartonloose';
+            $labelprint->raw_data = $raw_data;
+            $labelprint->printed = 0;
+            $labelprint->creator = $authUser['email'];
+            $labelprint->quantity = 1;
+
+            $labelprint->save();
+        }
+
+        if ($this->getUserPrinterSettings('sticky')) {
+            $view = View::make('labels.templates.samplesticky', ['settings' => $this->getUserPrinterSettings('sticky')]);
+        
+            $raw_data = (string) $view;
+
+            $labelprint = New UserLabelPrint();
+            $labelprint->user_id = $authUser['id'];
+            $labelprint->order_id = '1234567';
+            $labelprint->type = 'sticky';
+            $labelprint->raw_data = $raw_data;
+            $labelprint->printed = 0;
+            $labelprint->creator = $authUser['email'];
+            $labelprint->quantity = 1;
+
+            $labelprint->save();
+        }
+
+        return $labelprint;
+    }
 }

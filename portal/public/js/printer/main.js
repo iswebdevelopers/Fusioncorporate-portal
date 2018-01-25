@@ -270,7 +270,8 @@
                       window.location.replace("/portal/login");
                     }
                 },
-                success: function(result) {
+                success: function(data) {
+                    createSampleLabels();
                     $("#askPrinterSettingModal").modal('hide');
                     $("#askPrinterSettingModal").removeClass("in").hide();
                     displayMessage("Printers settings saved");
@@ -282,6 +283,28 @@
         } else{
             pinMessage("Please launch the print client");
         }  
+    }
+
+    function createSampleLabels() {
+        $.ajax({
+            url: '/portal/printer/samplelabels',
+            method: 'GET',
+            statusCode: {
+                401: function() {
+                  window.location.replace("/portal/login");
+                }
+            },
+            success: function(data) {
+                createSampleLabels();
+                $("#askPrinterSettingModal").modal('hide');
+                $("#askPrinterSettingModal").removeClass("in").hide();
+                displayMessage("Printers settings saved");
+                location.reload();
+            },
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                displayMessage("Status: " + textStatus + "Error: " + errorThrown); 
+            }   
+        });
     }
 
     /// Raw Printers ///

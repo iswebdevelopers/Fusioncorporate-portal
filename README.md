@@ -8,6 +8,7 @@ Deployment as new instance:
 - Go into the portal folder and rename  file named .env.example to .env change the values 
 - Run composer install/update
 - Run php artisan key:generate
+- Run php artisan migrate
 - Run  php artisan cache:clear
 - Run  php artisan view:clear
 

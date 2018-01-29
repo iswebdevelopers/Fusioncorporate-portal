@@ -9,7 +9,7 @@ Deployment as new instance:
 - Run composer install/update
 - Run php artisan key:generate
 - Run  php artisan cache:clear
-- Run  php artisan cache:clear
+- Run  php artisan view:clear
 
 ## Dependencies
 - Organisation Api - https://github.com/Gauthamram/fusionAPI.

@@ -13,7 +13,7 @@ Deployment as new instance:
 
 ## Dependencies
 - Organisation Api - https://github.com/Gauthamram/fusionAPI.
-- Print Client - https://qz.io/ (Refer Docs - sample Js provided to get you started and customise as required)
+- Print Client - https://qz.io/ (Refer Docs - sample Js provided to get started and customise as required)
 
 ## Label Generation
 - Without setting the printer values, no label will be generated.

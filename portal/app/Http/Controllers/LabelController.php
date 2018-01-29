@@ -25,7 +25,8 @@ class LabelController extends FrontController
     public function createticket(Request $request)
     {
         $authUser = $this->getAuthUser($request);
-
+        $tipsticketdata = [];
+        
         try {
             $token = $request->session()->get('token');
 
@@ -46,26 +47,34 @@ class LabelController extends FrontController
                 if (count($ticket_list) > 0) {
                     foreach ($ticket_list as $ticket) {
                         $ticketsdata = $this->getTipsTicketData($ticket, $request);
-                        foreach ($ticketsdata as $type => $tipsdata) {
-                            if(isset($tipsticketdata[$type])){
-                                $tipsticketdata[$type] = array_merge($tipsticketdata[$type],$tipsdata);
-                            } else {
-                                $tipsticketdata[$type] = $tipsdata;
+
+                        if($ticketsdata) {
+                            foreach ($ticketsdata as $type => $tipsdata) {
+                                if(isset($tipsticketdata[$type])){
+                                    $tipsticketdata[$type] = array_merge($tipsticketdata[$type],$tipsdata);
+                                } else {
+                                    $tipsticketdata[$type] = $tipsdata;
+                                }
                             }
                         }
                     }
                 }
 
-                foreach ($tipsticketdata as $type => $ticketdata) {
-                    if (config::get('ticket.process.'.strtolower($type)) == 'sticky') {
-                        processStickyLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('sticky'));
-                    } else {
-                        processCartonLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('carton'));
+                if($tipsticketdata) {
+                    foreach ($tipsticketdata as $type => $ticketdata) {
+                        if (config::get('ticket.process.'.strtolower($type)) == 'sticky') {
+                            processStickyLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('sticky'));
+                        } else {
+                            processCartonLabels::dispatch($authUser, $ticketdata, $type, $this->getUserPrinterSettings('carton'));
+                        }
                     }
-                }
 
-                $request->session()->flash('message', "All Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
-                $request->session()->flash('class', 'alert-info');
+                    $request->session()->flash('message', "All Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
+                    $request->session()->flash('class', 'alert-info');
+                } else {
+                    $request->session()->flash('message', "Labels Could not be generated for the order - Please Contact Support for more information");
+                    $request->session()->flash('class', 'alert-info');
+                }
             } else {
                 $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting')." >Printer Settings</a>.");
                 $request->session()->flash('class', "alert-error");

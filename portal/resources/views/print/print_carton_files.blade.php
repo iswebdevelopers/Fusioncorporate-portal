@@ -20,6 +20,7 @@
                         <td>{{$carton->quantity}}</td>
                         <td>
                             <button type="button" class="btn btn-sm" onclick="printZPL({{$carton->id}});">Print</button>
+                            <button type="button" class="btn btn-sm" onclick="printArchive({{$carton->id}});">Remove</button>
                         </td>
                     </tr>
 		    	@endforeach

@@ -19,7 +19,7 @@
                         <td>{{$archive->type}}</td>
                         <td>{{$archive->quantity}}</td>
                         <td>
-                            <button type="button" class="btn btn-sm" onclick="printZPL({{$archive->id}});">ZPL</button>
+                            <button type="button" class="btn btn-sm" onclick="printZPL({{$archive->id}});">Print</button>
                         </td>
                     </tr>
 		    	@endforeach

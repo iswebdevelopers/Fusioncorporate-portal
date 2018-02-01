@@ -26,7 +26,7 @@ class UserLabelPrint extends Model
      * @var array
      */
     protected $fillable = [
-        'type', 'raw_data', 'printed', 'user_id', 'quantity', 'creator'
+        'order_id','type', 'raw_data', 'printed', 'user_id', 'quantity', 'creator'
     ];
 
     /**

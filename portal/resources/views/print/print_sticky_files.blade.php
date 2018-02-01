@@ -20,6 +20,7 @@
                         <td>{{$sticky->quantity}}</td>
                         <td>
                             <button type="button" class="btn btn-sm" onclick="printZPL({{$sticky->id}});">Print</button>
+                            <button type="button" class="btn btn-sm" onclick="printArchive({{$sticky->id}});">Remove</button>
                         </td>
                     </tr>
 		    	@endforeach

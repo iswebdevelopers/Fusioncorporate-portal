@@ -23,11 +23,12 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('setting', 'HomeController@setting');
 
     Route::get('print-shop', 'PrintController@index');
-    Route::post('printer/setting','PrintController@PrinterSetting');
-    Route::get('printer/setting','PrintController@PrinterSetting');
+    Route::post('printer/setting','PrintController@printersetting');
+    Route::get('printer/setting','PrintController@printersetting');
     Route::get('printer/samplelabels','LabelController@printsamples');
 
     Route::get('label/rawdata/{id}', 'PrintController@rawdata');
+    Route::get('label/archive/{id}', 'PrintController@archive');
     Route::post('label/create/ticket', 'LabelController@createticket');
     Route::get('label/order/{order?}', 'OrderController@orderdetails');
 

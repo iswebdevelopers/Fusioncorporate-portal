@@ -39,10 +39,24 @@ class PrintController extends FrontController
         $user_label_print = UserLabelPrint::findOrFail($id);
 
         if ($user_label_print) {
+            return json_encode(['data' => $user_label_print->raw_data]);
+        }
+    }
+
+    /**
+     * archive label in print shop
+     * @param  id $id
+     * @return archived label object
+     */
+    public function archive(int $id)
+    {
+        $user_label_print = UserLabelPrint::findOrFail($id);
+
+        if ($user_label_print) {
             $user_label_print->printed = 1;
             $user_label_print->save();
 
-            return json_encode(['data' => $user_label_print->raw_data]);
+            return json_encode(['data' => $user_label_print]);
         }
     }
 
@@ -51,7 +65,7 @@ class PrintController extends FrontController
      * @param Request $request
      * @param settings object
      */
-    public function PrinterSetting(Request $request)
+    public function printersetting(Request $request)
     {
         if ($request->isMethod('post')) {
             $printer = UserPrinterSetting::first();

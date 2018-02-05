@@ -76,7 +76,7 @@ class LabelController extends FrontController
                     $request->session()->flash('class', 'alert-info');
                 }
             } else {
-                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting')." >Printer Settings</a>.");
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting')." >Printer Settings</a>.");
                 $request->session()->flash('class', "alert-error");
             }
             
@@ -125,7 +125,7 @@ class LabelController extends FrontController
                 $request->session()->flash('message', "Carton Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
-                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting').">Printer Settings</a>.");
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting').">Printer Settings</a>.");
                 $request->session()->flash('class', 'alert-error');
             }
             
@@ -183,7 +183,7 @@ class LabelController extends FrontController
                 $request->session()->flash('message', "Sticky Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');       
             } else {
-                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting').">Printer Settings</a>.");
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting').">Printer Settings</a>.");
                 $request->session()->flash('class', "alert-error");
             }
 
@@ -226,7 +226,7 @@ class LabelController extends FrontController
                 $request->session()->flash('message', "Carton Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
-                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting').">Printer Settings</a>.");
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting').">Printer Settings</a>.");
                 $request->session()->flash('class', "alert-error");
             }            
             return back();
@@ -245,23 +245,11 @@ class LabelController extends FrontController
      */
     public function history(Request $request)
     {
-        try {
-            $token = $request->session()->get('token');
-            $page = $request->page ? $request->page : 1;
-            
-            $response = $this->client->request('GET', 'ticket/tips/printed', ['query' => ['token' => $token,'page'=>$page]]);
-            
-            if ($response->getstatusCode() == 200) {
-                $result = json_decode($response->getBody()->getContents(), true);
-            }
-        } catch (Exception $e) {
-            $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['data']['message']];
-            
-            return view('labels.history')->withErrors($errors)->withTitle('label_history');
-        }
+        $token = $request->session()->get('token');
+           
+        $tickets_printed = UserLabelPrint::Archived()->get(['order_id','type','created_at','quantity']);
 
-        return view('labels.history', ['labels' => $result['data'],'nav' => true])->withTitle('label_history');
+        return view('labels.history', ['tickets' => $tickets_printed,'nav' => true])->withTitle('label_history');
     }
 
     /**
@@ -324,7 +312,7 @@ class LabelController extends FrontController
                 $request->session()->flash('message', "Carton Mixed Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
                 $request->session()->flash('class', 'alert-info');
             } else {
-                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@PrinterSetting').">Printer Settings</a>.");
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting').">Printer Settings</a>.");
                 $request->session()->flash('class', "alert-error");
             }
 

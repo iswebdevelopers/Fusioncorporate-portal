@@ -1,79 +1,30 @@
 <div class="col-md-10 col-sm-12 col-xs-12">
-    @if(count($labels) > 0)
+    @if(count($tickets) > 0)
         <div class="panel panel-default">
-            @if($nav) 
-                <div class="panel-body">
-                	<nav aria-label="Page navigation" class="pagination-nav">
-                		@if(array_key_exists('current_page',$labels))	
-        			  		<h4>Page {{$labels['current_page']}} of {{$labels['last_page']}}</h4>
-        			  		<ul class="pagination">
-        				  		@if($labels['current_page'] > 1)	
-        					    	<li>
-        					      		<a href="{{url()->current()}}?page={{$labels['current_page'] - 1}}" aria-label="Previous">
-        					        		<span aria-hidden="true">&laquo;</span>
-        					      		</a>
-        					    	</li>
-        					    @endif
-        				    	@if($labels['current_page'] < $labels['last_page'])
-        					    	<li>
-        					      		<a href="{{url()->current()}}?page={{$labels['current_page'] + 1}}" aria-label="Next">
-        					        		<span aria-hidden="true">&raquo;</span>
-        					      		</a>
-        					    	</li>
-        				    	@endif
-        				  	</ul>
-        			  	@endif
-        			</nav>
-            @else
-                <div class="panel-heading">
-                    Printed Label History
-                </div>
-                <div class="panel-body">       
-            @endif
+            <div class="panel-heading">
+                Printed Label History
+            </div>
+            <div class="panel-body">       
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
-                    <!-- warehouse table is different from other users -->
-                    @if(strtolower($user['roles']) == 'warehouse')
                         <thead>
                             <tr>
                                 <th>Order No.</th>
                                 <th>printed date</th>
                                 <th>Type</th>
-                                <th>No. of Cartons</th>
+                                <th>Quantity</th>
                             </tr>
                         </thead>
                         <tbody>
-                        @foreach ($labels['data'] as $label)
+                        @foreach ($tickets as $ticket)
                              <tr>
-                                <td>{{$label['order']}}</td>
-                                <td>{{$label['date']}}</td>
-                                <td>{{$label['type']}}</td>
-                                <td>{{$label['cartons']}}</td>
+                                <td><a href="/portal/label/order/{{$ticket->order_id}}">{{$ticket->order_id}}</a></td>
+                                <td>{{$ticket->created_at}}</td>
+                                <td>{{$ticket->type}}</td>
+                                <td>{{$ticket->quantity}}</td>
                             </tr>
                         @endforeach
-                        </tbody>
-                    @endif
-                    <!-- Admin and suppliers is different -->
-                    @if(strtolower($user['roles']) != 'warehouse')
-                        <thead>
-                            <tr>
-                                <th>label ID</th>
-                                <th>Order No.</th>
-                                <th>printed date</th>
-                                <th>No. of Cartons</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($labels['data'] as $label)
-                             <tr>
-                                <td>{{$label['id']}}</td>
-                                <td><a href="/portal/label/order/{{$label['order']}}">{{$label['order']}}</a></td>
-                                <td>{{$label['date']}}</td>
-                                <td>{{$label['cartons']}}</td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                    @endif    
+                        </tbody>    
                     </table>
                 </div>
             </div>

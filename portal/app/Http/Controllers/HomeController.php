@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Setting;
 use Validator;
+use App\UserLabelPrint;
 use GuzzleHttp\Exception\ClientException as Exception;
 
 class HomeController extends FrontController
@@ -22,14 +23,10 @@ class HomeController extends FrontController
             
             $response = $this->client->request('GET', 'orders/pending', ['query' =>['token' => $token]]);
             
-            $tickets_response = $this->client->request('GET', 'ticket/tips/printed', ['query' =>['token' => $token]]);
+            $tickets_printed = UserLabelPrint::Archived()->get(['order_id','type','created_at','quantity']);
 
             if ($response->getstatusCode() == 200) {
                 $result = json_decode($response->getBody()->getContents(), true);
-            }
-
-            if ($tickets_response->getstatusCode() == 200) {
-                $order_result = json_decode($tickets_response->getBody()->getContents(), true);
             }
 
         } catch (Exception $e) {
@@ -39,7 +36,7 @@ class HomeController extends FrontController
             return view('dashboard')->withErrors($errors)->withTitle('dashboard');
         }
 
-        return view('dashboard', ['orders' => $result['data'],'labels' => $order_result['data'],'nav' => false])->withTitle('dashboard');
+        return view('dashboard', ['orders' => $result['data'],'tickets' => $tickets_printed,'nav' => false])->withTitle('dashboard');
     }
 
     /**

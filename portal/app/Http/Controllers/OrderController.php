@@ -74,7 +74,7 @@ class OrderController extends FrontController
             }
         } catch (Exception $e) {
             $error = json_decode((string) $e->getResponse()->getBody(), true);
-            $errors = [$error['message']];
+            $errors = [$error['data']['message']];
             
             return view('labels.home', ['orderdetails' => $data,'order_no' => $order_no])->withTitle('label_orders');
         }

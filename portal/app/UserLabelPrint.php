@@ -69,7 +69,7 @@ class UserLabelPrint extends Model
      */
     public function scopeArchived($query)
     {
-        return $query->where('printed','1');
+        return $query->where('printed','1')->whereNotIn('order_id',['1234567','7654321']);
     } 
 
     /**

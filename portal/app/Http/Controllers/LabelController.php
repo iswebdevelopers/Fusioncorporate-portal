@@ -346,9 +346,8 @@ class LabelController extends FrontController
         
             $raw_data = (string) $view;
 
-            $labelprint = New UserLabelPrint();
+            $labelprint = UserLabelPrint::firstOrNew(['order_id'=>'1234567']);
             $labelprint->user_id = $authUser['id'];
-            $labelprint->order_id = '1234567';
             $labelprint->type = 'cartonloose';
             $labelprint->raw_data = $raw_data;
             $labelprint->printed = 0;
@@ -363,9 +362,8 @@ class LabelController extends FrontController
         
             $raw_data = (string) $view;
 
-            $labelprint = New UserLabelPrint();
+            $labelprint = UserLabelPrint::firstOrNew(['order_id'=>'7654321']);
             $labelprint->user_id = $authUser['id'];
-            $labelprint->order_id = '1234567';
             $labelprint->type = 'sticky';
             $labelprint->raw_data = $raw_data;
             $labelprint->printed = 0;

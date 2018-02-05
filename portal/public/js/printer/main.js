@@ -312,7 +312,6 @@
         if (ConnectionStatus()){
             /// Raw Printers ///
             var config = getUpdatedConfig();
-            var row = $("table tbody tr[data-id='" + id +"']");
             $.ajax({
                 url: '/portal/label/rawdata/' + id,
                 statusCode: {
@@ -329,6 +328,7 @@
                     displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
                 },
                 complete: function(result) {
+                    printArchive(id);
                     row.remove();
                     displayMessage("File has been sent to Printer");
                 }
@@ -336,6 +336,33 @@
         } else {
             pinMessage("Please launch the print client");
         }    
+    }
+
+    //Archive Print label
+    function printArchive(id) {
+        if (ConnectionStatus()){
+            var row = $("table tbody tr[data-id='" + id +"']");
+            $.ajax({
+                url: '/portal/label/archive/' + id,
+                statusCode: {
+                    401: function() {
+                      window.location.replace("/portal/login");
+                    }
+                },
+                success: function(result) {
+                    row.remove();
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    displayMessage("Status: " + textStatus + " Error: " + errorThrown); 
+                },
+                complete: function(result) {
+                    displayMessage("File has been removed");
+                }
+            });
+        } else {
+            pinMessage("Please launch the print client");
+        }    
+
     }
 
     qz.websocket.setClosedCallbacks(function(evt) {

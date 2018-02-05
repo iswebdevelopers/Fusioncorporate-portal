@@ -4,7 +4,7 @@ corporate website and portal
 ## Installation
 Deployment as new instance:
 
-- Git clone the repository from git hub link provided
+- Git clone the repository 
 - Go into the portal folder and rename  file named .env.example to .env change the values 
 - Run composer install/update
 - Run php artisan key:generate

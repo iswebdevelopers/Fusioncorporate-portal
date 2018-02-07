@@ -4,21 +4,13 @@
             <li>
                 <a @if ($title == 'dashboard') class="active-menu" @endif href="/portal/dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
             </li>
-            <li @if (substr($title,0,5) == 'label') class="active" @endif>
-                <a href="#"><i class="fa fa-file" aria-hidden="true"></i>Labels<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a @if (substr($title,6) == 'orders') class="active-menu" @endif href="/portal/label/orders">Orders</a>
-                    </li>
-                    <!-- @if((strtolower($user['roles']) == 'administrator') || ($user['roles'] == 'warehouse'))
-                    <li>
-                        <a @if (substr($title,6) == 'carton') class="active-menu" @endif href="/portal/label/carton/search">Individual Carton</a>
-                    </li>
-                    @endif -->
-                    <li>
-                        <a @if (substr($title,6) == 'history') class="active-menu" @endif href="/portal/label/history">History</a>
-                    </li>
-                </ul>
+            
+             <li>
+                <a @if ($title == 'orders') class="active-menu" @endif href="/portal/label/orders"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Orders</a>
+            </li>
+            
+            <li>
+                <a @if ($title == 'history') class="active-menu" @endif href="/portal/label/history"><i class="fa fa-history" aria-hidden="true"></i> History</a>
             </li>
             @if(strtolower($user['roles']) == 'administrator')
             <li>

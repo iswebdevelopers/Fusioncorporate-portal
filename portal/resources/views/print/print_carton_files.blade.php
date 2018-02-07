@@ -27,6 +27,6 @@
 		    </tbody>
 		</table>
 	@else
-		<h5 class="alert alert-info">There are no files to print.</h5>
+		<h5 class="alert alert-info">There are no carton label files to print.</h5>
 	@endif		
 </div>

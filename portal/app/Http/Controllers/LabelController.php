@@ -249,7 +249,7 @@ class LabelController extends FrontController
            
         $tickets_printed = UserLabelPrint::Archived()->get(['order_id','type','created_at','quantity']);
 
-        return view('labels.history', ['tickets' => $tickets_printed,'nav' => true])->withTitle('label_history');
+        return view('labels.history', ['tickets' => $tickets_printed,'nav' => true])->withTitle('history');
     }
 
     /**

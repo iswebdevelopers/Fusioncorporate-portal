@@ -32,10 +32,10 @@ class OrderController extends FrontController
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
             
-            return view('labels.list')->withErrors($errors)->withTitle('label_history');
+            return view('labels.list')->withErrors($errors)->withTitle('orders');
         }
 
-        return view('labels.list', ['orders' => $result['data']])->withTitle('label_orders');
+        return view('labels.list', ['orders' => $result['data']])->withTitle('orders');
     }
 
     /**

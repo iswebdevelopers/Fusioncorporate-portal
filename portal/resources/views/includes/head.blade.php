@@ -22,7 +22,7 @@
     <!-- Bootstrap Styles-->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <!-- FontAwesome Styles-->
-    <link href="{{ asset('css/font-awesome.css') }}" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <!-- Jquery Confirm Js and Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>

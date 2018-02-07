@@ -27,6 +27,6 @@
 		    </tbody>
 		</table>
 	@else
-	<h5 class="alert alert-info">There are no archived files.</h5>
+	<h5 class="alert alert-info">There are no unit label files.</h5>
 	@endif		
 </div>

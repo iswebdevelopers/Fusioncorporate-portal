@@ -20,7 +20,7 @@
         <div class="col-md-6">
             <ul class="nav nav-pills" id="print-tab">
                 <li class="active"><a class="change" href="#print-carton" data-type="carton" data-toggle="tab">Carton</a></li>
-                <li class=""><a class="change" id="print-tab" href="#print-sticky" data-type="sticky" data-toggle="tab">Sticky</a></li>
+                <li class=""><a class="change" id="print-tab" href="#print-sticky" data-type="sticky" data-toggle="tab">Unit</a></li>
                 <li class=""><a href="#archive" data-toggle="tab">Archived</a></li>
             </ul>
             <div class="tab-content">

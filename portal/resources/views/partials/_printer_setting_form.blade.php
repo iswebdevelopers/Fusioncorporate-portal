@@ -7,7 +7,7 @@
     <div class="col-xs-6">
         <div class="form-group">
             {{csrf_field()}}
-            <label for="sticky" class="col-xs-3">Sticky:</label>
+            <label for="sticky" class="col-xs-3">Unit:</label>
             <select name="sticky[printer]" class="form-control" id="sticky-select" required></select>
         </div>
         <div class="form-group">

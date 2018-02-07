@@ -15,7 +15,7 @@
     <div class="col-md-8 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-            Orders Pending to be printed
+            Orders
             </div> 
             <div class="panel-body">
                 <div class="table-responsive">

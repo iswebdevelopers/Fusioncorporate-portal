@@ -19,7 +19,7 @@
                         <tbody>
                         <form action="{{ action('LabelController@printitem') }}" method="post">
                         <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                        <input name="type" type="hidden" value="sticky"/>    
+                        <input name="type" type="hidden" value="item"/>    
                         @foreach ($items as $item)
                             <input name="data[{{$item['item_number']}}][description]" type="hidden" value="{{$item['short_desc']}}"/>
                             <input name="data[{{$item['item_number']}}][colour]" type="hidden" value="{{$item['colour']}}"/>
@@ -41,7 +41,7 @@
     @else
     	@include('errors.error-list')
         <div class="alert alert-danger col-md-6">
-            No orders found.
+            No items found.
         </div>
     @endif
 @endif                      

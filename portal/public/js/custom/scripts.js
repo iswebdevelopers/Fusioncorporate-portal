@@ -73,7 +73,7 @@ $( function() {
     // });
 
     //selection of carton labels and sticky labels to generate labels
-    $("#carton,#sticky").on("change","input[type='checkbox']",function(){
+    $("#carton,#unit").on("change","input[type='checkbox']",function(){
         var elclass = $(this).data("item");
         var elements = $("input."+elclass);
         changeInputState(elements,this.checked);

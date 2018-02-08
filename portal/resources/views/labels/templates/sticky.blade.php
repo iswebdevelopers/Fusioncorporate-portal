@@ -31,7 +31,7 @@
 	@if(!empty($sticky))
 		{{$start}}
 		<?php $total = $sticky['quantity'];?> 		
-		@if(($label_no == 1) and (isset($sticky['order_number'])))
+		@if($label_no == 1)
 			^XA
 			^FX Top section.
 			^CF0,{{$font_1}}

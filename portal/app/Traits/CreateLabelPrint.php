@@ -9,7 +9,7 @@ trait CreateLabelPrint
     public function addLabelPrint($label, $data, string $type)
     {
         $label_print = new UserLabelPrint();
-        $label_print->order_id = $label['order_number'];
+        $label_print->order_id = (isset($label['order_number'])) ? $label['order_number'] : $label['item'];
         $label_print->user_id = $this->user['id'];
         $label_print->type = $type;
         $label_print->raw_data = $data;

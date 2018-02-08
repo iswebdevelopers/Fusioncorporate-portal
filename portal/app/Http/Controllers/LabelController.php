@@ -322,6 +322,31 @@ class LabelController extends FrontController
     }
 
     /**
+     * list of cartons for order searched
+     * @param  Request $request
+     * @return data array of cartons
+     */
+    public function printitem(Request $request)
+    { 
+        $authUser = $this->getAuthUser($request);
+
+        if ($request->isMethod('post')) {
+
+            if ($this->getUserPrinterSettings('sticky')) {
+                processStickyLabels::dispatch($authUser, $request->data, $request->type, $this->getUserPrinterSettings('sticky'));                
+                $request->session()->flash('message', "Sticky Labels has been added to Print Shop - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@index').">Print Shop</a>");
+                $request->session()->flash('class', 'alert-info'); 
+            } else {
+                $request->session()->flash('message', "Please set printer settings at - <a class='btn btn-default btn-xs' target='_blank' href =".action('PrintController@printersetting').">Printer Settings</a>.");
+                $request->session()->flash('class', "alert-error");
+            }
+
+            return back();
+        }
+
+    }
+
+    /**
      * create sample labels
      * @return data sample labels
      */

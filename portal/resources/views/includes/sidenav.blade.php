@@ -5,10 +5,14 @@
                 <a @if ($title == 'dashboard') class="active-menu" @endif href="/portal/dashboard"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
             </li>
             
-             <li>
+            <li>
                 <a @if ($title == 'orders') class="active-menu" @endif href="/portal/label/orders"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> Orders</a>
             </li>
             
+            <li>
+                <a @if ($title == 'items') class="active-menu" @endif href="/portal/label/items"><i class="fa fa-tags" aria-hidden="true"></i> Items</a>
+            </li>
+
             <li>
                 <a @if ($title == 'history') class="active-menu" @endif href="/portal/label/history"><i class="fa fa-history" aria-hidden="true"></i> History</a>
             </li>

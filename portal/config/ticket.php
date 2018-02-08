@@ -19,7 +19,8 @@ return [
 	'process' => [
 		'sticky' => 'sticky',
 		'simplepack' => 'sticky',
-		'pack' => 'sticky'
+		'pack' => 'sticky',
+		'item' => 'sticky'
 	],
 	'templates' => [
 		'cartonpack' => 'cartonpack',

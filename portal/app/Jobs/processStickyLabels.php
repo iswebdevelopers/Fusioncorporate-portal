@@ -45,7 +45,7 @@ class processStickyLabels implements ShouldQueue
         try {
             if (!empty($this->stickydata)) {
                 foreach ($this->stickydata as $sticky) {
-                    $view = View::make('labels.templates.'.$this->type, ['sticky' => $sticky, 'settings' => $this->printer_settings]);
+                    $view = View::make('labels.templates.unit.'.$this->type, ['sticky' => $sticky, 'settings' => $this->printer_settings]);
                     $raw_data = (string) $view;
                     //add it to user label print
                     $this->addLabelPrint($sticky, $raw_data, config::get('ticket.process.'.$this->type));    

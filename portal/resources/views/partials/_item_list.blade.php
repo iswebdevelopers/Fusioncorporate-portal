@@ -21,14 +21,15 @@
                         <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                         <input name="type" type="hidden" value="item"/>    
                         @foreach ($items as $item)
-                            <input name="data[{{$item['item_number']}}][description]" type="hidden" value="{{$item['short_desc']}}"/>
+                            <input name="data[{{$item['item_number']}}][description]" type="hidden" value="{{$item['description']}}"/>
                             <input name="data[{{$item['item_number']}}][colour]" type="hidden" value="{{$item['colour']}}"/>
                             <input name="data[{{$item['item_number']}}][item_size]" type="hidden" value="{{$item['item_size']}}"/>
                             <input name="data[{{$item['item_number']}}][barcode]" type="hidden" value="{{$item['barcode']}}"/>
                             <input name="data[{{$item['item_number']}}][item]" type="hidden" value="{{$item['item_number']}}"/>
+                            <input name="data[{{$item['item_number']}}][barcode_type]" type="hidden" value="{{$item['barcode_type']}}"/>
                             <tr>
                                 <td>{{$item['item_number']}}</a></td>
-                                <td>{{$item['short_desc'].' '.$item['colour']}}</td>
+                                <td>{{$item['description'].' '.$item['colour']}}</td>
                                 <td>{{$item['item_size']}}</td>
                                 <td><input type="number" name="data[{{$item['item_number']}}][quantity]" value="{{$item['quantity']}}"></td>
                             </tr>

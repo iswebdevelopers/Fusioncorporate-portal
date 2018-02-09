@@ -294,7 +294,7 @@ class LabelController extends FrontController
         if ($request->isMethod('post')) {
 
             if ($this->getUserPrinterSettings('carton')) {
-                $view = View::make('labels.templates.mixedcarton', ['settings' => $this->getUserPrinterSettings('carton'), 'quantity' => $request->quantity]);
+                $view = View::make('labels.templates.carton.mixedcarton', ['settings' => $this->getUserPrinterSettings('carton'), 'quantity' => $request->quantity]);
             
                 $raw_data = (string) $view;
 
@@ -355,7 +355,7 @@ class LabelController extends FrontController
         $authUser = $this->getAuthUser($request);
 
         if ($this->getUserPrinterSettings('carton')) {
-            $view = View::make('labels.templates.samplecarton', ['settings' => $this->getUserPrinterSettings('carton')]);
+            $view = View::make('labels.templates.carton.samplecarton', ['settings' => $this->getUserPrinterSettings('carton')]);
         
             $raw_data = (string) $view;
 
@@ -371,7 +371,7 @@ class LabelController extends FrontController
         }
 
         if ($this->getUserPrinterSettings('sticky')) {
-            $view = View::make('labels.templates.samplesticky', ['settings' => $this->getUserPrinterSettings('sticky')]);
+            $view = View::make('labels.templates.unit.samplesticky', ['settings' => $this->getUserPrinterSettings('sticky')]);
         
             $raw_data = (string) $view;
 

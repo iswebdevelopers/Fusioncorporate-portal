@@ -50,7 +50,7 @@ class processCartonLabels implements ShouldQueue
                     } else {
                         $pagebreak = false;
                     }
-                    $view = View::make('labels.templates.'.$this->type, ['carton' => $carton, 'settings' => $this->printer_settings, 'pagebreak' => $pagebreak]);
+                    $view = View::make('labels.templates.carton.'.$this->type, ['carton' => $carton, 'settings' => $this->printer_settings, 'pagebreak' => $pagebreak]);
                     $raw_data = (string) $view;
 
                     try {

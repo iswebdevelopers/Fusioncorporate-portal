@@ -54,7 +54,8 @@
 
 				^FX Third section with barcode.
 				{{$barcode}}
-				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.5}}^BE^FD{{$pack['barcode']}}^FS
+				^FO{{$margin_left + (($label_no - 1) * $width)}},{{$margin_top * 3.5}}
+				{{ config('ticket.barcodetype.'.$pack['barcode_type']) }}^FD{{$pack['barcode']}}^FS
 
 				^FX Fourth section (the two boxes on the bottom).
 				^CF0,{{$font_2}},

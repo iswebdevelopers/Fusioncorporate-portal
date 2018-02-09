@@ -1,7 +1,8 @@
 <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Web Portal - Fusion Retail Brands</title>
+    <title>Portal - Fusion Retail Brands</title>
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
     <!-- Print JS Scripts-->
     <script type="text/javascript" src="{{ asset('js/printer/rsvp-3.1.0.min.js')}}"></script>
 	<script type="text/javascript" src="{{ asset('js/printer/sha-256.min.js')}}"></script>

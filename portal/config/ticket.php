@@ -29,4 +29,9 @@ return [
 		'simplepack' => 'stickypack',
 		'pack' => 'stickypack'
 	],
+	'barcodetype' => [
+		'upca' => '^BUN',
+		'ean13' => '^BEN',
+		'code128' => '^BCN'
+	]
 ];

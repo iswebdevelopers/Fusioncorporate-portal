@@ -17,7 +17,7 @@
             <form action="{{ action('ItemController@itemlist') }}" method="post" class="form-inline">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <div class="form-group">
-                    <label>SKU/Barcode</label>
+                    <label>SKU</label>
                     <input name="item" class="form-control" type="number" value="{{ (empty($input['item'])) ? '' : $input['item']}}">
                 </div>
                 <div class="form-group"><strong>(Or)</strong></div>

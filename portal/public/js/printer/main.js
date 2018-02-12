@@ -44,11 +44,10 @@
         });
 
         //print all
-        $("#print-sticky,#print-carton").on("click","button#print-all",function(e) {
+        $("#print-sticky,#print-carton").on("click","a#print-all",function(e) {
             e.preventDefault();
             var type = $(this).data('type');
             var selector = $("table#"+ type + "files tbody tr");
-
             selector.each(function(index){
                 var id = $(this).data('id');
                 setTimeout(function(){ printZPL(id); }, index * 10000);
@@ -329,7 +328,6 @@
                 },
                 complete: function(result) {
                     printArchive(id);
-                    row.remove();
                     displayMessage("File has been sent to Printer");
                 }
             });

@@ -7,6 +7,9 @@
             </div> -->
             <div class="panel-body">
                 <div class="table-responsive">
+                    <form action="{{ action('LabelController@printitem') }}" method="post">
+                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
+                        <input name="type" type="hidden" value="item"/> 
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
@@ -16,10 +19,7 @@
                                 <th>Quantity</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        <form action="{{ action('LabelController@printitem') }}" method="post">
-                        <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
-                        <input name="type" type="hidden" value="item"/>    
+                        <tbody>   
                         @foreach ($items as $item)
                             <input name="data[{{$item['item_number']}}][description]" type="hidden" value="{{$item['description']}}"/>
                             <input name="data[{{$item['item_number']}}][colour]" type="hidden" value="{{$item['colour']}}"/>
@@ -28,7 +28,7 @@
                             <input name="data[{{$item['item_number']}}][item]" type="hidden" value="{{$item['item_number']}}"/>
                             <input name="data[{{$item['item_number']}}][barcode_type]" type="hidden" value="{{$item['barcode_type']}}"/>
                             <tr>
-                                <td>{{$item['item_number']}}</a></td>
+                                <td>{{$item['item_number']}}</td>
                                 <td>{{$item['description'].' '.$item['colour']}}</td>
                                 <td>{{$item['item_size']}}</td>
                                 <td><input type="number" name="data[{{$item['item_number']}}][quantity]" value="{{$item['quantity']}}"></td>

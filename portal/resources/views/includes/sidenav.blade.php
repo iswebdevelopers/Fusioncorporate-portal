@@ -1,4 +1,4 @@
-<nav class="col-sm-2 navbar-default navbar-side" role="navigation">
+<nav class="col-sm-2 navbar-default navbar-side">
     <div class="sidebar-collapse">
         <ul class="nav" id="main-menu">
             <li>

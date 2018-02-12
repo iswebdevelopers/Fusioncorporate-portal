@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <button type="button" class="btn btn-default pull-right" id="print-all" data-type="carton">Print All</button>
+                <a class="btn btn-default pull-right" id="print-all" data-type="carton">Print All</a>
 		    	@foreach($cartons as $carton)
 		    		<tr data-id="{{$carton->id}}">
                         <td><a href="/portal/label/order/{{$carton->order_id}}">{{$carton->order_id}}</a></td>
@@ -19,8 +19,8 @@
                         <td>{{$carton->type}}</td>
                         <td>{{$carton->quantity}}</td>
                         <td>
-                            <button type="button" class="btn btn-sm" onclick="printZPL({{$carton->id}});">Print</button>
-                            <button type="button" class="btn btn-sm" onclick="printArchive({{$carton->id}});">Remove</button>
+                            <a class="btn btn-default btn-sm" onclick="printZPL({{$carton->id}});">Print</a>
+                            <a class="btn btn-default btn-sm" onclick="printArchive({{$carton->id}});">Remove</a>
                         </td>
                     </tr>
 		    	@endforeach

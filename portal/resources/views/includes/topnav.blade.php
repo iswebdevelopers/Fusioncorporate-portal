@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default top-navbar" role="navigation">
+<nav class="navbar navbar-default top-navbar">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -20,7 +20,6 @@
                         @else
                         <li><a href="/portal/login"><i class="fa fa-sign-out fa-fw"></i>Login</a></li>
                         @endif
-                        </li>
                     </ul>
                     <!-- /.dropdown-user -->
                 </li>

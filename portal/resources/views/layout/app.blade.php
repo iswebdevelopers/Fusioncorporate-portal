@@ -12,8 +12,7 @@
             <!-- <div id="page-inner"> -->
                 @yield('content')
                 <!-- /. ROW  -->
-                
-            <!-- </div> -->
+
             @include('includes.foot')
             <!-- /. PAGE INNER  -->
         </div>

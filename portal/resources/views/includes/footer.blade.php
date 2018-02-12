@@ -1,6 +1,6 @@
 <!-- Metis Menu Js -->
-<script type="text/javascript" src="{{ asset('js/jquery/jquery.metisMenu.js') }}"></script>
+<script src="{{ asset('js/jquery/jquery.metisMenu.js') }}"></script>
 
 <!-- Custom Js -->
-<script type="text/javascript" src="{{ asset('js/custom/scripts.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/custom/main.js') }}"></script>
+<script src="{{ asset('js/custom/scripts.js') }}"></script>
+<script src="{{ asset('js/custom/main.js') }}"></script>

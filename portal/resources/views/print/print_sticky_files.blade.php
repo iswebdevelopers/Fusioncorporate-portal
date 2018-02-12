@@ -11,7 +11,7 @@
                 </tr>
             </thead>
             <tbody>
-                <button type="button" class="btn btn-default pull-right" id="print-all" data-type="sticky">Print All</button>
+                <a class="btn btn-default pull-right" id="print-all" data-type="sticky">Print All</a>
 		    	@foreach($stickies as $sticky)
 		    		<tr data-id="{{$sticky->id}}">
                         <td><a href="/portal/label/order/{{$sticky->order_id}}">{{$sticky->order_id}}</a></td>
@@ -19,8 +19,8 @@
                         <td>{{$sticky->type}}</td>
                         <td>{{$sticky->quantity}}</td>
                         <td>
-                            <button type="button" class="btn btn-sm" onclick="printZPL({{$sticky->id}});">Print</button>
-                            <button type="button" class="btn btn-sm" onclick="printArchive({{$sticky->id}});">Remove</button>
+                            <a class="btn btn-default btn-sm" onclick="printZPL({{$sticky->id}});">Print</a>
+                            <a class="btn btn-default btn-sm" onclick="printArchive({{$sticky->id}});">Remove</a>
                         </td>
                     </tr>
 		    	@endforeach

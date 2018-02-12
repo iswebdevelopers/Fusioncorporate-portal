@@ -13,7 +13,7 @@
         <div class="form-group">
             <div class="checkbox">
                     <label><input name="sticky[passthroughmode]" type="checkbox" <?php if (isset($user_setting->settings['sticky']['passthroughmode'])) echo ($user_setting->settings['sticky']['passthroughmode']=='on' ? 'checked' : '');?>> Enable pass through mode</label>
-                    <span id="helpBlock" class="help-block"><i class="fa fa-info-circle"> </i> Enable only if passthrough mode on printer preferences is also enabled</span>
+                    <span id="help-Block" class="help-block"><i class="fa fa-info-circle"> </i> Enable only if passthrough mode on printer preferences is also enabled</span>
             </div>
         </div>    
         <div class="form-group">

@@ -33,7 +33,7 @@
         <div class="form-group">
             <div class="form-group">
             <label>All</label>
-            <div class="list-group" id="printer-list" style="display: hidden">
+            <div class="list-group" id="printer-list" style="display:none">
             </div>
         </div>
     </div>

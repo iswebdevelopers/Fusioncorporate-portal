@@ -6,7 +6,7 @@
 			<input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 			<div class="form-group">
                 <label>Order ID</label>
-                <input name="order_no" class="form-control" type="number" value="{{ (empty($input['order_no'])) ? '' : $input['order_no']}}" required="true">
+                <input name="order_no" class="form-control" type="number" value="{{ (empty($input['order_no'])) ? '' : $input['order_no']}}" required>
 			</div>
 			<!-- <div class="form-group">	
 				<label>Item Number</label>

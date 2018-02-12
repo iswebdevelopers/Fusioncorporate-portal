@@ -2,12 +2,7 @@
 
 @section('content')
 <div class="row">
-    @if(Session::has('status'))
-    <div class="alert col-md-4 col-md-offset-4 {{Session::get('level')}}">
-        {{ Session::get('status') }}
-    </div>
-    @endif
-
+    @include('partials._browser_notification')
 	@include('errors.error-list')
 	
 	<div class="panel panel-default col-md-4 col-md-offset-4">

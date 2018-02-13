@@ -6,6 +6,7 @@
                     <th>Order No.</th>
                     <th>Print Date</th>
                     <th>Label Type</th>
+                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Action</th>
                 </tr>
@@ -17,6 +18,7 @@
                         <td><a href="/portal/label/order/{{$carton->order_id}}">{{$carton->order_id}}</a></td>
                         <td>{{$carton->updated_at}}</td>
                         <td>{{$carton->type}}</td>
+                        <td>{{$carton->description}}</td>
                         <td>{{$carton->quantity}}</td>
                         <td>
                             <a class="btn btn-default btn-sm" onclick="printZPL({{$carton->id}});">Print</a>

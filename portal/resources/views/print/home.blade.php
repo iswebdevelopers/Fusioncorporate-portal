@@ -11,13 +11,13 @@
         </h4>
         <div class="row-spread">
             @include('partials._flash')
-        	<div class="col-md-5">
+        	<div class="col-md-4">
                 @include('print.connection_tab')
                 
                 @include('print.printer_tab')
             </div>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <ul class="nav nav-pills" id="print-tab">
                 <li class="active"><a href="#print-carton" data-type="carton" data-toggle="tab">Carton</a></li>
                 <li class=""><a href="#print-sticky" data-type="sticky" data-toggle="tab">Unit</a></li>

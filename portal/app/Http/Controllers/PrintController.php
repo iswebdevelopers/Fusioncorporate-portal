@@ -17,9 +17,9 @@ class PrintController extends FrontController
      */
     public function index(Request $request)
     {
-        $cartons = UserLabelPrint::Print()->OfType('carton')->orderBy('order_id','id','type')->get(['order_id','type','quantity','id','updated_at']);
-        $stickies = UserLabelPrint::Print()->OfType('sticky')->orderBy('order_id','id','type')->get(['order_id','type','quantity','id','updated_at']);
-        $archives = UserLabelPrint::Archived()->orderBy('order_id','id','type')->get(['order_id','type','quantity','id','updated_at']);
+        $cartons = UserLabelPrint::Print()->OfType('carton')->orderBy('order_id','id','type')->get(['order_id','type','quantity','description','id','updated_at']);
+        $stickies = UserLabelPrint::Print()->OfType('sticky')->orderBy('order_id','id','type')->get(['order_id','type','quantity','description','id','updated_at']);
+        $archives = UserLabelPrint::Archived()->orderBy('order_id','id','type')->get(['order_id','type','quantity','description','id','updated_at']);
         $setting = UserPrinterSetting::all()->first();
         $printer_settings = Config::get('user.settings.printer');
 

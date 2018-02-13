@@ -6,6 +6,7 @@
                     <th>Order No.</th>
                     <th>Print Date</th>
                     <th>Label Type</th>
+                    <th>Description</th>
                     <th>Quantity</th>
                     <th>Action</th>
                 </tr>
@@ -17,6 +18,7 @@
                         <td><a href="/portal/label/order/{{$sticky->order_id}}">{{$sticky->order_id}}</a></td>
                         <td>{{$sticky->updated_at}}</td>
                         <td>{{$sticky->type}}</td>
+                        <td>{{$sticky->description}}</td>
                         <td>{{$sticky->quantity}}</td>
                         <td>
                             <a class="btn btn-default btn-sm" onclick="printZPL({{$sticky->id}});">Print</a>

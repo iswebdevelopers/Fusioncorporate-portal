@@ -11,7 +11,6 @@
     @include('errors.error-list')
     <!-- search panel -->
     <div class="col-md-10 col-sm-12 col-xs-12">
-        @include('partials._flash')
         <div class="panel panel-default">
         <div class="panel-body">
             <form action="{{ action('ItemController@itemlist') }}" method="post" class="form-inline">

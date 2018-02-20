@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use Setting;
+use Illuminate\Support\Facades\Storage;
 use GuzzleHttp\Exception\ClientException as Exception;
 
 class OrderController extends FrontController
@@ -79,5 +80,33 @@ class OrderController extends FrontController
             return view('labels.home', ['orderdetails' => $data,'order_no' => $order_no])->withTitle('label_orders');
         }
         return view('labels.home', ['orderdetails' => $data,'order_no' => $order_no])->withTitle('label_orders');
+    }
+
+    /**
+     * details of the order
+     * @param  Request $request
+     * @param  int     $order_no
+     * @return data to download
+     */
+    public function Download(Request $request, $order_no, $format = 'json')
+    {
+        try {
+            $token = $request->session()->get('token');
+
+            $filename = 'LabelData_'.$order_no.'_'.date('d-m-Y').'.'.$format;
+    
+            $response = $this->client->request('GET', 'order/data/'.$order_no.'/'.$format, ['query' => ['token' => $token]]);
+
+            $contents = $response->getBody()->getContents();
+
+            Storage::disk('local')->put($filename,$contents);
+            
+            return response()->download(storage_path('app\\'.$filename))->deleteFileAfterSend(true);//Storage::download($filename);
+
+        } catch (Exception $e) {
+            $request->session()->flash('message', "Request data cannot be generated. Please contact support");
+                $request->session()->flash('class', "alert-error");
+                return back();
+        }
     }
 }

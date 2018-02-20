@@ -90,4 +90,41 @@ class PrintController extends FrontController
             return view('print.setting', ['user_setting' => $setting,'printer_settings' => $printer_settings])->withTitle('setting');            
         }    
     }
+
+    /**
+     * Sign qz client using the certificate
+     * @return certificate
+     */
+    public function promise_certificate()
+    {
+        $certificate = file_get_contents(resource_path('assets/qz/digital-certificate.txt'));
+
+        return $certificate;
+    }
+
+    /**
+     * Sign qz client using the certificate sign with private key
+     * @return signature
+     */
+    public function promise_signature(Request $request)
+    {
+        
+        $key = resource_path('assets/qz/private-key.pem');
+
+        $req = $request->sign;
+
+        $privateKey = openssl_get_privatekey(file_get_contents($key));
+
+        $signature = null;
+        openssl_sign($req, $signature, $privateKey);
+
+        if ($signature) {
+           header("Content-type: text/plain");
+           return base64_encode($signature);
+           exit(0);
+        }
+
+        echo '<h1>Error signing message</h1>';
+        exit(1);
+    }
 }

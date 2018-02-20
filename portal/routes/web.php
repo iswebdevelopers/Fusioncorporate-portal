@@ -65,7 +65,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('faq', 'HomeController@faq');
 
     Route::get('promise/certificate', 'PrintController@promise_certificate');
-    Route::get('promise/signature', 'PrintController@promise_certificate');
+    Route::get('promise/signature', 'PrintController@promise_signature');
 
     Route::get('label/order/download/{order_no}/{format}', 'OrderController@download');
 });

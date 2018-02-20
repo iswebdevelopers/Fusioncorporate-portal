@@ -34,6 +34,7 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('label/orders', 'OrderController@orderlist');
     Route::post('label/orders/search', 'OrderController@orderlist');
+    Route::get('label/order/download/{order_no}/{format}', 'OrderController@download');
     
     Route::get('label/carton/search', 'LabelController@search');
     Route::post('label/carton/search', 'LabelController@search');
@@ -66,8 +67,6 @@ Route::group(['middleware' => 'api'], function () {
 
     Route::get('promise/certificate', 'PrintController@promise_certificate');
     Route::get('promise/signature', 'PrintController@promise_signature');
-
-    Route::get('label/order/download/{order_no}/{format}', 'OrderController@download');
 });
 
 Route::get('user/recovery/{id?}', 'UserController@recovery');

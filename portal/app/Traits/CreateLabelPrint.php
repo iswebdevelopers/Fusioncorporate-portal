@@ -10,6 +10,8 @@ trait CreateLabelPrint
     {
         if((isset($label['description'])) and (isset($label['item_size']))) {
             $description = $label['description'] .' - '.  $label['item_size']; 
+        } elseif(isset($label['description'])) {
+            $description = $label['description'];
         } else {
             $description = '';
         }

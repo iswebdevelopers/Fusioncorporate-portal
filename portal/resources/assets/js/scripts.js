@@ -113,6 +113,10 @@ $( function() {
         titleattr: "Password Recovery",
     });
 
+    $("a.img-gallery").venobox({
+        titleattr: 'data-title'
+        });
+
     //Datatables to have pagination
     $("#users-list, #suppliers-list").DataTable({
         "sPaginationType": "full_numbers",

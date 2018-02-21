@@ -10,7 +10,7 @@
 <script src="{{ asset('js/jquery/jquery-3.2.1.min.js') }}"></script>
 <!-- Venbobox -->
 <script src="{{ asset('js/jquery/venobox.min.js') }}"></script>
-<link href="{{ asset('css/venobox.css') }}" rel="stylesheet"/>
+<link href="{{ asset('css/venobox.min.css') }}" rel="stylesheet"/>
 <!-- Bootstrap Js -->
 <script src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
  <!-- Data Table Js and CSS -->
@@ -19,14 +19,11 @@
 <!-- ui autocomplete -->
 <script src="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script> 
 <link href="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}" rel="stylesheet" />
-<!-- Bootstrap Styles-->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
+<link href="{{ asset('css/main.min.css') }}" rel="stylesheet" />
 <!-- FontAwesome Styles-->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <!-- Jquery Confirm Js and Styles -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
-<!-- Custom Styles-->
-<link href="{{ asset('css/custom-styles.css') }}" rel="stylesheet" />
 <!-- Google Fonts-->
 <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />

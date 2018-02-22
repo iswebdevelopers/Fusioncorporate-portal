@@ -30,11 +30,11 @@
         </div>
         <div class="form-group">
             <label for="sticky">Width:(mm)</label>
-            <input name="sticky[width]" class="form-control" value="{{$user_setting->settings['sticky']['width'] or 148}}" required/>
+            <input name="sticky[width]" class="form-control" value="{{$user_setting->settings['sticky']['width'] or 35}}" required/>
         </div>
         <div class="form-group">
             <label for="sticky">Height:(mm)</label>
-            <input name="sticky[height]" class="form-control" value="{{$user_setting->settings['sticky']['height'] or 48}}" required/>
+            <input name="sticky[height]" class="form-control" value="{{$user_setting->settings['sticky']['height'] or 40}}" required/>
         </div>
         <div class="form-group">
             <label for="sticky">Label Per Row:</label>

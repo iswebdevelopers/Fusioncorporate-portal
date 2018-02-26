@@ -63,7 +63,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::get('supplier/search/{term?}', 'SupplierController@search');
     Route::post('supplier/search/', 'SupplierController@search');
 
-    Route::get('faq', 'HomeController@faq');
+    Route::get('usermanual', 'HomeController@usermanual');
 
     Route::get('promise/certificate', 'PrintController@promise_certificate');
     Route::get('promise/signature', 'PrintController@promise_signature');

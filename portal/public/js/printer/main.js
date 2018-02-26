@@ -73,10 +73,10 @@
     qz.security.setSignaturePromise(function(toSign) {
         return function(resolve, reject) {
             //Preferred method - from server
-            //$.ajax("/portal/promise/signature?sign=" + toSign).then(resolve, reject);
+            $.ajax("/portal/promise/signature?sign=" + toSign).then(resolve, reject);
 
             //Alternate method - unsigned
-             resolve();
+            // resolve();
         };
     });
 

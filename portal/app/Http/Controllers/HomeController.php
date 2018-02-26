@@ -88,10 +88,10 @@ class HomeController extends FrontController
     }
 
     /**
-     * Faq
+     * User manual for setting up the printer
      */
-    public function faq()
+    public function usermanual()
     {
-        return view('faq')->withTitle('faq');
+        return response()->download(storage_path('app\public\User_Manual.pdf'));
     }
 }

@@ -17,7 +17,7 @@
 		    		<tr data-id="{{$carton->id}}">
                         <td><a href="/portal/label/order/{{$carton->order_id}}">{{$carton->order_id}}</a></td>
                         <td>{{$carton->updated_at}}</td>
-                        <td>{{$carton->type}}</td>
+                        <td>{{ucfirst(trans($carton->type))}}</td>
                         <td>{{$carton->description}}</td>
                         <td>{{$carton->quantity}}</td>
                         <td>

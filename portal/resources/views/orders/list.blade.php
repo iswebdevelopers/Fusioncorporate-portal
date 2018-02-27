@@ -8,7 +8,7 @@
         </h4>
     </div>
     <!--Order List-->                
-    @include('partials._list')
+    @include('partials._order_list')
     <!--End Order List-->  
 </div>
 @stop

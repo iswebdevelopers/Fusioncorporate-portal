@@ -13,7 +13,7 @@
     @include('partials._order_search_form')
     <!-- End Order Search form -->
     <!--Order List-->
-    @include('partials._list')
+    @include('partials._order_list')
     <!--End Order List-->  
 </div>
 @stop

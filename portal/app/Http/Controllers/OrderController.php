@@ -33,10 +33,10 @@ class OrderController extends FrontController
             $error = json_decode((string) $e->getResponse()->getBody(), true);
             $errors = [$error['message']];
             
-            return view('labels.list')->withErrors($errors)->withTitle('orders');
+            return view('labels.list')->withErrors($errors)->withTitle('orders')->withInput($request->all());
         }
 
-        return view('labels.list', ['orders' => $result['data']])->withTitle('orders');
+        return view('labels.list', ['orders' => $result['data']])->withTitle('orders')->withInput($request->all());
     }
 
     /**
@@ -94,19 +94,20 @@ class OrderController extends FrontController
             $token = $request->session()->get('token');
 
             $filename = 'LabelData_'.$order_no.'_'.date('d-m-Y').'.'.$format;
-    
+
             $response = $this->client->request('GET', 'order/data/'.$order_no.'/'.$format, ['query' => ['token' => $token]]);
 
-            $contents = $response->getBody()->getContents();
+            if ($response->getstatusCode() == 200) {
+                $contents = $response->getBody()->getContents();
 
-            Storage::disk('local')->put($filename,$contents);
-            
-            return response()->download(storage_path('app\\'.$filename))->deleteFileAfterSend(true);//Storage::download($filename);
-
+                Storage::disk('local')->put($filename,$contents);
+                
+                return response()->download(storage_path('app\\'.$filename))->deleteFileAfterSend(true);//Storage::download($filename);
+            } 
         } catch (Exception $e) {
-            $request->session()->flash('message', "Request data cannot be generated. Please contact support");
-                $request->session()->flash('class', "alert-error");
-                return back();
+            $error = json_decode((string) $e->getResponse()->getBody(), true);
+            $errors = [$error['data']['message']];
+            return redirect('/label/orders')->withErrors($errors);
         }
     }
 }

@@ -33,13 +33,13 @@
                             @foreach ($suppliers as $supplier)
                                 <tr>
                                     <td>{{$supplier['id']}}</td>
-                                    <td>{{$supplier['name']}}</td>
+                                    <td>{{ucwords(strtolower($supplier['name']))}}</td>
                                     <td>
                                         @foreach (explode(';', $supplier['email']) as $email)
-                                            {{$email}}<br/>
+                                            {{strtolower($email)}}<br/>
                                         @endforeach
                                     </td>
-                                    <td>{{$supplier['contact']}}</td>
+                                    <td>{{ucwords(strtolower($supplier['contact']))}}</td>
                                     <td>{{$supplier['phone']}}</td>
                                 </tr>
                             @endforeach

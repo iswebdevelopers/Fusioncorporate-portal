@@ -10,7 +10,7 @@
                         <thead>
                             <tr>
                                 <th>Order No.</th>
-                                <th>printed date</th>
+                                <th>Printed Date</th>
                                 <th>Type</th>
                                 <th>Quantity</th>
                             </tr>
@@ -20,7 +20,7 @@
                              <tr>
                                 <td><a href="/portal/label/order/{{$ticket->order_id}}">{{$ticket->order_id}}</a></td>
                                 <td>{{$ticket->created_at}}</td>
-                                <td>{{$ticket->type}}</td>
+                                <td>{{ucfirst(trans($ticket->type))}}</td>
                                 <td>{{$ticket->quantity}}</td>
                             </tr>
                         @endforeach

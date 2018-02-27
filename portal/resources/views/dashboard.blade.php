@@ -24,14 +24,14 @@
                             <tr>
                                 <th>Order No.</th>
                                 <th>Supplier</th>
-                                <th>Order date</th>
+                                <th>Order Date</th>
                             </tr>
                         </thead>
                         <tbody>
                         @foreach ($orders as $order) 
                             <tr>
                                 <td><a href="/portal/label/order/{{$order['order_number']}}">{{$order['order_number']}}</a></td>
-                                <td>{{$order['supplier']}}</td>
+                                <td>{{ucwords(strtolower($order['supplier']))}}</td>
                                 <td>{{$order['approval_date']}}</td>
                             </tr>
                         @endforeach
@@ -54,7 +54,7 @@
             <div class="panel-body">
                 <div class="list-group">
                     <span class="list-group-item">
-                     Name: {{$user['name']}}
+                     Name: {{ucfirst(trans($user['name']))}}
                     </span>
                     <span class="list-group-item">
                      Email: {{$user['email']}}

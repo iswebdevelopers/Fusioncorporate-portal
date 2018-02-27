@@ -12,7 +12,7 @@
                             <tr>
                                 <th>Order No.</th>
                                 <th>Supplier</th>
-                                <th>Order date</th>
+                                <th>Order Date</th>
                                 <th>Download</th>
                             </tr>
                         </thead>
@@ -20,7 +20,7 @@
                         @foreach ($orders as $order)
                             <tr>
                                 <td><a href="/portal/label/order/{{$order['order_number']}}">{{$order['order_number']}}</a></td>
-                                <td>{{$order['supplier']}}</td>
+                                <td>{{ucwords(strtolower($order['supplier']))}}</td>
                                 <td>{{$order['approval_date']}}</td>
                                 <td><a class='btn btn-default btn-xs' href="/portal/label/order/download/{{$order['order_number']}}/xml">XML</a></td>
                             </tr>

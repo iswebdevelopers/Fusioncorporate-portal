@@ -17,7 +17,7 @@
 		    		<tr data-id="{{$sticky->id}}">
                         <td><a href="/portal/label/order/{{$sticky->order_id}}">{{$sticky->order_id}}</a></td>
                         <td>{{$sticky->updated_at}}</td>
-                        <td>{{$sticky->type}}</td>
+                        <td>{{ucfirst(trans($sticky->type))}}</td>
                         <td>{{$sticky->description}}</td>
                         <td>{{$sticky->quantity}}</td>
                         <td>

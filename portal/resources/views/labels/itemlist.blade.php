@@ -13,6 +13,7 @@
     <div class="col-md-10 col-sm-12 col-xs-12">
         <div class="panel panel-default">
         <div class="panel-body">
+            @include('partials._flash')
             <form action="{{ action('ItemController@itemlist') }}" method="post" class="form-inline">
                 <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
                 <div class="form-group">
